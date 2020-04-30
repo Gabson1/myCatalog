@@ -6,6 +6,15 @@
 .vscode/
 .history/
 
+#dotfiles
+.graphqlconfig
+.cache/
+.bash_profile
+.nvmrc
+.zhsrc
+.npmrc
+.nrpmrc
+
 # misc
 .DS_Store
 .env
@@ -24,17 +33,6 @@ server.zip
 server/build/
 server/dist/
 client/build/
-.graphqlconfig
 schema.graphql
 dist/
-
-.cache/
-
 public/build
-
-#dotfiles
-.bash_profile
-.nvmrc
-.zhsrc
-.npmrc
-.nrpmrc
