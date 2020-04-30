@@ -69,7 +69,7 @@
   "homepage": "https://github.com/MisterSemaan/myCatalog",
   "description": "Value Asset Manager",
   "keywords": [],
-  "license": "",
+  "license": "MIT",
   "version": "0.1.0",
   "private": true,
   "main": "",
