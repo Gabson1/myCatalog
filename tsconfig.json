@@ -1,17 +1,25 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "target": "es6",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "outDir": "./dist",
     "allowJs": true,
-    "types": ["node", "type-graphql"]
+    "allowSyntheticDefaultImports": true,
+    "checkJs": true,
+    "lib": ["es2016", "dom"],
+    "outDir": "./build",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "target": "es6",
+    // "types": ["node", "type-graphql"],
+    "strict": false
   },
-  "lib": ["es2015"],
   "include": [
-    "./src/server/",
-    "./scripts/"
+    "./src"
+  ],
+  "exclude": [
+    "node_modules",
+    "webpack.config.js"
   ]
 }
+

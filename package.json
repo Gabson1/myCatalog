@@ -52,6 +52,7 @@
     "@babel/types": "^7.6.1",
     "@types/graphql": "^14.2.2",
     "@types/knex": "^0.16.1",
+    "@types/node": "^13.13.4",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
     "babel-eslint": "^10.0.3",
@@ -63,7 +64,8 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
     "webpack": "4.41.3",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "tslint": "^5.12.1"
   },
   "name": "mycatalog",
   "homepage": "https://github.com/MisterSemaan/myCatalog",
@@ -72,7 +74,7 @@
   "license": "MIT",
   "version": "0.1.0",
   "private": true,
-  "main": "",
+  "main": "./dest/app.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MisterSemaan/myCatalog"
