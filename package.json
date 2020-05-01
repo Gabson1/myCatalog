@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "start": "tsc && node ./build/server/server.js",
     "client": "",
     "server": "",
     "app": "",
@@ -74,7 +75,7 @@
   "license": "MIT",
   "version": "0.1.0",
   "private": true,
-  "main": "./dest/app.js",
+  "main": "",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MisterSemaan/myCatalog"
