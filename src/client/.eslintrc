@@ -1,6 +1,6 @@
 {
     "extends": [
-        "airbnb",
+        "standard",
         "plugin:react/recommended",
         "plugin:react-hooks/recommended",
         "plugin:import/errors"
@@ -10,7 +10,6 @@
         "jsx-a11y",
         "react-hooks"
     ],
-    "globals": { /* Set of globals */ },
     "parserOptions": {
         "ecmaVersion": 6,
         "ecmaFeatures": {
