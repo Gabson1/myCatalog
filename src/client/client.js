@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './src/App';
+import Index from './routes/index';
+
+// TODO: Handle redux store, react DOM rendering
 
 // @ts-ignore
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Index />, document.getElementById('root'));
