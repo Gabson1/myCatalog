@@ -1,19 +1,19 @@
 {
   "scripts": {
-    "start": "tsc && node ./build/server/server.js",
+    "test:run": "tsc && node ./build/server/server.js",
     "client": "",
     "server": "",
-    "app": "",
+    "app": "concurrently -n server,client \"npm run server\" \"npm run client\"",
     "build:client": "",
-    "build:server": "",
-    "db:reset": "",
-    "db:create": "",
-    "db:drop": "",
-    "db:migrate": "",
-    "db:seed": "",
-    "lint": "",
-    "lint:client": "",
-    "lint:server": ""
+    "build:server": "npx tsc",
+    "db:drop": "node build/server/knex/dropDB.js",
+    "db:create": "node build/server/knex/createDB.js",
+    "db:migrate": "knex --knexfile build/server/knex/knexfile.js migrate:latest",
+    "db:seed": "knex --knexfile build/server/knex/knexfile.js seed:run",
+    "db:reset": "npm run db:drop && npm run db:create && npm run db:migrate && npm run db:seed",
+    "lint": "npm run lint:client && npm run lint:server",
+    "lint:client": "eslint ./src/client/ --color --quiet",
+    "lint:server": "eslint ./src/server/ --color --quiet"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.1.0",

@@ -1,14 +1,12 @@
 # Folder Structure
-## New Structure: Role Based
+## Role Based
 
 Role based folder structure means that all entities, that fulfil the same role, reside under the same folder.
 
-An easy example of this is the redux management structure.
-Here is a small refresh on the different components in redux:
+An easy example of this is the redux management structure:
 
 - `Store`: Immutable (well kinda) State of the data store, includes all the app-wide needed information.
-- `Reducers`: The store data manipulators, upon the dispatch of different actions, the reducers overwrite
-the store's information.
+- `Reducers`: The store data manipulators, upon the dispatch of different actions, the reducers overwrite the store's information.
 - `Actions`: Actions specifying the desired data manipulation.
 - `Selectors`: Filter & extract small pieces of data from the store.
 
@@ -20,18 +18,15 @@ src/
         index.js
     reducers/
         users.js
-        mandates.js
     actions/
         users.js
-        mandates.js
     selectors/
         users.js
-        mandates.js
 ```
 
 Under such a folder structure, no matter who I am and where I came from, I'll instantly know where to look
-if I wanted, for example, to change a certain data manipulation on users and where I'd later on pull this information from.
-Given the fact that I know how to work with redux and already understand it's structure.
+if I wanted, for example, to change a certain data manipulation on users and where I'd pull this information from.
+Given the fact that I know how to work with redux and already understand its structure.
 
 
 ## Role Based+
@@ -40,9 +35,9 @@ The above example already looks better, but it's not enough; under the premise o
 Files should also indicate their role without their nesting under the folders.
 So for example, if a developer were to work on a new feature for users,
 he'd probably need the following files: `reducers/users.js`, `actions/users.js` etc...
-in order to completely eliminate the confusion, the role of the file can be appended to the end of the file.
+In order to completely eliminate the confusion, the role of the file can be appended to the end of the file.
 
-so The above example would change to the following:
+The above example would change to the following:
 
 ```
 src/
@@ -50,13 +45,10 @@ src/
         index.js
     reducers/
         users.red.js
-        mandates.red.js
     actions/
         users.act.js
-        mandates.act.js
     selectors/
         users.sel.js
-        mandates.sel.js
     routes/
         MandatesRoute.js
     containers/
@@ -91,8 +83,8 @@ As a response from that action, a saga in `app.sag.js` might be invoked, which m
 - Redux management related files should always be annotated using the `3-char prefix` role annotation. Simply because
 the usage of redux management files is very broad and interchangeable by nature.
 
-#### CamelCased Postfix Annotation
-Postfixing a file name with the Role of the file
+#### CamelCased Appending Annotation
+Appending a filename with the Role of the file
 
 - `Routes` == `SomeScreenNameRoute.js`
 - `Views` == `SomeNameView.js`
@@ -100,26 +92,16 @@ Postfixing a file name with the Role of the file
 
 As a part of predictable code design and naming conventions, instanced objects
 (i.e: modules that needs instancing) should reference class/module/object.
-For example: `<CockpitRoute />` must have been imported from `**/routes/CockpitRoute`
+For example: `<CockpitRoute />` must have been imported from: `**/routes/CockpitRoute`
 
-The CamelCase Postfix Annotation should be used in the following scenarios:
+The CamelCase Appending Annotation should be used in the following scenarios:
 
 - React Components.
 - Encapsulated Services and singletons.
 
 
 # Style Guidelines
-
-This document specifies the usages and conventions of css styles in this project.
-
-
-## A little bit about the past
-
-Until recently, there were no "rules" to how use css styles in the project, and each developer did what he thought best.
-Which lead to two main css usages:
-
-
-### Plain css files
+## Plain css files
 Just like any other JS library, ReactJs come with the standard css integration.
 
 By creating a css file `myStyles.css` and later on importing it in a React Component file `myComponent.js`.
@@ -455,10 +437,6 @@ Will throw a webpack error:
 
 So the need to constantly override `react-semantic` css rules, kills this option for us.
 
-
-# Rules
-Break down of the Guidelines
-
 ## Naming conventions
 Variable naming and files structure
 
@@ -561,7 +539,7 @@ Project contains different theme files under `src/client/src/styles/themes`.
 
 These files define custom property `var()`s.
 
-These theme files are then Injected to the outer `App.js` that wraps all the components in the project.
+These theme files are injected to the outer `App.js` that wraps all the components in the project.
 And injected to the different **popup** components, because their scope is different of that of the `App.js`.
 
 The Theme files are CSS module files (i.e: `Theme1.module.css`)
