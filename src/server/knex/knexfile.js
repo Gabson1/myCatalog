@@ -8,8 +8,11 @@ const knexConfig = {
   },
   pool: { min: 0, max: 7 },
   migrations: {
-    tableName: process.env.DB_MIGRATIONS
-  }
+    directory: '../migrations'
+  },
+  seeds: {
+    directory: '../seeds'
+  },
 };
 
 module.exports = knexConfig;
