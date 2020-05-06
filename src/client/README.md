@@ -15,7 +15,7 @@ So a role based example of the above would look like this:
 ```
 src/
     store/
-        ClientRouter.js
+        ClientRouter.ts
     reducers/
         users.js
     actions/
@@ -42,7 +42,7 @@ The above example would change to the following:
 ```
 src/
     store/
-        ClientRouter.js
+        ClientRouter.ts
     reducers/
         users.red.js
     actions/
