@@ -20,7 +20,7 @@ module.exports = {
         },
         {
           test: /\.(js|jsx|ts|tsx)$/,
-          use: 'babel-loader',
+          use: 'ts-loader',
           include: path.join(__dirname, entryDir),
           exclude: /node_modules/,
         },

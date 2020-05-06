@@ -7,9 +7,17 @@ import Integrations from './Settings';
 import Profile from './Profile';
 import Tables from './Tables';
 
+type Props = {
+  id: string;
+  key: string;
+  path: string;
+  showSideBar: boolean;
+  showHeader: boolean;
+  protected: boolean;
+}
 
-function AppRouter() {
+function ClientRouter() {
 
 }
 
-export default AppRouter;
+export default ClientRouter;

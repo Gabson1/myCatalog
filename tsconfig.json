@@ -4,6 +4,7 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "checkJs": true,
+    "esModuleInterop": true,
     "lib": ["es2016", "dom"],
     "outDir": "./build",
     "module": "commonjs",
@@ -11,16 +12,19 @@
     "noImplicitAny": false,
     "removeComments": true,
     "resolveJsonModule": true,
-    "target": "es6",
+    "sourceMap": true,
+    "target": "es5",
     // "types": ["node", "type-graphql"],
     "strict": false
   },
   "include": [
-    "./src"
+    "./src/**/*.ts",
+    "./src/**/*.tsx"
   ],
   "exclude": [
     "node_modules",
-    "webpack.config.js"
+    "webpack.config.js",
+    "./public/"
   ]
 }
 
