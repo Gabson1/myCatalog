@@ -13,10 +13,12 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json());
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (_req: any, res: { send: (arg: string) => any; }) => res.send('Hello World!'))
+
+app.get('/secret', (_req: any, res: { send: (arg: string) => any; }) => res.send('You are not supposed to be here buddy!'))
 
 app.listen(port, host, (err: any) => {
-    (err) ? console.log('Error:', err) : console.info(`>>> Server is up and running... ${host}:${port}`);
+    (err) ? console.log('Error:', err) : console.info(`>>> SERVER IS TRYING TO RUN AWAY: http://${host}:${port}`);
 });
 
 

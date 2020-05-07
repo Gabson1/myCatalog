@@ -4,7 +4,6 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "checkJs": true,
-    "esModuleInterop": true,
     "lib": ["es2016", "dom"],
     "outDir": "./build",
     "module": "commonjs",
