@@ -40,7 +40,7 @@ See a list of asset types MyCatalog supports:
 
 ### Folder Structure
 #### Client: React app
-#### Server: Node app
+#### Server: Node/Express app
 
 ### Bundling with webpack
 Webpack allows, what I call, smart-bundling. 
