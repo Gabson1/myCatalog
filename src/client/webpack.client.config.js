@@ -1,3 +1,6 @@
+import * as webpack from "webpack";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
+
 const path = require('path');
 
 const outputDir = path.join(__dirname, '../', 'build', 'client')
@@ -52,6 +55,12 @@ module.exports = {
       ]
     }]
   },
+  plugins: [
+    new CleanWebpackPlugin({ // https://www.npmjs.com/package/clean-webpack-plugin
+      verbose: true,
+    }),
+    new webpack.HotModuleReplacementPlugin() // https://webpack.js.org/concepts/hot-module-replacement/
+  ],
   output: {
     filename: 'build.js',
     path: outputDir,

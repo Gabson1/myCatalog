@@ -1,7 +1,7 @@
 import * as webpack from "webpack";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
 
 const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const outputDir = path.join(__dirname, '../', 'build', 'server')
 
