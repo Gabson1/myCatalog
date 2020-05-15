@@ -1,4 +1,4 @@
-const knexConfig = {
+module.exports  = {
   client: 'pq',
   connection: {
     host : process.env.DB_HOST,
@@ -8,10 +8,10 @@ const knexConfig = {
   },
   pool: { min: 0, max: 7 },
   migrations: {
+    tableName: process.env.DB_MIGRATION_TABLE_NAME || 'migrations',
     directory: './migrations'
   },
+  seeds: {
+    directory: './seeds'
+  }
 };
-
-module.exports = knexConfig;
-
-export default knexConfig;
