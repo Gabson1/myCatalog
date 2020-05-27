@@ -1,24 +1,33 @@
-import * as webpack from "webpack";
-import { CleanWebpackPlugin } from "clean-webpack-plugin";
-
 const path = require('path');
+const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const serverDir = path.join(__dirname, '../', '../', 'src', 'server');
 
 const outputDir = path.join(__dirname, '../', '../', 'build', 'server')
 
 module.exports = {
+  target: 'node',
+  externals: nodeExternals(),
   entry: path.join(serverDir, 'server.ts'),
   devtool: 'inline-source-map',
   module: {
-    rules: [{
-      test: /\.tsx?$/,
-      use: 'ts-loader',
-      exclude: /node_modules/,
-    }],
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        include: path.join(serverDir, '/**/*'),
+      },
+      {
+        test: /\.js$/,
+        use: 'babel-loader',
+        include: path.join(serverDir, '/**/*'),
+      }
+    ],
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ],
+    extensions: [ '.tsx', '.ts' ],
   },
   plugins: [
     new CleanWebpackPlugin({ // https://www.npmjs.com/package/clean-webpack-plugin

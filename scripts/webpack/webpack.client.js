@@ -1,7 +1,7 @@
-import * as webpack from "webpack";
-import { CleanWebpackPlugin } from "clean-webpack-plugin";
-
 const path = require('path');
+const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const clientDir = path.join(__dirname, '../', '../', 'src', 'client');
 
@@ -10,6 +10,8 @@ const outputDir = path.join(__dirname, '../', '../', 'build', 'client')
 // https://webpack.js.org/configuration/mode/#mode-development
 
 module.exports = {
+  target: 'node',
+  externals: nodeExternals(),
   entry: path.join(clientDir, 'client.tsx'),
   module: {
     rules: [{
@@ -18,13 +20,16 @@ module.exports = {
           test: [/\.jpe?g$/, /\.png$/],
           use: 'file-loader',
           include: path.join(clientDir, '/**/*'),
-          exclude: /node_modules/,
         },
         {
-          test: /\.(js|jsx|ts|tsx)$/,
+          test: /\.jsx?$/,
+          use: 'babel-loader',
+          include: path.join(clientDir, '/**/*'),
+        },
+        {
+          test: /\.tsx?$/,
           use: 'ts-loader',
           include: path.join(clientDir, '/**/*'),
-          exclude: /node_modules/,
         },
         {
           test: /\.css$/,
@@ -52,7 +57,6 @@ module.exports = {
           test: /\.html$/i,
           use: 'html-loader',
           include: path.join(clientDir, '/**/*'),
-          exclude: /node_modules/,
         }
       ]
     }]

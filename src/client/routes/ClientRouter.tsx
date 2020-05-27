@@ -6,6 +6,7 @@ import Login from './Login';
 import Integrations from './Settings';
 import Profile from './Profile';
 import Tables from './Tables';
+import {render} from "react-dom";
 
 type Props = {
   id: string;
@@ -17,7 +18,7 @@ type Props = {
 }
 
 function ClientRouter() {
-
+  return <div>...</div>
 }
 
 export default ClientRouter;
