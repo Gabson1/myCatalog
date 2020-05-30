@@ -15,12 +15,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.ts/,
         use: 'ts-loader',
         include: path.join(serverDir, '/**/*'),
       },
       {
-        test: /\.js$/,
+        test: /\.js/,
         use: 'babel-loader',
         include: path.join(serverDir, '/**/*'),
       }
