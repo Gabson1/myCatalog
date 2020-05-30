@@ -1,0 +1,51 @@
+:local(.ui.button).appButton {
+    background-color: var(--action-enabled);
+    text-transform: uppercase;
+    width: 200px;
+    min-height: 45px;
+    text-align: center;
+    padding: 5px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--action-title);
+    opacity: 1;
+}
+
+:local(.ui.button).appButton:focus,
+:local(.ui.button).appButton:active,
+:local(.ui.button).appButton:hover {
+    background-color: var(--action-enabled);
+    color: var(--action-title);
+    opacity: .85;
+}
+
+:local(.ui.button).appButton:active {
+    transform: scale(0.95);
+}
+
+:local(.ui.button.disabled).appButton {
+    background-color: var(--action-disabled);
+    text-transform: uppercase;
+    text-align: center;
+    cursor: not-allowed;
+    color: var(--action-title);
+    opacity: .45;
+}
+
+
+:local(.ui.button).appButton p {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+:local(.ui.button).appButton:focus p {
+    background-color: var(--action-enabled);
+    color: var(--action-title);
+}
+
+:local(.ui.button).appButton:active p,
+:local(.ui.button).appButton:hover p {
+    background-color: var(--action-enabled);
+    color: var(--action-title);
+    font-weight: 600;
+}
