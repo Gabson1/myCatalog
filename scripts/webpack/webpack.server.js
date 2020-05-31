@@ -3,31 +3,26 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-const serverDir = path.join(__dirname, '../', '../', 'src', 'server');
-
-const outputDir = path.join(__dirname, '../', '../', 'build', 'server')
+const pathResolver = require('../utils/pathResolver');
 
 module.exports = {
   target: 'node',
   externals: nodeExternals(),
-  entry: path.join(serverDir, 'server.ts'),
+  entry: pathResolver.serverEntryPoint,
   devtool: 'inline-source-map',
   module: {
     rules: [
-      {
+      { // TS LOADER
         test: /\.ts/,
         use: 'ts-loader',
-        include: path.join(serverDir, '/**/*'),
+        include: pathResolver.clientRootDir
       },
-      {
+      { // JS LOADER
         test: /\.js/,
         use: 'babel-loader',
-        include: path.join(serverDir, '/**/*'),
-      }
+        include: pathResolver.clientRootDir
+      },
     ],
-  },
-  resolve: {
-    extensions: [ '.tsx', '.ts' ],
   },
   plugins: [
     new CleanWebpackPlugin({ // https://www.npmjs.com/package/clean-webpack-plugin
@@ -37,6 +32,6 @@ module.exports = {
   ],
   output: {
     filename: 'server.js',
-    path: outputDir,
+    path: pathResolver.serverOutputDir,
   },
 };

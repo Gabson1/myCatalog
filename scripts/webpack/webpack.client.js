@@ -3,72 +3,81 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-const clientDir = path.join(__dirname, '../', '../', 'src', 'client');
-
-const outputDir = path.join(__dirname, '../', '../', 'build', 'client')
+const pathResolver = require('../utils/pathResolver');
 
 // https://webpack.js.org/configuration/mode/#mode-development
 
 module.exports = {
   target: 'node',
   externals: nodeExternals(),
-  entry: path.join(clientDir, 'client.tsx'),
+  entry: pathResolver.clientEntryPoint,
   module: {
-    rules: [{
-      oneOf: [
-        {
-          test: [/\.jpe?g$/, /\.png$/],
-          use: 'file-loader',
-          include: path.join(clientDir, '/**/*'),
-        },
-        {
-          test: /\.jsx?$/,
-          use: 'babel-loader',
-          include: path.join(clientDir, '/**/*'),
-        },
-        {
-          test: /\.tsx?$/,
-          use: 'ts-loader',
-          include: path.join(clientDir, '/**/*'),
-        },
-        {
-          test: /\.css$/,
-          use: [
-            'style-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-                modules: true
-              }
+    rules: [
+      { // IMAGE LOADER
+        test: /\.(png|svg|jpg|jpeg|gif)$/,
+        use: 'file-loader',
+        include: pathResolver.clientRootDir
+      },
+      { // FONT LOADER
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: 'file-loader',
+        include: pathResolver.clientRootDir
+      },
+      { // HTML LOADER
+        test: /\.(html)$/,
+        use: 'html-loader',
+        include: pathResolver.clientRootDir
+      },
+      { // CSS LOADER
+        test: /\.css/,
+        use: [
+          'style-loader',
+          'css-loader',
+        ],
+        exclude: /\.module\.css/,
+        include: pathResolver.clientRootDir
+      },
+      { // CSS MODULES LOADER
+        test: /\.module\.css/,
+        use: [
+          'style-loader',
+          {
+            loader: 'typings-for-css-modules-loader',
+            options: {
+              modules: true,
+              namedExport: true
             }
-          ],
-          include: /\.module\.css$/
-        },
-        {
-          test: /\.css$/,
-          use: [
-            'style-loader',
-            'css-loader'
-          ],
-          exclude: /\.module\.css$/
-        },
-        {
-          test: /\.html$/i,
-          use: 'html-loader',
-          include: path.join(clientDir, '/**/*'),
-        }
-      ]
-    }]
+          }
+        ],
+        exclude: /\.css/,
+        include: pathResolver.clientRootDir
+      },
+      { // TS LOADER
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        include: pathResolver.clientRootDir
+      },
+      { // JS LOADER
+        test: /\.jsx?$/,
+        use: 'babel-loader',
+        include: pathResolver.clientRootDir
+      },
+    ]
+  },
+  //
+  devServer: {
+    port: 3000,
+    host: 'localhost',
+    hot: true,
   },
   plugins: [
+    // Cleans the bundles files before the next bundle
     new CleanWebpackPlugin({ // https://www.npmjs.com/package/clean-webpack-plugin
       verbose: true,
     }),
-    new webpack.HotModuleReplacementPlugin() // https://webpack.js.org/concepts/hot-module-replacement/
   ],
   output: {
-    filename: 'build.js',
-    path: outputDir,
+    filename: 'client.js',
+    path: pathResolver.clientOutputDir,
   },
 };
