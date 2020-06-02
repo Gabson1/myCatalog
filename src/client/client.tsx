@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './routes/ClientRouter';
+// import './index.css';
 
 // TODO: Handle redux store, react DOM rendering
 
