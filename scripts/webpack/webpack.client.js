@@ -1,5 +1,3 @@
-const path = require('path');
-const nodeExternals = require('webpack-node-externals');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 
@@ -7,7 +5,6 @@ const pathResolver = require('../utils/pathResolver');
 
 module.exports = {
   target: 'node',
-  externals: [nodeExternals()],
   devtool: 'inline-source-map',
   entry: pathResolver.clientEntryPoint,
   module: {
