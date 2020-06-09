@@ -1,4 +1,6 @@
+const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
+
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const WebpackShellPlugin = require('webpack-shell-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
@@ -7,13 +9,15 @@ const pathResolver = require('../utils/pathResolver');
 
 const isProd = process.env.NODE_ENV === 'production';
 
+// Webpack plugins that are always in use, regardless of the mode
 const plugins = [
-  new CleanWebpackPlugin({ // https://www.npmjs.com/package/clean-webpack-plugin
+  new CleanWebpackPlugin({
     verbose: true,
     cleanOnceBeforeBuildPatterns: pathResolver.serverOutputDir,
   }),
 ];
 
+// Webpack plugins that are only in use when mode !== 'production'
 if (!isProd) {
   plugins.push(
     new WebpackShellPlugin({
@@ -23,15 +27,17 @@ if (!isProd) {
   )
 }
 
+// Webpack plugins that are only in use when mode === 'production'
 if (isProd) {
   plugins.push(
-    new CopyPlugin([
-      {
-        from: pathResolver.clientOutputDir,
-        to: pathResolver.serverOutputDir,
-      }
-    ])
+    new CopyPlugin([{
+      from: pathResolver.clientOutputDir,
+      to: pathResolver.serverOutputDir,
+    }]),
   )
+  plugins.push(new webpack.DefinePlugin({
+    'process.env.CLIENT_BUILD_DIR': JSON.stringify(pathResolver.clientOutputDir),
+  }))
 }
 
 module.exports = {
@@ -46,6 +52,7 @@ module.exports = {
       { // TS LOADER
         test: /\.(ts|js)$/,
         use: 'ts-loader',
+        options: {configFile: '../../tsconfig.json'},
         exclude: [/node_modules/, /src\/client\//],
         include: pathResolver.serverRootDir
       },
@@ -53,7 +60,7 @@ module.exports = {
   },
   resolve: {
     // Add `.ts` and `.js` as a resolvable extension.
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js'],
   },
   plugins,
   output: {
