@@ -6,63 +6,49 @@ const pathResolver = require('../utils/pathResolver');
 module.exports = {
   target: 'node',
   devtool: 'inline-source-map',
-  entry: pathResolver.clientEntryPoint,
+  entry: '../../public/index.html',
   module: {
     rules: [
-      { // IMAGE LOADER
-        test: /\.(png|svg|jpg|jpeg|gif)$/,
+      { // File Loader
+        test: /\.(png|svg|jpg|jpeg|gif|woff|woff2|eot|ttf|otf)$/,
         use: 'file-loader',
-        exclude: /(node_modules)/,
+        exclude: /node_modules/,
         include: pathResolver.clientRootDir
       },
-      { // FONT LOADER
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: 'file-loader',
-        exclude: /(node_modules)/,
-        include: pathResolver.clientRootDir
-      },
-      { // HTML LOADER
-        test: /\.(html)$/,
-        use: 'html-loader',
-        exclude: /(node_modules)/,
-        include: pathResolver.clientRootDir
-      },
-      { // CSS LOADER
-        test: /\.css/,
-        use: [
-          'style-loader',
-          'css-loader',
-        ],
-        exclude: /(\.module\.css|node_modules)/,
-        include: pathResolver.clientRootDir
-      },
-      { // CSS MODULES LOADER
-        test: /\.module\.css/,
+      { // Css Loader
+        test: /\.(css|module\.css)$/,
         use: [
           'style-loader',
           {
-            loader: 'typings-for-css-modules-loader',
+            loader: 'css-loader',
             options: {
-              modules: true,
-              namedExport: true
+              importLoaders: 1,
+              modules: {
+                mode: 'local',
+                localIdentName: '[name]_[local]__[hash:base64:5]',
+              },
             }
-          }
+          },
         ],
-        exclude: /(\.css|node_modules)/,
+        exclude: /node_modules/,
         include: pathResolver.clientRootDir
       },
-      { // TS LOADER
-        test: /\.(ts|tsx)$/,
-        use: 'ts-loader',
-        exclude: /(node_modules)/,
+      { // Typescript + Javascript Loaders
+        test: /\.(js|ts)x?$/,
+        use: [{
+          loader: 'babel-loader',
+        }, {
+          loader: 'ts-loader',
+        }],
+        exclude: /node_modules/,
         include: pathResolver.clientRootDir
       },
-      { // JS LOADER
-        test: /\.(js|jsx)$/,
-        use: 'babel-loader',
-        exclude: /(node_modules)/,
+      { // HTML LOADER
+        test: /\.html$/,
+        use: 'html-loader',
+        exclude: /node_modules/,
         include: pathResolver.clientRootDir
-      },
+      }
     ]
   },
   resolve: {
