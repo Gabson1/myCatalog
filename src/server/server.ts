@@ -3,7 +3,7 @@ import * as morgan from 'morgan';
 import ServerRouter from './routes/index';
 
 const app  = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const host = process.env.HOST_NAME || 'localhost';
 
 app.use(morgan('dev'));

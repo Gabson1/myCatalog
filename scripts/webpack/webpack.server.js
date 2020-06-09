@@ -1,6 +1,7 @@
 const nodeExternals = require('webpack-node-externals');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const WebpackShellPlugin = require('webpack-shell-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const pathResolver = require('../utils/pathResolver');
 
@@ -19,6 +20,17 @@ if (!isProd) {
       onBuildStart: ['echo "Starting webpack"'],
       onBuildEnd: ['npm run server:watch']
     })
+  )
+}
+
+if (isProd) {
+  plugins.push(
+    new CopyPlugin([
+      {
+        from: pathResolver.clientOutputDir,
+        to: pathResolver.serverOutputDir,
+      }
+    ])
   )
 }
 
