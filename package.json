@@ -2,7 +2,7 @@
   "scripts": {
     "test:run": "tsc && node ./build/src/server/server.js",
     "app": "concurrently -n server,client \"npm run server\" \"npm run client\"",
-    "client": "webpack-dev-server --hot --config ./scripts/webpack/webpack.client.js",
+    "client": "webpack-dev-server --config ./scripts/webpack/webpack.client.js",
     "server": "webpack --config ./scripts/webpack/webpack.server.js",
     "server:watch": "nodemon ./build/server/server.js",
     "build:app": "concurrently -n server,client \"npm run build:server\" \"npm run build:client\"",

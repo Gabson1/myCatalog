@@ -12,6 +12,8 @@ const serverEntryPoint = relativePathResolver(path.join('src', 'server', 'server
 const serverRootDir = relativePathResolver(path.join('src', 'server'));
 const serverOutputDir = relativePathResolver(path.join('build', 'server'));
 
+const htmlEntryfile = relativePathResolver(path.join('src', 'index.html'));
+
 module.exports = {
   projectRootDir,
   relativePathResolver,
@@ -21,4 +23,5 @@ module.exports = {
   serverEntryPoint,
   serverRootDir,
   serverOutputDir,
+  htmlEntryfile,
 };

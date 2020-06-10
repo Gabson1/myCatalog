@@ -1,3 +1,4 @@
+const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 
@@ -6,7 +7,7 @@ const pathResolver = require('../utils/pathResolver');
 module.exports = {
   target: 'node',
   devtool: 'inline-source-map',
-  entry: '../../public/index.html',
+  entry: pathResolver.clientEntryPoint,
   module: {
     rules: [
       { // File Loader
@@ -56,16 +57,19 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
   devServer: {
-    port: 3000,
     host: 'localhost',
+    port: 3000,
     hot: true,
+    open: true,
     contentBase: pathResolver.clientOutputDir
   },
   plugins: [
-    new CleanWebpackPlugin({ // https://www.npmjs.com/package/clean-webpack-plugin
+    new CleanWebpackPlugin({
       verbose: true,
     }),
-    new HtmlWebPackPlugin() // https://www.npmjs.com/package/html-webpack-plugin
+    new HtmlWebPackPlugin({
+      template: pathResolver.htmlEntryfile
+    }),
   ],
   output: {
     filename: 'client.js',
