@@ -539,8 +539,8 @@ Project contains different theme files under `src/client/src/styles/themes`.
 
 These files define custom property `var()`s.
 
-These theme files are injected to the outer `App.js` that wraps all the components in the project.
-And injected to the different **popup** components, because their scope is different of that of the `App.js`.
+These theme files are injected to the outer `testApp.js` that wraps all the components in the project.
+And injected to the different **popup** components, because their scope is different of that of the `testApp.js`.
 
 The Theme files are CSS module files (i.e: `Theme1.module.css`)
 They contain one class called `.appColors` which defines all the theme related values needed for the project.

@@ -1,1 +1,0 @@
-// TODO: Setup redux store. Also add redux store loggin only for development environment

@@ -1,8 +1,12 @@
 const path = require('path');
+
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin')
+const { prepareProxy } = require('react-dev-utils/WebpackDevServerUtils');
 
 const pathResolver = require('../utils/pathResolver');
+
+const proxy = prepareProxy('http://localhost:5000/', pathResolver.publicRootDir);
 
 module.exports = {
   target: 'node',
@@ -17,34 +21,18 @@ module.exports = {
         include: pathResolver.clientRootDir
       },
       { // Css Loader
-        test: /\.(css|module\.css)$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              modules: {
-                mode: 'local',
-                localIdentName: '[name]_[local]__[hash:base64:5]',
-              },
-            }
-          },
-        ],
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
         exclude: /node_modules/,
         include: pathResolver.clientRootDir
       },
-      { // Typescript + Javascript Loaders
-        test: /\.(js|ts)x?$/,
-        use: [{
-          loader: 'babel-loader',
-        }, {
-          loader: 'ts-loader',
-        }],
+      { // Javascript Loader
+        test: /\.(js|jsx)$/,
+        loader: "babel-loader",
         exclude: /node_modules/,
-        include: pathResolver.clientRootDir
+        options: { presets: ["@babel/preset-react", "@babel/preset-env"] }
       },
-      { // HTML LOADER
+      { // HTML Loader
         test: /\.html$/,
         use: 'html-loader',
         exclude: /node_modules/,
@@ -52,27 +40,29 @@ module.exports = {
       }
     ]
   },
-  resolve: {
-    // Add `.ts`, `.tsx` and `.js`, `.jsx` as resolvable extensions.
-    extensions: ['.ts', '.tsx', '.js', '.jsx']
-  },
+  resolve: { extensions: ["*", ".js", ".jsx"] },
   devServer: {
     host: 'localhost',
     port: 3000,
     hot: true,
     open: true,
-    contentBase: pathResolver.clientOutputDir
+    // index: 'index.html',
+    // proxy,
+    // contentBase: pathResolver.clientOutputDir
   },
   plugins: [
     new CleanWebpackPlugin({
       verbose: true,
+      cleanOnceBeforeBuildPatterns: pathResolver.clientOutputDir,
     }),
     new HtmlWebPackPlugin({
-      template: pathResolver.htmlEntryfile
+      favicon: path.join(pathResolver.clientRootDir, 'assets', 'favicon.ico'),
+      template: pathResolver.htmlEntryPoint,
+      filename: 'index.html'
     }),
   ],
   output: {
-    filename: 'client.js',
+    filename: 'index.js',
     path: pathResolver.clientOutputDir,
   },
 };

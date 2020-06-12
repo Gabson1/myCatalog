@@ -38,6 +38,7 @@ if (isProd) {
   plugins.push(new webpack.DefinePlugin({
     'process.env.CLIENT_BUILD_DIR': JSON.stringify(pathResolver.clientOutputDir),
   }))
+
 }
 
 module.exports = {
@@ -52,7 +53,7 @@ module.exports = {
       { // TS LOADER
         test: /\.(ts|js)$/,
         use: 'ts-loader',
-        options: {configFile: '../../tsconfig.json'},
+        // options: {configFile: '../../tsconfig.json'},
         exclude: [/node_modules/, /src\/client\//],
         include: pathResolver.serverRootDir
       },
