@@ -1,4 +1,40 @@
 import React, { Component } from 'react';
+import './App.css';
+
+class App extends Component {
+  state = { data: '' };
+
+  componentDidMount() {
+    this.callBackendAPI()
+      .then(res => this.setState({ data: res.express }))
+      .catch(err => console.log(err));
+  }
+  callBackendAPI = async () => {
+    const response = await fetch('/secret');
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message)
+    }
+    return body;
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src="../assets/logo.svg" className="App-logo" alt="logo" />
+          <h1 className="App-title">Welcome to React</h1>
+        </header>
+        <p className="App-intro">{this.state.data}</p>
+      </div>
+    );
+  }
+}
+export default App;
+
+/*
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {CommonAction, TestAction, Incrementer, Decrementer} from '../actions/testAction'
 
@@ -51,3 +87,4 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
+*/
