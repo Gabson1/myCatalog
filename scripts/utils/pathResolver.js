@@ -12,7 +12,7 @@ const serverEntryPoint = relativePathResolver(path.join('src', 'server', 'server
 const serverRootDir = relativePathResolver(path.join('src', 'server'));
 const serverOutputDir = relativePathResolver(path.join('build', 'server'));
 
-const htmlEntryPoint = relativePathResolver(path.join('src', 'index.html'));
+const htmlEntryPoint = relativePathResolver(path.join('src', 'client', 'index.html'));
 const publicRootDir = relativePathResolver(path.join('public'));
 
 module.exports = {

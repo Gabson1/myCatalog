@@ -10,7 +10,7 @@ const pathResolver = require('../utils/pathResolver');
 const proxy = prepareProxy(proxyUrl, pathResolver.publicRootDir);
 
 module.exports = {
-  target: 'node',
+  target: 'web',
   devtool: 'inline-source-map',
   entry: pathResolver.clientEntryPoint,
   module: {
@@ -50,7 +50,6 @@ module.exports = {
     port: 3000,
     hot: true,
     open: true,
-    // index: 'index.html',
     proxy,
     // contentBase: pathResolver.clientOutputDir
   },
