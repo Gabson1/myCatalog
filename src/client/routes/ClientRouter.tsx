@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import {render} from "react-dom";
 import { Router, Switch, Redirect } from 'react-router-dom';
 
 import Settings from './Settings';
@@ -6,18 +7,25 @@ import Login from './Login';
 import Integrations from './Settings';
 import Profile from './Profile';
 import Tables from './Tables';
-import {render} from "react-dom";
 
 type Props = {
-  id: string;
-  key: string;
-  path: string;
-  showSideBar: boolean;
-  showHeader: boolean;
-  protected: boolean;
+  id?: string;
+  key?: string;
+  path?: string;
+  showSideBar?: boolean;
+  showHeader?: boolean;
+  isProtected?: boolean;
 }
 
-function ClientRouter() {
+function ClientRouter(props: Props) {
+  const {
+    id,
+    key,
+    path,
+    showSideBar,
+    showHeader,
+    isProtected,
+  } = props;
   return <div>...</div>
 }
 

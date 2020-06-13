@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import { Button, Icon } from 'semantic-ui-react';
-import styles from '../../styles/molecules/AppButton.module.css';
+// import styles from '../../styles/molecules/AppButton.module.css';
 
 type Props = {
     style?: any;
@@ -38,10 +38,11 @@ function AppButton(props: Props) {
         <Button
             style={style}
             disabled={isDisabled || isLoading}
-            className={styles.appButton}
+            // className={styles.appButton}
             labelPosition={labelPosition}
             content={buttonText}
             onClick={click}
+            iconName={iconName}
         >
             { iconName &&
                 <Icon

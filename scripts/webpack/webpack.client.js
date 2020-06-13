@@ -1,74 +1,72 @@
 const path = require('path');
-const webpack = require('webpack');
-const nodeExternals = require('webpack-node-externals');
+
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin')
+const { prepareProxy } = require('react-dev-utils/WebpackDevServerUtils');
 
-const clientDir = path.join(__dirname, '../', '../', 'src', 'client');
+const proxyUrl = require('../../package.json').proxy
+const pathResolver = require('../utils/pathResolver');
 
-const outputDir = path.join(__dirname, '../', '../', 'build', 'client')
-
-// https://webpack.js.org/configuration/mode/#mode-development
+const proxy = prepareProxy(proxyUrl, pathResolver.publicRootDir);
 
 module.exports = {
   target: 'node',
-  externals: nodeExternals(),
-  entry: path.join(clientDir, 'client.tsx'),
+  devtool: 'inline-source-map',
+  entry: pathResolver.clientEntryPoint,
   module: {
-    rules: [{
-      oneOf: [
-        {
-          test: [/\.jpe?g$/, /\.png$/],
-          use: 'file-loader',
-          include: path.join(clientDir, '/**/*'),
-        },
-        {
-          test: /\.jsx?$/,
-          use: 'babel-loader',
-          include: path.join(clientDir, '/**/*'),
-        },
-        {
-          test: /\.tsx?$/,
-          use: 'ts-loader',
-          include: path.join(clientDir, '/**/*'),
-        },
-        {
-          test: /\.css$/,
-          use: [
-            'style-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-                modules: true
-              }
-            }
-          ],
-          include: /\.module\.css$/
-        },
-        {
-          test: /\.css$/,
-          use: [
-            'style-loader',
-            'css-loader'
-          ],
-          exclude: /\.module\.css$/
-        },
-        {
-          test: /\.html$/i,
-          use: 'html-loader',
-          include: path.join(clientDir, '/**/*'),
+    rules: [
+      { // File Loader
+        test: /\.(png|svg|jpg|jpeg|gif|woff|woff2|eot|ttf|otf)$/,
+        use: 'file-loader',
+        exclude: /node_modules/,
+        include: pathResolver.clientRootDir
+      },
+      { // Css Loader
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+        exclude: /node_modules/,
+        include: pathResolver.clientRootDir
+      },
+      { // Javascript Loader
+        test: /\.(js|jsx)$/,
+        loader: "babel-loader",
+        exclude: /node_modules/,
+        options: {
+          presets: ["@babel/preset-react", "@babel/preset-env"],
+          plugins: ["@babel/plugin-proposal-class-properties"]
         }
-      ]
-    }]
+      },
+      { // HTML Loader
+        test: /\.html$/,
+        use: 'html-loader',
+        exclude: /node_modules/,
+        include: pathResolver.clientRootDir
+      }
+    ]
+  },
+  resolve: { extensions: ["*", ".js", ".jsx"] },
+  devServer: {
+    host: 'localhost',
+    port: 3000,
+    hot: true,
+    open: true,
+    // index: 'index.html',
+    proxy,
+    // contentBase: pathResolver.clientOutputDir
   },
   plugins: [
-    new CleanWebpackPlugin({ // https://www.npmjs.com/package/clean-webpack-plugin
+    new CleanWebpackPlugin({
       verbose: true,
+      cleanOnceBeforeBuildPatterns: pathResolver.clientOutputDir,
     }),
-    new webpack.HotModuleReplacementPlugin() // https://webpack.js.org/concepts/hot-module-replacement/
+    new HtmlWebPackPlugin({
+      favicon: path.join(pathResolver.clientRootDir, 'assets', 'favicon.ico'),
+      template: pathResolver.htmlEntryPoint,
+      filename: 'index.html'
+    }),
   ],
   output: {
-    filename: 'build.js',
-    path: outputDir,
+    filename: 'index.js',
+    path: pathResolver.clientOutputDir,
   },
 };

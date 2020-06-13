@@ -1,42 +1,71 @@
-const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
+
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const WebpackShellPlugin = require('webpack-shell-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
-const serverDir = path.join(__dirname, '../', '../', 'src', 'server');
+const pathResolver = require('../utils/pathResolver');
 
-const outputDir = path.join(__dirname, '../', '../', 'build', 'server')
+const isProd = process.env.NODE_ENV === 'production';
+
+// Webpack plugins that are always in use, regardless of the mode
+const plugins = [
+  new CleanWebpackPlugin({
+    verbose: true,
+    cleanOnceBeforeBuildPatterns: pathResolver.serverOutputDir,
+  }),
+];
+
+// Webpack plugins that are only in use when mode !== 'production'
+if (!isProd) {
+  plugins.push(
+    new WebpackShellPlugin({
+      onBuildStart: ['echo "Starting webpack"'],
+      onBuildEnd: ['npm run server:watch']
+    })
+  )
+}
+
+// Webpack plugins that are only in use when mode === 'production'
+if (isProd) {
+  plugins.push(
+    new CopyPlugin([{
+      from: pathResolver.clientOutputDir,
+      to: pathResolver.serverOutputDir,
+    }]),
+  )
+  plugins.push(new webpack.DefinePlugin({
+    'process.env.CLIENT_BUILD_DIR': JSON.stringify(pathResolver.clientOutputDir),
+  }))
+
+}
 
 module.exports = {
   target: 'node',
-  externals: nodeExternals(),
-  entry: path.join(serverDir, 'server.ts'),
+  mode: process.env.NODE_ENV,
+  watch: !isProd,
+  externals: [nodeExternals()],
   devtool: 'inline-source-map',
+  entry: pathResolver.serverEntryPoint,
   module: {
     rules: [
-      {
-        test: /\.ts/,
+      { // TS LOADER
+        test: /\.(ts|js)$/,
         use: 'ts-loader',
-        include: path.join(serverDir, '/**/*'),
+        // options: {configFile: '../../tsconfig.json'},
+        exclude: [/node_modules/, /src\/client\//],
+        include: pathResolver.serverRootDir
       },
-      {
-        test: /\.js/,
-        use: 'babel-loader',
-        include: path.join(serverDir, '/**/*'),
-      }
     ],
   },
   resolve: {
-    extensions: [ '.tsx', '.ts' ],
+    // Add `.ts` and `.js` as a resolvable extension.
+    extensions: ['.ts', '.js'],
   },
-  plugins: [
-    new CleanWebpackPlugin({ // https://www.npmjs.com/package/clean-webpack-plugin
-      verbose: true,
-    }),
-    new webpack.HotModuleReplacementPlugin() // https://webpack.js.org/concepts/hot-module-replacement/
-  ],
+  plugins,
   output: {
     filename: 'server.js',
-    path: outputDir,
+    path: pathResolver.serverOutputDir,
   },
 };
