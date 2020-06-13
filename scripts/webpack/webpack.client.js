@@ -4,9 +4,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const { prepareProxy } = require('react-dev-utils/WebpackDevServerUtils');
 
+const proxyUrl = require('../../package.json').proxy
 const pathResolver = require('../utils/pathResolver');
 
-const proxy = prepareProxy('http://localhost:5000/', pathResolver.publicRootDir);
+const proxy = prepareProxy(proxyUrl, pathResolver.publicRootDir);
 
 module.exports = {
   target: 'node',
@@ -47,7 +48,7 @@ module.exports = {
     hot: true,
     open: true,
     // index: 'index.html',
-    // proxy,
+    proxy,
     // contentBase: pathResolver.clientOutputDir
   },
   plugins: [
