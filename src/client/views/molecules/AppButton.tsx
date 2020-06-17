@@ -11,7 +11,8 @@ type Props = {
     labelPosition?: 'left' | 'right';
     iconName?: any;
     iconColor?: any;
-    iconSize? :any;
+    iconSize?: any;
+    showIcon?: boolean;
 };
 
 function AppButton(props: Props) {
@@ -22,6 +23,7 @@ function AppButton(props: Props) {
         isLoading,
         onClick = () => {},
         labelPosition = 'left',
+        showIcon = 'true',
         iconName = null,
         iconColor = null,
         iconSize = null,
@@ -42,9 +44,9 @@ function AppButton(props: Props) {
             labelPosition={labelPosition}
             content={buttonText}
             onClick={click}
-            iconName={iconName}
+            showIcon={showIcon}
         >
-            { iconName &&
+            { showIcon &&
                 <Icon
                     name={iconName}
                     size={iconSize}
