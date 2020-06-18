@@ -5,7 +5,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin')
 const { prepareProxy } = require('react-dev-utils/WebpackDevServerUtils');
 
 const proxyUrl = require('../../package.json').proxy
-const pathResolver = require('../utils/pathResolver');
+const pathResolver = require('../utils/paths');
 
 const proxy = prepareProxy(proxyUrl, pathResolver.publicRootDir);
 

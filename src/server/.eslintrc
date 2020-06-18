@@ -1,14 +1,10 @@
 {
     "extends": [
         "standard",
-        "plugin:import/typescript",
-        "plugin:@typescript-eslint/recommended"
     ],
     "plugins": [
         "node",
-        "@typescript-eslint"
     ],
     "env": { "es6": true },
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": { "ecmaVersion": 2018 },
+    "parserOptions": { "ecmaVersion": 2018 }
 }

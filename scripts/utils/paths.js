@@ -8,7 +8,7 @@ const clientEntryPoint = relativePathResolver(path.join('src', 'client', 'index.
 const clientRootDir = relativePathResolver(path.join('src', 'client'));
 const clientOutputDir = relativePathResolver(path.join('build', 'client'));
 
-const serverEntryPoint = relativePathResolver(path.join('src', 'server', 'server.ts'));
+const serverEntryPoint = relativePathResolver(path.join('src', 'server', 'server.js'));
 const serverRootDir = relativePathResolver(path.join('src', 'server'));
 const serverOutputDir = relativePathResolver(path.join('build', 'server'));
 
