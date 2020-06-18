@@ -9,7 +9,7 @@ const userSchema = new Schema({
   password: { type: String, required: true, minlength: 5 },
   image: { type: String },
   tables: [{ type: mongoose.Types.ObjectId, ref: 'Tables' }],
-  created_at : { type : Date, default: Date.now }
+  createdAt : { type : Date, default: Date.now }
 });
 
 module.exports = mongoose.model('Users', userSchema);

@@ -1,10 +1,10 @@
-import httpError from '../middleware/httpErrorMiddleware';
-import User from '../models/userModel';
+import httpError from '../middlewares/httpErrorMiddleware';
+import Users from '../models/userModel';
 
 export const createUserService = async ({ name, email, password }) => {
   let userExist;
   try {
-    userExist = await User.findOne({ email });
+    userExist = await Users.findOne({ email });
   } catch (err) {
     const error = new httpError("Could not sign up, please try again", 500);
     return next(error);
@@ -14,7 +14,7 @@ export const createUserService = async ({ name, email, password }) => {
     return new httpError("User already exists, log in instead.");
   }
 
-  const newUser = new User({
+  const newUser = new Users({
     name,
     email,
     password,
