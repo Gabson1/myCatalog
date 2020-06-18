@@ -1,8 +1,8 @@
-import Users from '../models/userModel';
-import { createUserService } from '../services/userService';
+import { Users } from '../models/index';
+import { createUserService } from '../services/index';
 
 // Get all users
-export const getAllUsers = async (req, res, next) => {
+export const getAllUsers = async (req, res,) => {
   const allUsers = await Users.find({}, "-password"); // Omit password
   console.log(allUsers);
   res.json({ data: allUsers });
@@ -15,7 +15,7 @@ export const createUser = async (req, res) => {
 };
 
 // Login a user
-export const loginUser = async (req, res, next) => {
+export const loginUser = async (req, res) => {
   const { email } = req.body;
   const user = await Users.findOne({ email });
   res.json({ message: `${user.name} has successfully logged in` });

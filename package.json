@@ -91,6 +91,7 @@
     "html-webpack-plugin": "^4.3.0",
     "mongodb": "^3.5.9",
     "nodemon": "^1.19.4",
+    "nodemon-webpack-plugin": "^4.3.2",
     "prop-types": "^15.7.2",
     "react-dev-utils": "^10.2.1",
     "style-loader": "^1.2.1",

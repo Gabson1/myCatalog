@@ -2,6 +2,7 @@ const nodeExternals = require("webpack-node-externals");
 
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const WebpackShellPlugin = require("webpack-shell-plugin");
+// const NodemonPlugin = require('nodemon-webpack-plugin');
 
 const pathResolver = require("../utils/paths");
 

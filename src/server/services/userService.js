@@ -1,5 +1,5 @@
-import httpError from '../middlewares/httpErrorMiddleware';
-import Users from '../models/userModel';
+import httpError from '../utils/httpError';
+import { Users } from '../models/index';
 
 export const createUserService = async ({ name, email, password }) => {
   let userExist;
