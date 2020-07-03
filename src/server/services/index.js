@@ -1,5 +1,1 @@
-import { createUserService } from './userService';
-
-export {
-  createUserService,
-};
+export * from './user.srv';

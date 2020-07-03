@@ -1,7 +1,7 @@
 import httpError from '../utils/httpError';
-import { Users } from '../models/index';
+import Users from '../models/user.mod';
 
-export const createUserService = async ({ name, email, password }) => {
+export const createUserService = async ({ username, email, password }) => {
   let userExist;
   try {
     userExist = await Users.findOne({ email });
@@ -15,11 +15,11 @@ export const createUserService = async ({ name, email, password }) => {
   }
 
   const newUser = new Users({
-    name,
+    username,
     email,
     password,
-    image: "https://picsum.photos/200",
-    places: [],
+    avatar: "https://picsum.photos/200",
+    tables: [],
   });
 
   try {

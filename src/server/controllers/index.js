@@ -1,5 +1,1 @@
-import { getAllUsers, createUser, loginUser } from './userController';
-
-export {
-  getAllUsers, createUser, loginUser,
-};
+export * from './user.con';

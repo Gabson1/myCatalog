@@ -1,4 +1,4 @@
-import { genericValidator, loginUserValidation, createUserValidation } from './userMiddleware';
+import { genericValidator, loginUserValidation, createUserValidation } from './user.mid';
 
 export {
   genericValidator, loginUserValidation, createUserValidation,

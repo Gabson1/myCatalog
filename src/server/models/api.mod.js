@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require ("mongoose");
 
 const Schema = mongoose.Schema;
 
@@ -10,4 +10,4 @@ const apiSchema = new Schema({
   createdAt : { type : Date, default: Date.now }
 });
 
-module.exports = mongoose.model("Apis", apiSchema);
+const Apis = module.exports = mongoose.model("Apis", apiSchema);

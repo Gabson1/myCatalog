@@ -1,4 +1,4 @@
-import { Users } from '../models/index';
+import Users from '../models/user.mod';
 import { createUserService } from '../services/index';
 
 // Get all users

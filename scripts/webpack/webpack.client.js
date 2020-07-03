@@ -2,12 +2,14 @@ const path = require('path');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin')
+
 const { prepareProxy } = require('react-dev-utils/WebpackDevServerUtils');
 
 const proxyUrl = require('../../package.json').proxy
 const pathResolver = require('../utils/paths');
 
 const proxy = prepareProxy(proxyUrl, pathResolver.publicRootDir);
+
 
 module.exports = {
   target: 'web',
@@ -25,7 +27,7 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
         exclude: /node_modules/,
-        include: pathResolver.clientRootDir
+        include: pathResolver.clientRootDir,
       },
       { // Javascript Loader
         test: /\.(js|jsx)$/,
@@ -62,7 +64,7 @@ module.exports = {
       favicon: path.join(pathResolver.clientRootDir, 'assets', 'favicon.ico'),
       template: pathResolver.htmlEntryPoint,
       filename: 'index.html'
-    }),
+    })
   ],
   output: {
     filename: 'index.js',

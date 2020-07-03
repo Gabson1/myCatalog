@@ -14,10 +14,12 @@ export const genericValidator = (req, res, next) => {
 };
 
 export const createUserValidation = [
-  check('email').normalizeEmail().isEmail()
+  check('username', 'Please provide a username').not().isEmpty(),
+  check('email', 'Please insert a valid email').normalizeEmail().isEmail(),
+  check('password', 'Please insert a valid password with a minimum length of 8 characters').isLength({ min: 8 })
 ];
 
 export const loginUserValidation = [
-  check('email').normalizeEmail().isEmail(),
-  check('password')
+  check('email', 'Please insert a valid email').normalizeEmail().isEmail(),
+  check('password', 'Please insert a valid password').isLength({ min: 8 })
 ];
