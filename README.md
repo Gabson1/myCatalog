@@ -26,8 +26,10 @@ See a list of asset types MyCatalog supports:
 - Watches
 - Gold
 - Silver
-- Stocks
+- Wine
+----- later versions -----
 - Real estate
+- Stocks
 - Cryptocurrency
 
 <hr />
