@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form , Input, Button} from 'semantic-ui-react';
 
-import { loginAction } from '../../actions';
+import { loginUser } from '../../actions';
 
 class LoginForm extends Component {
   state = {
@@ -29,9 +29,9 @@ class LoginForm extends Component {
   }
 }
 
-const mapStateToProps = state => {  const { isLoggedIn } = state.loginReducer;   return { isLoggedIn }  };
+const mapStateToProps = state => {  const { isLoggedIn } = state.userReducer;   return { isLoggedIn }  };
 
-const mapDispatchToProps = dispatch => ({   loginAction: (email, password) => dispatch(loginAction(email, password))  });
+const mapDispatchToProps = dispatch => ({   loginAction: (email, password) => dispatch(loginUser(email, password))  });
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

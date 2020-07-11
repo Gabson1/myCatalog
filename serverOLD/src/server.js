@@ -1,4 +1,3 @@
-import path from 'path';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
@@ -13,8 +12,7 @@ server.use(morgan('dev'));
 
 server.use(cors());
 
-server.use(express.static(path.join(__dirname, '../../client/public')))
-server.use(express.static(path.join(__dirname, '../../client/src/assets')))
+// server.use(express.static('public'))
 
 server.use(express.urlencoded({ extended: false }));
 server.use(express.json());
@@ -40,4 +38,4 @@ mongoose
       console.log(`SERVER IS ALIVE >>> http://${host}:${port}`);
     });
   })
-  .catch((error) => console.log(`Error: ${error.message}`));
+  .catch((error) => console.log(`Error: ${error}`));

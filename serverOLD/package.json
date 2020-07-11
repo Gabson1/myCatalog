@@ -1,12 +1,15 @@
 {
   "scripts": {
-    "server": "node --exec babel-node src/server.js",
+    "server": "node src/server.js",
     "server:watch": "nodemon --exec babel-node src/server.js"
   },
   "dependencies": {
-    "bcrypt": "^5.0.0",
+    "argon2": "^0.26.2",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "debug": "^4.1.1",
     "express": "4.17.0",
+    "express-session": "^1.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.19",
     "passport": "^0.4.1",
@@ -21,11 +24,12 @@
     "@types/mongoose": "^5.7.27",
     "@types/node": "^14.0.14",
     "babel-preset-env": "^1.7.0",
+    "bcrypt": "^5.0.0",
     "express-validator": "^6.5.0",
     "morgan": "^1.9.1",
     "nodemon": "^2.0.4"
   },
-  "name": "redux-example",
+  "name": "server-mycatalog",
   "version": "0.1.0",
   "private": true,
   "eslintConfig": {

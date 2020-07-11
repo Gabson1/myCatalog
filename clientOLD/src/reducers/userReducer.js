@@ -1,19 +1,17 @@
-import { loginTypes as t } from '../types/login';
+import { registrationTypes as t } from '../types/registrationTypes';
 
 const initialState = {
   isLoggedIn: false,
   user: {}
 };
 
-export const loginReducer = (state = initialState, action) => {
-  console.log('Action: ', action);
-  console.log(action.user || {});
+export const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case t.LOGIN_SUCCESS:
+    case t.LOGIN:
       return {
         ...state,
         isLoggedIn: true,
-        user: action.user || {}
+        user: action
       };
     case t.LOGIN_FAILURE:
       return state

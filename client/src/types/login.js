@@ -1,5 +1,7 @@
-export const loginTypes = {
+export const registrationTypes = {
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
   LOGIN_FAILURE: 'LOGIN_FAILURE',
-  LOGOUT: 'LOGOUT'
+  LOGOUT: 'LOGOUT',
+  SIGNUP_SUCCESS: 'SIGNUP_SUCCESS',
+  SIGNUP_FAILURE: 'SIGNUP_FAILURE'
 };

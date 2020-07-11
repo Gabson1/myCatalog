@@ -1,11 +1,13 @@
 import React from 'react';
 
-import LoginForm from '../../features/login/Login';
+import {RegistrationSwitcher} from "../../components/registrationTypeSwitcher/regSwitch";
+
+
 function App() {
   return (
     <div>
       <h1>REACT ECOMMERCE BITCHEs</h1>
-      <LoginForm />
+      <RegistrationSwitcher />
     </div>
   );
 }
