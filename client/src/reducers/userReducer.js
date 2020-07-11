@@ -11,7 +11,7 @@ export const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true,
-        user: action
+        user: action.payload
       };
     case t.LOGIN_FAILURE:
       return state
@@ -31,7 +31,7 @@ export const signupReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true,
-        user: action
+        user: action.payload
       };
     case t.SIGNUP_FAILURE:
       return state
