@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 
 import 'semantic-ui-css/semantic.min.css'
 
-import App from './pages/app/App';
+import App from './components/app/App';
 import { store } from './store/store';
 
 ReactDOM.render(

@@ -1,7 +1,0 @@
-export const registrationTypes = {
-  SIGNUP: 'SIGNUP',
-  SIGNUP_FAILURE: 'SIGNUP FAILURE',
-  LOGIN: 'LOGIN',
-  LOGOUT: 'LOGOUT',
-  LOGIN_FAILURE: 'LOGIN_FAILURE'
-};
