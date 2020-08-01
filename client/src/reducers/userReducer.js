@@ -1,4 +1,4 @@
-import { registrationTypes as t } from '../types/login';
+import { registrationTypes as t } from '../types/user';
 
 const initialState = {
   isLoggedIn: false,
