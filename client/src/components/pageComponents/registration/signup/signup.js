@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 
-import { signupAction } from '../../../actions';
-import useInput from "../../../hooks/useInput";
+import { signupAction } from '../../../../actions';
+import useInput from "../../../../hooks/useInput";
 
-import image from '../../../assets/logo192.png'
+import image from '../../../../assets/logo192.png'
 
 const SignupForm = ({ login, signupAction }) => {
   const username = useInput('');

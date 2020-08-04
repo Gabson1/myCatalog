@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 
-import { loginAction } from '../../../actions';
-import useInput from "../../../hooks/useInput";
+import { loginAction } from '../../../../actions';
+import useInput from "../../../../hooks/useInput";
 
-import image from '../../../assets/logo192.png'
+import image from '../../../../assets/logo192.png'
 
 const LoginForm = ({ signup, loginAction }) => {
   const email = useInput('');

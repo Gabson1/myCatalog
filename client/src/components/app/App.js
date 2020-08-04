@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {RegistrationSwitcher} from "../registration/registrationTypeSwitcher/regSwitch";
+import {RegistrationSwitcher} from "../pageComponents/registration/registrationTypeSwitcher/regSwitch";
 
 import Cookie from "../cookie/cookie";
 
