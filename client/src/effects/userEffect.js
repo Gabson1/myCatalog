@@ -18,3 +18,11 @@ export const signupRequest = async (username, email, password) => {
     throw new Error(`Something went wrong... ${err.message}`);
   }
 };
+
+export const signoutRequest = async () => {
+  try {
+    return await axios.post('http://localhost:5000/api/users/signout')
+  } catch (err) {
+    throw new Error(`Something went wrong... ${err.message}`);
+  }
+};

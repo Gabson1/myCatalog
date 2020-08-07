@@ -13,6 +13,11 @@ router.post(
 );
 
 router.post(
+  '/signout',
+  controller.signoutUser
+);
+
+router.post(
   '/login',
   validation.loginUserValidation,
   validation.genericValidator,

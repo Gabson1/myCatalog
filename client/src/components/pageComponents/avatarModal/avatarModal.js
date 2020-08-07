@@ -11,7 +11,7 @@ const AvatarModal = ({fullName, email, isLoggedIn }) => {
 
   const avatarStyles = `${showAvatarModal ? 'showAvatarModalWrapper' : 'dismissAvatarModalWrapper'}`;
 
-  // const onSignOutClick = signoutAction();
+  const onSignOutClick = signoutAction();
   // const onChangeProfileClick = () => history.push('/edit-profile');
 
   return (

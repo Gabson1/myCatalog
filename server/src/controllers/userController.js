@@ -13,6 +13,12 @@ export const createUser = async (req, res) => {
   res.status(201).json({ newUser });
 };
 
+export const signoutUser = async (req, res) => {
+  req.logout();
+  if (req.xhr) return res.status(204).end();
+  return res.redirect('/');
+};
+
 // Login a user
 export const loginUser = async (req, res) => {
   try {
