@@ -3,12 +3,15 @@ import { BrowserRouter, Switch, Route} from "react-router-dom";
 
 import PrivateRoute from '../PrivateRoute';
 
-import RegSwitch  from '../../components/registration/registrationTypeSwitcher/regSwitch';
+import RegSwitch  from '../../component/registration/registrationTypeSwitcher/regSwitch';
 import Apis from '../../pages/api/api';
 import Dashboard from '../../pages/dashboard/dashboard';
 import Profile from '../../pages/profile/profile';
 import Settings from '../../pages/setting/setting';
 import Tables from '../../pages/tables/table';
+import NotFound from '../../component/notfound/notFound';
+
+import './App.css';
 
 const App = () => {
   return (
@@ -20,6 +23,7 @@ const App = () => {
         <PrivateRoute exact path="/profile" component={Profile}/>
         <PrivateRoute exact path="/setting" component={Settings}/>
         <PrivateRoute exact path="/tables" component={Tables}/>
+        <Route component={NotFound} />
       </Switch>
     </BrowserRouter>
   );
