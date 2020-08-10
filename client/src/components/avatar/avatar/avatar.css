@@ -1,0 +1,19 @@
+.avatarContainer img.showAvatarWrapper {
+    width: 40px;
+    height: auto;
+    position: absolute;
+    transform: translate3d(1300px, 5px, 0px);
+    right: auto;
+    top: 0;
+    left: 25px;
+}
+
+
+.avatarContainer .showAvatarWrapper {
+    position: absolute;
+}
+
+.avatarContainer .dismissAvatarWrapper {
+    position: absolute;
+    visibility: hidden;
+}

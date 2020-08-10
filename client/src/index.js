@@ -1,16 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { Router } from 'react-router-dom';
+
+import App from './router/app/App';
+import history from './middlewares/history';
+import { store } from './store/store';
 
 import 'semantic-ui-css/semantic.min.css'
-
-import App from './components/app/App';
-import { store } from './store/store';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Router history={history}>
+        <App />
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

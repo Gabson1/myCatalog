@@ -23,13 +23,4 @@ export const signupAction = (payload) => {
   };
 };
 
-export const signoutAction = () => {
-  return async (dispatch) => {
-    try {
-      await signoutRequest()
-      dispatch({ type: t.SIGNOUT_SUCCESS })
-    } catch (e) {
-      dispatch({ type: t.SIGNOUT_FAILURE })
-    }
-  };
-};
+export const logoutAction = () => ({ type: t.SIGNOUT_SUCCESS });

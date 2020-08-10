@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import SignupForm from "../signup/signup";
 import LoginForm from "../login/Login";
 
-export const RegistrationSwitcher = () => {
+const RegSwitch = () => {
   const [reg, setReg] = useState('SIGNUP');
 
   const login = () => setReg('LOGIN');
@@ -15,3 +15,5 @@ export const RegistrationSwitcher = () => {
     return <SignupForm login={login} />;
   }
 };
+
+export default RegSwitch;
