@@ -27,7 +27,7 @@ export const signupAction = formData => async dispatch => {
       type: t.SIGNUP_SUCCESS,
       payload: res.data
     });
-    // dispatch(loadUser());
+    dispatch(loadUserAction());
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -52,8 +52,7 @@ export const loginAction = (email, password) => async dispatch => {
       type: t.LOGIN_SUCCESS,
       payload: res.data
     });
-
-    // dispatch(loadUser());
+    dispatch(loadUserAction());
   } catch (err) {
     const errors = err.response.data.errors;
 

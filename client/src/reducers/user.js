@@ -7,6 +7,8 @@ const initialState = {
   user: null
 };
 
+console.log(initialState.isAuthenticated)
+
 export default function (state = initialState, action) {
   const { type, payload } = action;
 

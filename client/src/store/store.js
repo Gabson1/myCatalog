@@ -1,17 +1,24 @@
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import logger from 'redux-logger';
+
 import rootReducer from '../reducers/index';
 import setAuthToken from '../utils/setAuthToken';
 
 const initialState = {};
 
-const middleware = [thunk];
+const composeEnhancers =
+  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
+
+const enhancer = composeEnhancers(
+  applyMiddleware(thunk, logger),
+);
 
 const store = createStore(
   rootReducer,
   initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
+  enhancer
 );
 
 // set up a store subscription listener
@@ -26,8 +33,8 @@ store.subscribe(() => {
   let previousState = currentState;
   currentState = store.getState();
   // if the token changes set the value in localStorage and axios headers
-  if (previousState.auth.token !== currentState.auth.token) {
-    const token = currentState.auth.token;
+  if (previousState.token !== currentState.token) {
+    const token = currentState.token;
     setAuthToken(token);
   }
 });

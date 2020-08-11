@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux';
 import { Button } from "semantic-ui-react";
 
-import { cookieAction } from "../../actions/cookieAction";
+import { cookieAction } from "../../actions/cookie";
 
 import './cookie.css';
 
@@ -16,11 +16,11 @@ const Cookie = () => {
 
     setShowCookie(false)
 
-    const payload = {
+    const response = {
       showCookie: showCookie.valueOf(),
     };
 
-    cookieAction(payload)
+    cookieAction(response)
   };
 
   return (

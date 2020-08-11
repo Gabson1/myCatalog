@@ -92,7 +92,7 @@ const SignupForm = ({ login, signupAction, isAuthenticated }) => {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.isAuthenticated
 });
 
 export default connect(mapStateToProps, { setToast, signupAction })(SignupForm);

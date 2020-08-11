@@ -6,9 +6,6 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.1.0",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "camelcase": "^5.3.1",
     "dotenv": "6.2.0",
@@ -40,6 +37,7 @@
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.10.1",
     "@babel/register": "^7.7.4",
+    "@types/react-router-dom": "^5.1.5",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.1.0",
     "babel-plugin-named-asset-import": "^0.3.6",
@@ -59,7 +57,7 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.87.1"
   },
-  "name": "redux-example",
+  "name": "mycatalog-client",
   "version": "0.1.0",
   "private": true,
   "browserslist": {

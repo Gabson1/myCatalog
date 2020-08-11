@@ -3,7 +3,7 @@ import store from '../store/store';
 import { registrationTypes as t } from '../types/user';
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: '/users',
   headers: {
     'Content-Type': 'application/json'
   }
