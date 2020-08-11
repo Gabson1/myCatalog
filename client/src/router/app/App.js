@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route} from "react-router-dom";
+
+import setAuthToken from '../../utils/setAuthToken';
+import store from '../../store/store';
+import { loadUserAction } from '../../actions';
 
 import PrivateRoute from '../PrivateRoute';
 
-import RegSwitch  from '../../component/registration/registrationTypeSwitcher/regSwitch';
+import RegSwitch  from '../../component/registration/regSwitch';
 import Apis from '../../pages/api/api';
 import Dashboard from '../../pages/dashboard/dashboard';
 import Profile from '../../pages/profile/profile';
@@ -14,6 +18,12 @@ import NotFound from '../../component/notfound/notFound';
 import './App.css';
 
 const App = () => {
+  useEffect(() => {
+    setAuthToken(localStorage.token);
+    store.dispatch(loadUserAction());
+  }, []);
+
+
   return (
     <BrowserRouter>
       <Switch>

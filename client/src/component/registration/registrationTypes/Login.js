@@ -1,13 +1,14 @@
 import React from 'react'
+import { Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 
 import { loginAction } from '../../../actions';
+import { setToast } from "../../../actions/toast";
+
 import useInput from "../../../hooks/useInput";
 
-import image from '../../../assets/logo192.png'
-
-const LoginForm = ({ signup, loginAction }) => {
+const LoginForm = ({ signup, loginAction, isAuthenticated }) => {
   const email = useInput('');
   const password = useInput('');
 
@@ -15,16 +16,20 @@ const LoginForm = ({ signup, loginAction }) => {
     e.preventDefault();
 
     if (!email.value.trim() || !password.value.trim()) {
-      return alert("Please fill in all the fields"); //TODO: Browser error
+      setToast('Please fill in all fields', 'danger');
     }
 
-    const payload = {
+    const formData = {
       email: email.value,
       password: password.value,
     };
 
-    loginAction(payload)
+    loginAction(formData)
   };
+
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <Grid textAlign='center' style={{height: '100vh'}} verticalAlign='middle'>
@@ -64,11 +69,15 @@ const LoginForm = ({ signup, loginAction }) => {
           </Segment>
         </Form>
         <Message>
-          New to us? <a href='#' onClick={() => signup()}>Sign Up</a>
+          New to us? <button onClick={() => signup()}>Sign Up</button>
         </Message>
       </Grid.Column>
     </Grid>
   )
 }
 
-export default connect(null, { loginAction })(LoginForm);
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { setToast, loginAction })(LoginForm);

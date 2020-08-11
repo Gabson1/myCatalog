@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import SignupForm from "../signup/signup";
-import LoginForm from "../login/Login";
+import SignupForm from "./registrationTypes/signup";
+import LoginForm from "./registrationTypes/Login";
 
 const RegSwitch = () => {
   const [reg, setReg] = useState('SIGNUP');

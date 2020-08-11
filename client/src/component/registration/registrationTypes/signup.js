@@ -1,13 +1,14 @@
 import React from 'react'
+import { Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 
+import { setToast } from "../../../actions/toast";
 import { signupAction } from '../../../actions';
+
 import useInput from "../../../hooks/useInput";
 
-import image from '../../../assets/logo192.png'
-
-const SignupForm = ({ login, signupAction }) => {
+const SignupForm = ({ login, signupAction, isAuthenticated }) => {
   const username = useInput('');
   const email = useInput('');
   const password = useInput('');
@@ -16,21 +17,25 @@ const SignupForm = ({ login, signupAction }) => {
     e.preventDefault();
 
     if (!username.value.trim() ||!email.value.trim() || !password.value.trim()) {
-      return alert("Please fill in all the fields"); // TODO: Browser error
+      setToast('Please fill in all fields', 'danger');
     }
 
     if (username.value.length <= 3) {
-      return alert("Username should be atleast four characters long"); // TODO: Browser error
+      setToast('Username should be at least four characters long', 'danger');
     }
 
-    const payload = {
+    const formData = {
       userame: username.value,
       email: email.value,
       password: password.value,
     };
 
-    signupAction(payload)
+    signupAction(formData)
   };
+
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <Grid textAlign='center' style={{height: '100vh'}} verticalAlign='middle'>
@@ -79,11 +84,15 @@ const SignupForm = ({ login, signupAction }) => {
           </Segment>
         </Form>
         <Message>
-          Already have an account? <a href='#' onClick={() => login()}>Login</a>
+          Already have an account? <button onClick={() => login()}>Login</button>
         </Message>
       </Grid.Column>
     </Grid>
   )
 }
 
-export default connect(null, { signupAction })(SignupForm);
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { setToast, signupAction })(SignupForm);
