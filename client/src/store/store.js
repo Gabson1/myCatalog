@@ -9,16 +9,16 @@ const initialState = {};
 
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
+  	window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
 
 const enhancer = composeEnhancers(
-  applyMiddleware(thunk, logger),
+	applyMiddleware(thunk, logger),
 );
 
 const store = createStore(
-  rootReducer,
-  initialState,
-  enhancer
+	rootReducer,
+	initialState,
+	enhancer
 );
 
 // set up a store subscription listener
@@ -29,14 +29,14 @@ const store = createStore(
 let currentState = store.getState();
 
 store.subscribe(() => {
-  // keep track of the previous and current state to compare changes
-  let previousState = currentState;
-  currentState = store.getState();
-  // if the token changes set the value in localStorage and axios headers
-  if (previousState.token !== currentState.token) {
-    const token = currentState.token;
-    setAuthToken(token);
-  }
+	// keep track of the previous and current state to compare changes
+	let previousState = currentState;
+	currentState = store.getState();
+	// if the token changes set the value in localStorage and axios headers
+	if (previousState.token !== currentState.token) {
+		const token = currentState.token;
+		setAuthToken(token);
+	}
 });
 
 export default store;

@@ -7,15 +7,15 @@ import App from './router/app/App';
 import history from './middlewares/history';
 import store from './store/store';
 
-import 'semantic-ui-css/semantic.min.css'
+import 'semantic-ui-css/semantic.min.css';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <Router history={history}>
-        <App />
-      </Router>
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+	<React.StrictMode>
+		<Provider store={store}>
+			<Router history={history}>
+				<App />
+			</Router>
+		</Provider>
+	</React.StrictMode>,
+	document.getElementById('root')
 );

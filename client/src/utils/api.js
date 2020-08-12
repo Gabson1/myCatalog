@@ -3,10 +3,10 @@ import store from '../store/store';
 import { registrationTypes as t } from '../types/user';
 
 const api = axios.create({
-  baseURL: '/users',
-  headers: {
-    'Content-Type': 'application/json'
-  }
+	baseURL: '/users',
+	headers: {
+		'Content-Type': 'application/json'
+	}
 });
 /**
  intercept any error responses from the api
@@ -16,13 +16,13 @@ const api = axios.create({
  **/
 
 api.interceptors.response.use(
-  res => res,
-  err => {
-    if (err.response.data.msg === 'Token is not valid') {
-      store.dispatch({ type: t.LOGOUT_SUCCESS });
-    }
-    return Promise.reject(err);
-  }
+	res => res,
+	err => {
+		if (err.response.data.msg === 'Token is not valid') {
+			store.dispatch({ type: t.LOGOUT_SUCCESS });
+		}
+		return Promise.reject(err);
+	}
 );
 
 export default api;

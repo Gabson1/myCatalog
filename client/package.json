@@ -2,13 +2,16 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint ./src/ --color --quiet --fix"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.1.0",
     "axios": "^0.19.2",
     "camelcase": "^5.3.1",
     "dotenv": "6.2.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
     "lodash": "^4.17.15",
     "react": "^16.13.1",
     "react-animations": "^1.0.0",
@@ -52,7 +55,7 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
     "history": "^4.10.1",
-    "prettier": "2.0.5",
+    "prettier": "^2.0.5",
     "prop-types": "^15.7.2",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.87.1"

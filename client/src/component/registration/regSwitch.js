@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import SignupForm from "./registrationTypes/signup";
-import LoginForm from "./registrationTypes/Login";
+import SignupForm from './registrationTypes/signup';
+import LoginForm from './registrationTypes/Login';
 
 const RegSwitch = () => {
-  const [reg, setReg] = useState('SIGNUP');
+	const [reg, setReg] = useState('SIGNUP');
 
-  const login = () => setReg('LOGIN');
-  const signup = () => setReg('SIGNUP');
+	const login = () => setReg('LOGIN');
+	const signup = () => setReg('SIGNUP');
 
-  if (reg === 'LOGIN') {
-    return <LoginForm signup={signup} />;
-  } else {
-    return <SignupForm login={login} />;
-  }
+	if (reg === 'LOGIN') {
+		return <LoginForm signup={signup} />;
+	} else {
+		return <SignupForm login={login} />;
+	}
 };
 
 export default RegSwitch;
