@@ -84,7 +84,7 @@ const SignupForm = ({ login, signupAction, isAuthenticated }) => {
 					</Segment>
 				</Form>
 				<Message>
-          Already have an account? <button onClick={() => login()}>Login</button>
+          Already have an account? <button className="noButtonStyles" onClick={() => login()}>Login</button>
 				</Message>
 			</Grid.Column>
 		</Grid>

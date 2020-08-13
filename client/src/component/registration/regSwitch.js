@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import SignupForm from './registrationTypes/signup';
 import LoginForm from './registrationTypes/Login';
 
+import './regSwitch.css';
+
 const RegSwitch = () => {
 	const [reg, setReg] = useState('SIGNUP');
 

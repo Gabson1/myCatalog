@@ -7,7 +7,7 @@ const userSchema = new Schema({
 	email: { type: String, required: true, unique: true },
 	password: { type: String, required: true, minlength: 5 },
 	image: { type: String },
-	products: [{ type: mongoose.Types.ObjectId, ref: 'Product' }],
+	catalogs: [{ type: mongoose.Types.ObjectId, ref: 'Catalog' }],
 });
 
 module.exports = mongoose.model('User', userSchema);

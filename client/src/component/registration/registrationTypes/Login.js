@@ -69,7 +69,7 @@ const LoginForm = ({ signup, loginAction, isAuthenticated }) => {
 					</Segment>
 				</Form>
 				<Message>
-          New to us? <button onClick={() => signup()}>Sign Up</button>
+          New to us? <button className="noButtonStyles" onClick={() => signup()}>Sign Up</button>
 				</Message>
 			</Grid.Column>
 		</Grid>

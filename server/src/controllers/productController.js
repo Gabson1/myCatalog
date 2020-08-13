@@ -4,7 +4,7 @@ import validationResult from 'express-validator';
 import mongoose from 'mongoose';
 
 import httpError from '../utils/http-error';
-import Product from '../models/productModel';
+import Product from '../models/catalogModel';
 import User from '../models/userModel';
 
 // Get all products

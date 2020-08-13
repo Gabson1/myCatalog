@@ -1,6 +1,6 @@
 import express from 'express';
 
-import * as validation from '../middlewares/userMiddleware';
+import * as validation from '../middlewares/inputValidator';
 import * as controller from '../controllers/userController';
 
 let router = express.Router();
@@ -24,19 +24,11 @@ router.post(
 	controller.loginUser
 );
 
-// @route    GET api/auth
-// @desc     Get user by token
-// @access   Private
 router.get(
-	'/auth', auth, async (req, res) => {
-		try {
-			const user = await User.findById(req.user.id).select('-password');
-			res.json(user);
-		} catch (err) {
-			console.error(err.message);
-			res.status(500).send('Server Error');
-		}
-	});
+	'/auth',
+	validation.genericValidator,
+	controller.validateUserToken
+);
 
 router.get(
 	'/',
