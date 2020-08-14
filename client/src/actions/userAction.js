@@ -1,6 +1,6 @@
 import api from '../utils/api';
 import { setToast } from './toast';
-import { registrationTypes as t } from '../types/user';
+import { registrationTypes as t } from '../types/userType';
 
 // Load User
 export const loadUserAction = () => async dispatch => {

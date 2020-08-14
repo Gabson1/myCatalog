@@ -1,4 +1,4 @@
-import { registrationTypes as t } from '../types/user';
+import { registrationTypes as t } from '../types/userType';
 
 const initialState = {
 	token: localStorage.getItem('token'),
