@@ -24,10 +24,10 @@ export const createUserService = async ({ username, email, password }) => {
 		email,
 		password,
 		image: 'https://picsum.photos/200',
-		places: [],
+		catalogs: [],
 	});
 
-	console.log(newUser);
+	console.log('newUser: ', newUser);
 
 	try {
 		return newUser.save();

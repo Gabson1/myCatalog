@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 
@@ -12,6 +12,8 @@ const SignupForm = ({ login, signupAction, isAuthenticated }) => {
 	const username = useInput('');
 	const email = useInput('');
 	const password = useInput('');
+	const passwordRep = useInput('');
+	let history = useHistory();
 
 	const handleSignup = (e) => {
 		e.preventDefault();
@@ -24,13 +26,19 @@ const SignupForm = ({ login, signupAction, isAuthenticated }) => {
 			setToast('Username should be at least four characters long', 'danger');
 		}
 
+		if(passwordRep.value.trim() !== password.value.trim()) {
+			setToast('Your passwords do not match', 'danger');
+		}
+
 		const formData = {
-			userame: username.value,
+			username: username.value,
 			email: email.value,
 			password: password.value,
 		};
 
 		signupAction(formData);
+
+		history.push('/dashboard');
 	};
 
 	if (isAuthenticated) {
@@ -71,6 +79,15 @@ const SignupForm = ({ login, signupAction, isAuthenticated }) => {
 							type='password'
 							value={password.value}
 							onChange={password.onChange}
+						/>
+						<Form.Input
+							fluid
+							icon='lock'
+							iconPosition='left'
+							placeholder='Re-enter Password'
+							type='password'
+							value={passwordRep.value}
+							onChange={passwordRep.onChange}
 						/>
 
 						<Button

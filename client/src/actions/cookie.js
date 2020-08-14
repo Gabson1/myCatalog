@@ -1,9 +1,9 @@
 import { cookieTypes as t } from '../types';
-import api from '../utils/api';
+import apiValidation from '../middlewares/apiValidation';
 
 export const cookieAction = response => async dispatch => {
 	try {
-		const res = await api.post('/cookie', response);
+		const res = await apiValidation.post('/cookie', response);
 
 		dispatch({
 			type: t.COOKIE_ACCEPT,

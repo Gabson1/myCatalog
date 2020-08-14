@@ -8,7 +8,6 @@ import history from './middlewares/history';
 import store from './store/store';
 
 
-
 import 'semantic-ui-css/semantic.min.css';
 
 ReactDOM.render(

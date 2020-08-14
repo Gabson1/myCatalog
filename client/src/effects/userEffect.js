@@ -1,26 +1,32 @@
 import axios from 'axios';
 
-import config from '../../env.json';
+import config from '../env.json';
 
-export const loginRequest = async (email, password) => {
+// Destructure variables from the env.json file
+const { apiUserRoute, backendUrl } = config;
+
+// The full base user route for apiValidation calls
+const fullApiUserRoute = backendUrl + apiUserRoute;
+
+export const signupRequest = async (formData) => {
 	try {
-		return await axios.post(`${config.backendUrl}/api/users/login`, { email, password });
+		return await axios.post(`${fullApiUserRoute}/signup`, formData);
 	} catch (err) {
 		throw new Error(`Something went wrong... ${err.message}`);
 	}
 };
 
-export const signupRequest = async (username, email, password) => {
+export const loginRequest = async (formData) => {
 	try {
-		return await axios.post('http://localhost:5000/api/users/signup', { username, email, password });
+		return await axios.post(`${fullApiUserRoute}/login`, formData);
 	} catch (err) {
 		throw new Error(`Something went wrong... ${err.message}`);
 	}
 };
 
-export const signoutRequest = async () => {
+export const logoutRequest = async () => {
 	try {
-		return await axios.post('http://localhost:5000/api/users/signout');
+		return await axios.post(`${fullApiUserRoute}/logout`);
 	} catch (err) {
 		throw new Error(`Something went wrong... ${err.message}`);
 	}
