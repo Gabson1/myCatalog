@@ -3,11 +3,11 @@ import apiValidation from '../middlewares/apiValidation';
 
 export const cookieAction = response => async dispatch => {
 	try {
-		const res = await apiValidation.post('/cookie', response);
+		const res = 'ww'
 
 		dispatch({
 			type: t.COOKIE_ACCEPT,
-			payload: res.data
+			payload: res
 		});
 	} catch (err) {
 		throw new Error('error in cookieAction');

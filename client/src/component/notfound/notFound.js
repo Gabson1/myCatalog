@@ -1,15 +1,14 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { Container, Image } from 'semantic-ui-react'
 
 import notFound from '../../assets/404.svg';
 
-const NotFound = () => {
-	return (
-		<Fragment>
-			<p>
-				<img src={notFound} alt="Not found" /> Page Not Found
-			</p>
-		</Fragment>
-	);
-};
+import './notFound.css';
+
+const NotFound = () => (
+	<Container className="notFoundWrapper">
+		<Image size="medium" src={notFound} alt="Page Not Found"/>
+	</Container>
+);
 
 export default NotFound;

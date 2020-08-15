@@ -1,7 +1,9 @@
 import React from 'react';
+import { Container } from 'semantic-ui-react'
+
 import SideBar from "../../component/sidebar/sidebar";
 
-const Setting = () => {
+const Catalog = () => {
 	return (
 		<section>
 			<SideBar />
@@ -9,4 +11,4 @@ const Setting = () => {
 	);
 };
 
-export default Setting;
+export default Catalog;

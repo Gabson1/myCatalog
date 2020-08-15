@@ -1,10 +1,10 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 
 import { loginAction } from '../../../actions';
-import { setToast } from '../../../actions/toast';
+import { setToast } from '../../../actions/toastAction';
 
 import useInput from '../../../hooks/useInput';
 
@@ -12,12 +12,10 @@ const LoginForm = ({ signup, loginAction, isAuthenticated }) => {
 	const email = useInput('');
 	const password = useInput('');
 
+	let history = useHistory();
+
 	const handleLogin = (e) => {
 		e.preventDefault();
-
-		if (!email.value.trim() || !password.value.trim()) {
-			setToast('Please fill in all fields', 'danger');
-		}
 
 		const formData = {
 			email: email.value,
@@ -25,6 +23,8 @@ const LoginForm = ({ signup, loginAction, isAuthenticated }) => {
 		};
 
 		loginAction(formData);
+
+		history.push('/dashboard');
 	};
 
 	if (isAuthenticated) {

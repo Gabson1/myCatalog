@@ -1,34 +1,25 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
+import { Button, Form, Grid, Header, Message, Segment, Image } from 'semantic-ui-react';
 
-import { setToast } from '../../../actions/toast';
+import { setToast } from '../../../actions/toastAction';
 import { signupAction } from '../../../actions';
 
 import useInput from '../../../hooks/useInput';
+
+import avatar from '../../../assets/avatar.svg';
 
 const SignupForm = ({ login, signupAction, isAuthenticated }) => {
 	const username = useInput('');
 	const email = useInput('');
 	const password = useInput('');
 	const passwordRep = useInput('');
+
 	let history = useHistory();
 
 	const handleSignup = (e) => {
 		e.preventDefault();
-
-		if (!username.value.trim() ||!email.value.trim() || !password.value.trim()) {
-			setToast('Please fill in all fields', 'danger');
-		}
-
-		if (username.value.length <= 3) {
-			setToast('Username should be at least four characters long', 'danger');
-		}
-
-		if(passwordRep.value.trim() !== password.value.trim()) {
-			setToast('Your passwords do not match', 'danger');
-		}
 
 		const formData = {
 			username: username.value,

@@ -1,8 +1,11 @@
 import React from 'react';
+import SideBar from "../../component/sidebar/sidebar";
 
 const Apis = () => {
 	return (
-		<div>Apis</div>
+		<section>
+			<SideBar />
+		</section>
 	);
 };
 

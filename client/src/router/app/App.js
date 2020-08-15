@@ -7,12 +7,10 @@ import { loadUserAction } from '../../actions';
 
 import PrivateRoute from '../PrivateRoute';
 
-import RegSwitch  from '../../component/registration/regSwitch';
-import Apis from '../../pages/api/api';
 import Dashboard from '../../pages/dashboard/dashboard';
-import Profile from '../../pages/profile/profile';
-import Settings from '../../pages/setting/setting';
-import Tables from '../../pages/tables/table';
+import Catalog from '../../pages/catalog/catalog';
+import Apis from '../../pages/api/api';
+import Setting from '../../pages/setting/setting';
 import NotFound from '../../component/notfound/notFound';
 
 import './App.css';
@@ -28,12 +26,10 @@ const App = () => {
 	return (
 		<BrowserRouter>
 			<Switch>
-				<Route exact path="/" component={RegSwitch} />
-				<PrivateRoute exact path="/api" component={Apis}/>
-				<PrivateRoute exact path="/dashboard" component={Dashboard}/>
-				<PrivateRoute exact path="/profile" component={Profile}/>
-				<PrivateRoute exact path="/setting" component={Settings}/>
-				<PrivateRoute exact path="/tables" component={Tables}/>
+				<Route exact path="/dashboard" component={Dashboard} />
+				<Route exact path="/catalog" component={Catalog} />
+				<Route exact path="/api" component={Apis} />
+				<Route exact path="/setting" component={Setting} />
 				<Route component={NotFound} />
 			</Switch>
 		</BrowserRouter>
@@ -41,3 +37,11 @@ const App = () => {
 };
 
 export default App;
+
+/*
+				<PrivateRoute exact path="/api" component={Apis}/>
+				<PrivateRoute exact path="/dashboard" component={Dashboard}/>
+				<PrivateRoute exact path="/profile" component={Profile}/>
+				<PrivateRoute exact path="/setting" component={Settings}/>
+				<PrivateRoute exact path="/catalog" component={Tables}/>
+ */
