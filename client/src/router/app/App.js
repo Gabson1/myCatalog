@@ -9,7 +9,7 @@ import PrivateRoute from '../PrivateRoute';
 
 import Dashboard from '../../pages/dashboard/dashboard';
 import Catalog from '../../pages/catalog/catalog';
-import Apis from '../../pages/api/api';
+import Api from '../../pages/api/api';
 import Setting from '../../pages/setting/setting';
 import NotFound from '../../component/notfound/notFound';
 
@@ -28,7 +28,7 @@ const App = () => {
 			<Switch>
 				<Route exact path="/dashboard" component={Dashboard} />
 				<Route exact path="/catalog" component={Catalog} />
-				<Route exact path="/api" component={Apis} />
+				<Route exact path="/api" component={Api} />
 				<Route exact path="/setting" component={Setting} />
 				<Route component={NotFound} />
 			</Switch>
