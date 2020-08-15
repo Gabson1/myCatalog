@@ -1,35 +1,42 @@
-import { registrationTypes as t } from '../types';
-import { loginRequest, signupRequest } from "../effects/userEffect";
+import { loginRequest, logoutRequest, signupRequest } from '../effects';
+import { registrationTypes as t } from '../types/userType';
 
-export const loginAction = (payload) => {
-  return async (dispatch) => {
-    try {
-      const response = await loginRequest(payload.email, payload.password)
-      dispatch({ type: t.LOGIN_SUCCESS, payload: response })
-    } catch (e) {
-      dispatch({ type: t.LOGIN_FAILURE })
-    }
-  };
+// TODO: FIX ERROR HANDLING In ACTIONS
+// import { setToast } from './toast';
+
+// Signup User
+export const signupAction = (formData) => {
+	return async (dispatch) => {
+		try {
+			const res = await signupRequest(formData)
+			dispatch({ type: t.SIGNUP_SUCCESS, payload: res.data })
+		} catch (err) {
+			dispatch({ type: t.SIGNUP_FAILURE, payload: err.message })
+		}
+	};
 };
 
-export const signupAction = (payload) => {
-  return async (dispatch) => {
-    try {
-      const response = await signupRequest(payload.username, payload.email, payload.password)
-      dispatch({ type: t.SIGNUP_SUCCESS, payload: response })
-    } catch (e) {
-      dispatch({ type: t.SIGNUP_FAILURE })
-    }
-  };
+// Login User
+export const loginAction = (formData) => {
+	return async (dispatch) => {
+		try {
+			const res = await loginRequest(formData)
+			dispatch({ type: t.LOGIN_SUCCESS, payload: res.data })
+
+		} catch (err) {
+			dispatch({ type: t.SIGNUP_FAILURE, payload: err.message })
+		}
+	};
 };
 
-export const signoutAction = () => {
-  return async (dispatch) => {
-    try {
-      await signoutRequest()
-      dispatch({ type: t.SIGNOUT_SUCCESS })
-    } catch (e) {
-      dispatch({ type: t.SIGNOUT_FAILURE })
-    }
-  };
+// Logout
+export const logoutAction = () => {
+	return async (dispatch) => {
+		try {
+			await logoutRequest()
+			dispatch({ type: t.LOGOUT_SUCCESS })
+		} catch (err) {
+			dispatch({ type: t.LOGOUT_FAILURE, payload: err.message })
+		}
+	};
 };

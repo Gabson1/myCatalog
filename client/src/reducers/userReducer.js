@@ -1,46 +1,48 @@
-import { registrationTypes as t } from '../types/user';
+import { registrationTypes as t } from '../types/userType';
 
 const initialState = {
-  isLoggedIn: false,
-  user: {}
+	token: localStorage.getItem('token'),
+	isAuthenticated: null,
+	loading: true,
+	user: null
 };
 
-export const loginReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case t.LOGIN_SUCCESS:
-      return {
-        ...state,
-        isLoggedIn: true,
-        user: action.payload
-      };
-    case t.LOGIN_FAILURE:
-      return state
-    case t.LOGOUT:
-      return {
-        ...state,
-        isLoggedIn: false
-      }
-    default:
-      return state
-  }
-}
+console.log(initialState.isAuthenticated);
 
-export const signupReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case t.SIGNUP_SUCCESS:
-      return {
-        ...state,
-        isLoggedIn: true,
-        user: action.payload
-      };
-    case t.SIGNUP_FAILURE:
-      return state
-    case t.LOGOUT:
-      return {
-        ...state,
-        isLoggedIn: false
-      }
-    default:
-      return state
-  }
+export default function (state = initialState, action) {
+	const { type, payload } = action;
+
+	switch (type) {
+	case t.USER_LOADED:
+		return {
+			...state,
+			isAuthenticated: true,
+			loading: false,
+			user: payload
+		};
+	case t.SIGNUP_SUCCESS:
+		return {
+			...state,
+			...payload,
+			isAuthenticated: true,
+			loading: false
+		};
+	case t.LOGIN_SUCCESS:
+		return {
+			...state,
+			...payload,
+			isAuthenticated: true,
+			loading: false
+		};
+	case t.LOGOUT_SUCCESS:
+		return {
+			...state,
+			token: null,
+			isAuthenticated: false,
+			loading: false,
+			user: null
+		};
+	default:
+		return state;
+	}
 }
