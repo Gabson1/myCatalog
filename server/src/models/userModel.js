@@ -3,11 +3,11 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  username: { type: String, required: true, minlength: 3 },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true, minlength: 5 },
-  image: { type: String },
-  products: [{ type: mongoose.Types.ObjectId, ref: "Product" }],
+	username: { type: String, required: true, minlength: 3 },
+	email: { type: String, required: true, unique: true },
+	password: { type: String, required: true, minlength: 5 },
+	image: { type: String },
+	catalogs: [{ type: mongoose.Types.ObjectId, ref: 'Catalog' }],
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);

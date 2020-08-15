@@ -1,16 +1,21 @@
 {
   "scripts": {
     "server": "node --exec babel-node src/server.js",
-    "server:watch": "nodemon --exec babel-node src/server.js"
+    "server:watch": "nodemon --exec babel-node src/server.js",
+    "lint": "eslint ./src/ --color --quiet --fix"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "4.17.0",
+    "husky": "^4.2.5",
     "jsonwebtoken": "^8.5.1",
+    "lint-staged": "^10.2.11",
     "mongoose": "^5.9.19",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "prettier": "^2.0.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.4",
@@ -21,11 +26,14 @@
     "@types/mongoose": "^5.7.27",
     "@types/node": "^14.0.14",
     "babel-preset-env": "^1.7.0",
+    "eslint": "^7.6.0",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-import": "^2.21.2",
     "express-validator": "^6.5.0",
     "morgan": "^1.9.1",
     "nodemon": "^2.0.4"
   },
-  "name": "redux-example",
+  "name": "mycatalog-server",
   "version": "0.1.0",
   "private": true,
   "eslintConfig": {

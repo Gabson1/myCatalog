@@ -3,4 +3,5 @@ node_modules
 .vscode/
 package-lock.json
 build/
-.env
+server/.env
+env.json
