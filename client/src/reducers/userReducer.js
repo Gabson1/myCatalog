@@ -1,4 +1,4 @@
-import { registrationTypes as t } from '../types/userType';
+import { USER_LOADED, SIGNUP_SUCCESS, LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../actions/actionTypes';
 
 const initialState = {
 	token: localStorage.getItem('token'),
@@ -7,34 +7,35 @@ const initialState = {
 	user: null
 };
 
-console.log(initialState.isAuthenticated);
+console.log('initialState?', initialState);
+
 
 export default function (state = initialState, action) {
 	const { type, payload } = action;
 
 	switch (type) {
-	case t.USER_LOADED:
+	case USER_LOADED:
 		return {
 			...state,
 			isAuthenticated: true,
 			loading: false,
 			user: payload
 		};
-	case t.SIGNUP_SUCCESS:
+	case SIGNUP_SUCCESS:
 		return {
 			...state,
 			...payload,
 			isAuthenticated: true,
 			loading: false
 		};
-	case t.LOGIN_SUCCESS:
+	case LOGIN_SUCCESS:
 		return {
 			...state,
 			...payload,
 			isAuthenticated: true,
 			loading: false
 		};
-	case t.LOGOUT_SUCCESS:
+	case LOGOUT_SUCCESS:
 		return {
 			...state,
 			token: null,

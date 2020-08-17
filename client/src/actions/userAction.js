@@ -1,17 +1,34 @@
-import { loginRequest, logoutRequest, signupRequest } from '../effects';
-import { registrationTypes as t } from '../types/userType';
+import { loginRequest, logoutRequest, signupRequest, loadUserRequest } from '../effects';
+import { LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_FAILURE, LOGOUT_SUCCESS, SIGNUP_FAILURE, SIGNUP_SUCCESS, USER_LOADED, AUTH_ERROR } from './actionTypes';
 
-// TODO: FIX ERROR HANDLING In ACTIONS
-// import { setToast } from './toast';
+import { setToast } from "./toastAction";
+
+// TODO: Removed the loadUserAction and replace it with a selector
+// Load user information
+export const loadUserAction = () => async dispatch => {
+	try {
+		const res = await loadUserRequest()
+
+		dispatch({
+			type: USER_LOADED,
+			payload: res.data
+		});
+	} catch (err) {
+		dispatch({ type: AUTH_ERROR, payload: err.message });
+	}
+};
 
 // Signup User
 export const signupAction = (formData) => {
 	return async (dispatch) => {
 		try {
 			const res = await signupRequest(formData)
-			dispatch({ type: t.SIGNUP_SUCCESS, payload: res.data })
+			dispatch({
+				type: SIGNUP_SUCCESS,
+				payload: res.data
+			})
 		} catch (err) {
-			dispatch({ type: t.SIGNUP_FAILURE, payload: err.message })
+			dispatch({ type: SIGNUP_FAILURE, payload: err.message })
 		}
 	};
 };
@@ -21,10 +38,13 @@ export const loginAction = (formData) => {
 	return async (dispatch) => {
 		try {
 			const res = await loginRequest(formData)
-			dispatch({ type: t.LOGIN_SUCCESS, payload: res.data })
+			dispatch({
+				type: LOGIN_SUCCESS,
+				payload: res.data
+			})
 
 		} catch (err) {
-			dispatch({ type: t.SIGNUP_FAILURE, payload: err.message })
+			dispatch({ type: LOGIN_FAILURE, payload: err.message })
 		}
 	};
 };
@@ -34,9 +54,11 @@ export const logoutAction = () => {
 	return async (dispatch) => {
 		try {
 			await logoutRequest()
-			dispatch({ type: t.LOGOUT_SUCCESS })
+			dispatch({
+				type: LOGOUT_SUCCESS
+			})
 		} catch (err) {
-			dispatch({ type: t.LOGOUT_FAILURE, payload: err.message })
+			dispatch({ type: LOGOUT_FAILURE, payload: err.message })
 		}
 	};
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import { Divider, Grid, Button, Image } from "semantic-ui-react";
 
 import SideBar from '../../component/sidebar/sidebar';
-import { CatalogItems } from './catalogComponents/catalogItems';
+import { SingleTable } from './catalogComponents/singleTable';
 
 import plusIcon from '../../assets/plus.svg';
 import './catalog.css';
@@ -26,7 +26,7 @@ const Catalog = () => {
 					<Grid.Column className="gridItemWrapper" width={itemWidth}>
 						<h4>{'assetType'}</h4>
 						<Divider />
-						<CatalogItems />
+						<SingleTable />
 					</Grid.Column>
 				</Grid>
 			</section>

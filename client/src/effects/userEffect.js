@@ -31,3 +31,11 @@ export const logoutRequest = async () => {
 		throw new Error(`Something went wrong... ${err.message}`);
 	}
 };
+
+export const loadUserRequest = async () => {
+	try {
+		return await axios.post(`${fullApiUserRoute}/:id`);
+	} catch (err) {
+		throw new Error(`Something went wrong... ${err.message}`);
+	}
+};

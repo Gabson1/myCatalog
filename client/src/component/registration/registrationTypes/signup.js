@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button, Form, Grid, Header, Message, Segment, Image } from 'semantic-ui-react';
 
@@ -8,15 +8,11 @@ import { signupAction } from '../../../actions';
 
 import useInput from '../../../hooks/useInput';
 
-import avatar from '../../../assets/avatar.svg';
-
-const SignupForm = ({ login, signupAction, isAuthenticated }) => {
+const SignupForm = ({ login, signupAction }) => {
 	const username = useInput('');
 	const email = useInput('');
 	const password = useInput('');
 	const passwordRep = useInput('');
-
-	let history = useHistory();
 
 	const handleSignup = (e) => {
 		e.preventDefault();
@@ -28,13 +24,7 @@ const SignupForm = ({ login, signupAction, isAuthenticated }) => {
 		};
 
 		signupAction(formData);
-
-		history.push('/dashboard');
 	};
-
-	if (isAuthenticated) {
-		return <Redirect to="/dashboard" />;
-	}
 
 	return (
 		<Grid textAlign='center' style={{height: '100vh'}} verticalAlign='middle'>
@@ -87,20 +77,16 @@ const SignupForm = ({ login, signupAction, isAuthenticated }) => {
 							size='large'
 							onClick={() => handleSignup}
 						>
-              Signup
+							Signup
 						</Button>
 					</Segment>
 				</Form>
 				<Message>
-          Already have an account? <button className="noButtonStyles" onClick={() => login()}>Login</button>
+					Already have an account? <button className="noButtonStyles" onClick={() => login()}>Login</button>
 				</Message>
 			</Grid.Column>
 		</Grid>
 	);
 };
 
-const mapStateToProps = state => ({
-	isAuthenticated: state.isAuthenticated
-});
-
-export default connect(mapStateToProps, { setToast, signupAction })(SignupForm);
+export default connect(null, { setToast, signupAction })(SignupForm);

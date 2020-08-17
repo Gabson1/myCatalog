@@ -1,16 +1,13 @@
-/*
-import {apiInterceptor} from '../middlewares/apiValidation';
+import tokenValidator from './tokenValidator';
 
 const setAuthToken = token => {
 	if (token) {
-		apiInterceptor.defaults.headers.common['x-auth-token'] = token;
+      tokenValidator.defaults.headers.common['x-auth-token'] = token;
 		localStorage.setItem('token', token);
 	} else {
-		delete apiInterceptor.defaults.headers.common['x-auth-token'];
+		delete tokenValidator.defaults.headers.common['x-auth-token'];
 		localStorage.removeItem('token');
 	}
 };
 
 export default setAuthToken;
-
- */
