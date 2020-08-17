@@ -15,6 +15,7 @@ router.get(
   controller.getUserById
 );
 
+
 // REMOVE LATER... THIS IS ONlY FOR TESTING PURPOSES, DO NOT SUBMIT THIS
 // @route    GET user/all
 // @desc     Get all users

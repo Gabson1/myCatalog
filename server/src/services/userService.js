@@ -1,15 +1,21 @@
-import jwt from 'jsonwebtoken';
-
 import User from '../models/userModel';
-import { jwtVerify } from "../middlewares";
 
-export const findUserByIdService = async (req, res, cookies) => {
+export const findUserByIdService = async (req, res) => {
   // funcName is used for debugging purposes
   const funcName = 'findUserByIdService';
   try {
-    await jwtVerify(cookies['jwt']);
-    return await User.findById(req.user.id).select('-password');
+    // First find the user by id and return it as the user object (not including password)
+    const user = await User.findById(req.user.id).select('-password');
+
+    // If no user is found return an error
+    if (!user) return res.status(400).json({ errors: [{ msg: 'User does not exist' }] });
+
+    // Return the user as a json object
+    res.json(user);
+
+    // If anything goes wrong, return a server error
   } catch (error) {
-    throw new Error(`${funcName} Something went wrong`);
+    console.error(error.message);
+    res.status(500).send(`Server Error: ${funcName}`);
   }
 }

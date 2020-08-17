@@ -25,13 +25,4 @@ router.post(
 	controller.loginUser
 );
 
-
-// @route    POST auth/logout
-// @desc     Logout user
-// @access   Public
-router.post(
-	'/logout',
-	controller.logoutUser
-);
-
 export default router;

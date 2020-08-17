@@ -24,7 +24,6 @@ server.listen(port, async () => {
 	}
 });
 
-
 // -------------------- Initialize middlewares -------------------- //
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
@@ -41,8 +40,8 @@ server.use('/api/user', userRouter);
 // -------------------- if node environment is production, make node serve static files -------------------- //
 const pathToIndexFile = path.join(__dirname, '..', 'client', 'build', 'index.html')
 if (process.env.NODE_ENV === 'production') {
-	server.use(express.static(path.join(__dirname, '../../client/public')));
-	server.use(express.static(path.join(__dirname, '../../client/src/assets')));
+	server.use(express.static(path.join(__dirname, '..', '..', 'client', 'src', 'assets')));
+	server.use(express.static(path.join(__dirname, '..', '..', 'client', 'public')));
 
 	server.get('*', (req, res) => {
 		res.sendFile(pathToIndexFile);

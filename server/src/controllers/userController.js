@@ -18,16 +18,16 @@ export const getAllUsers = async (req, res) => {
  * @function
  * @param {Object} req - Express request object
  * @param {Object} res - Express response object
- * @param cookies - Token/Cookie for authorization
  * @description makes a call to the findUserByIdService
  * onSuccess: returns the user object && sets the statusCode to 200
  * onFailure: returns an http error && sets the statusCode to 500
  * @return json object
  */
-export const getUserById = async (req, res, cookies) => {
+export const getUserById = async (req, res) => {
   try {
-    return await findUserByIdService(req, res, cookies)
+    await findUserByIdService(req, res)
   } catch (error) {
-    throw new Error(error);
+    setHeader(res, 500);
+    res.json({error});
   }
-};
+}
