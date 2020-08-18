@@ -1,14 +1,14 @@
 import User from '../models/userModel';
 import { findUserByIdService } from '../services';
-import { setHeader } from '../utils/setHeader';
+import { setStatusHeader } from '../utils/setStatusHeader';
 
 export const getAllUsers = async (req, res) => {
   try {
     const allUsers = await User.find({}, '-password'); // Omit password
-    setHeader(res, 200);
+    setStatusHeader(res, 200);
     res.json({ data: allUsers });
   } catch (error) {
-    setHeader(res, 500);
+    setStatusHeader(res, 500);
     res.json({error});
   }
 };
@@ -27,7 +27,7 @@ export const getUserById = async (req, res) => {
   try {
     await findUserByIdService(req, res)
   } catch (error) {
-    setHeader(res, 500);
+    setStatusHeader(res, 500);
     res.json({error});
   }
 }

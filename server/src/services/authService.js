@@ -30,13 +30,13 @@ export const createUserService = async (res, { username, email, password }) => {
 		await user.save();
 
 		// This payload, consisting of the user id, will be used for the jwt signature
-		const payload = {
-			user: { id: user.id }
-		};
+		const payload = {};
+		payload.user = { id: user.id }
 
 		// Create a jwt user token
-		jwtSign(payload, res);
+		payload.token = jwtSign(payload);
 
+		return payload.token
 		// If anything goes wrong, return a server error
 	} catch (err) {
 		console.error(err.message);

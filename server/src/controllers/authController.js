@@ -1,5 +1,5 @@
 import { createUserService, loginUserService } from '../services';
-import { setHeader } from '../utils/setHeader';
+import { setStatusHeader } from '../utils/setStatusHeader';
 
 /**
  * @module signupUser
@@ -11,23 +11,16 @@ import { setHeader } from '../utils/setHeader';
  * onFailure: returns an http error && sets the statusCode to 500
  * @return json object
  */
-export const signupUser = async (res, req) => {
+export const signupUser = async (req, res) => {
 	try {
 		// Call the createUserService
-		await createUserService(res, req.body);
-
-		// Set the statusCode too 200 and the contentType to application/json
-		setHeader(res, 200);
+		const token = await createUserService(res, req.body);
 
 		// Send a json success message
-		res.json({ success: true, message: 'Registration Successful!' });
-
+		res.json({ success: true, message: 'Registration successful!', token: token });
 	} catch (error) {
-		// Set the statusCode too 500 and the contentType to application/json
-		setHeader(res, 500);
-
 		// If anything goes wrong, return a json error
-		res.json({ error });
+		res.json({ statusCode: 500, message: error, contentType: 'application/json' });
 	}
 };
 
@@ -41,19 +34,19 @@ export const signupUser = async (res, req) => {
  * onFailure: returns an Error && sets the statusCode to 500
  * @return json object
  */
-export const loginUser = async (res, req) => {
+export const loginUser = async (req, res) => {
 	try {
 		// Call the loginUserService
 		await loginUserService(res, req.body);
 
 		// Set the statusCode too 200 and the contentType to application/json
-		setHeader(res, 200)
+		setStatusHeader(res, 200)
 
 		// Send a json success message
 		res.json({ success: true, message: `${req.body.email} has successfully logged in` });
 	} catch (error) {
 		// Set the statusCode too 500 and the contentType to application/json
-		setHeader(res, 401)
+		setStatusHeader(res, 401)
 
 		// If anything goes wrong, return a json error
 		res.json({ error });

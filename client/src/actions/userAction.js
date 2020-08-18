@@ -3,7 +3,7 @@ import { LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_FAILURE, LOGOUT_SUCCESS, SIGNUP_FA
 
 import { setToast } from "./toastAction";
 
-// TODO: Removed the loadUserAction and replace it with a selector
+// TODO: Remove the loadUserAction and replace it with a selector
 // Load user information
 export const loadUserAction = () => async dispatch => {
 	try {
@@ -27,6 +27,7 @@ export const signupAction = (formData) => {
 				type: SIGNUP_SUCCESS,
 				payload: res.data
 			})
+			localStorage.setItem('user', res.data.token);
 		} catch (err) {
 			dispatch({ type: SIGNUP_FAILURE, payload: err.message })
 		}
@@ -50,15 +51,9 @@ export const loginAction = (formData) => {
 };
 
 // Logout
-export const logoutAction = () => {
-	return async (dispatch) => {
-		try {
-			await logoutRequest()
-			dispatch({
-				type: LOGOUT_SUCCESS
-			})
-		} catch (err) {
-			dispatch({ type: LOGOUT_FAILURE, payload: err.message })
-		}
-	};
+export const logoutAction = () => dispatch => {
+	localStorage.removeItem('user');
+	dispatch({
+		type: LOGOUT_SUCCESS,
+	});
 };
