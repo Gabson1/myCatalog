@@ -37,18 +37,12 @@ export const signupUser = async (req, res) => {
 export const loginUser = async (req, res) => {
 	try {
 		// Call the loginUserService
-		await loginUserService(res, req.body);
-
-		// Set the statusCode too 200 and the contentType to application/json
-		setStatusHeader(res, 200)
+		const token = await loginUserService(res, req.body);
 
 		// Send a json success message
-		res.json({ success: true, message: `${req.body.email} has successfully logged in` });
+		res.json({ success: true, message: `${req.body.email} has successfully logged in`, token: token });
 	} catch (error) {
-		// Set the statusCode too 500 and the contentType to application/json
-		setStatusHeader(res, 401)
-
 		// If anything goes wrong, return a json error
-		res.json({ error });
+		res.json({ statusCode: 500, message: error, contentType: 'application/json' });
 	}
 };

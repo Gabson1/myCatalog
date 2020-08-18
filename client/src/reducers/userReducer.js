@@ -1,4 +1,4 @@
-import { USER_LOADED, SIGNUP_SUCCESS, LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../actions/actionTypes';
+import { AUTH_SUCCESS, SIGNUP_SUCCESS, LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../actions/actionTypes';
 
 const initialState = {
 	token: localStorage.getItem('token'),
@@ -13,13 +13,13 @@ console.log('initialState?', initialState);
 export default function (state = initialState, action) {
 	const { type, payload } = action;
 
+	console.log('action?', action);
+
 	switch (type) {
-	case USER_LOADED:
+	case AUTH_SUCCESS:
 		return {
 			...state,
-			isAuthenticated: true,
-			loading: false,
-			user: payload
+			payload,
 		};
 	case SIGNUP_SUCCESS:
 		return {

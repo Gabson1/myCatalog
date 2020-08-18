@@ -5,12 +5,21 @@ import * as controller from '../controllers';
 
 let router = express.Router();
 
+// @route    GET user/
+// @desc     Verify token authenticity
+// @access   Private
+router.get(
+  '/',
+  validation.jwtVerify,
+  validation.genericValidator,
+);
+
 // @route    GET user/:id
 // @desc     Get user by id
 // @access   Private
 router.get(
   '/:id',
-  validation.jwtVerify,
+
   validation.genericValidator,
   controller.getUserById
 );

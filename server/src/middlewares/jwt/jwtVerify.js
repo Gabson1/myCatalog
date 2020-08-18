@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 
+// Todo: Work on the jwtVerify method
 export const jwtVerify = (req, res, next) => {
   // Get token from header
   const token = req.header('x-auth-token');
