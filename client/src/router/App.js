@@ -12,7 +12,7 @@ import { darkTheme } from './theme';
 const App = ({ isAuthenticated }) => {
 	useEffect(() => {
 		authenticateAction()
-	}, [isAuthenticated]);
+	}, []);
 
 	return (
 		<ThemeProvider theme={darkTheme}>
@@ -27,6 +27,7 @@ const mapStateToProps = state => ({
 	isAuthenticated: state.user.isAuthenticated
 });
 
-export default connect(mapStateToProps, { authenticateAction })(App);
 
-// Todo: Fix this. on page load make a call to the store to set the state to loaded --> if isAuthenticated = true  --> if a token exists
+export default connect(mapStateToProps , { authenticateAction } )(App);
+
+// Todo: Fix this. on page load make a call to the store to set the state to loaded --> if isAuthenticated = true ... if a token exists --> show all routes

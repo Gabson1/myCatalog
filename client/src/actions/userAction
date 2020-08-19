@@ -1,13 +1,8 @@
 import { AUTH_SUCCESS, AUTH_ERROR } from './actionTypes';
 import { verifyTokenRequest } from '../effects'
+
 // Todo: Verify the jwt token
-export const authenticateAction = () => {
-  return async (dispatch) => {
-    try {
-      await verifyTokenRequest()
-      dispatch({ type: AUTH_SUCCESS })
-    } catch (err) {
-      dispatch({ type: AUTH_ERROR, payload: err.message })
-    }
-  };
+export const authenticateAction = () => async (dispatch) => {
+  await verifyTokenRequest()
+  dispatch({ type: AUTH_SUCCESS, });
 };
