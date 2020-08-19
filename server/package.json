@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "server": "node --exec babel-node src/server.js",
+    "server": "node src/server.js",
     "server:watch": "nodemon --exec babel-node src/server.js",
     "lint": "eslint ./src/ --color --quiet --fix"
   },
@@ -27,11 +27,12 @@
     "@types/node": "^14.0.14",
     "babel-preset-env": "^1.7.0",
     "eslint": "^7.6.0",
-    "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-node": "^10.0.0",
     "express-validator": "^6.5.0",
     "morgan": "^1.9.1",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "passport-jwt": "^4.0.0"
   },
   "name": "mycatalog-server",
   "version": "0.1.0",

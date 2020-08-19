@@ -1,50 +1,21 @@
-import httpError from '../utils/http-error';
 import User from '../models/userModel';
-import bcrypt from 'bcrypt';
 
-export const createUserService = async ({ username, email, password }) => {
-	const funcName = 'createUserService';
-	let userExist;
-	try {
-		userExist = await User.findOne({ email });
-	} catch (err) {
-		const error = new httpError(`${funcName}: Something went wrong`, 500);
-		return next(error);
-	}
+export const findUserByIdService = async (req, res) => {
+  // funcName is used for debugging purposes
+  const funcName = 'findUserByIdService';
+  try {
+    // First find the user by id and return it as the user object (not including password)
+    const user = await User.findById(req.user.id).select('-password');
 
-	if (userExist) {
-		return new httpError(`${funcName}: User already exists.`);
-	}
+    // If no user is found return an error
+    if (!user) return res.status(400).json({ errors: [{ msg: 'User does not exist' }] });
 
-	const salt = await bcrypt.genSalt(10);
-	password = await bcrypt.hash(password, salt);
+    // Return the user as a json object
+    res.json(user);
 
-	const newUser = new User({
-		username,
-		email,
-		password,
-		image: 'https://picsum.photos/200',
-		catalogs: [],
-	});
-
-	console.log('newUser: ', newUser);
-
-	try {
-		return newUser.save();
-	} catch (err) {
-		const error = new httpError(`${funcName}: Creating new user failed! Please try again.`, 500);
-		return next(error);
-	}
-};
-
-export const loginUserService = async ({ email, password }) => {
-	const funcName = 'loginUserService';
-	try {
-		const user = await User.findOne({ email });
-		const match = await bcrypt.compare(password, user.password);
-		if(match) return user;
-		else throw new Error('Password does not match');
-	} catch(err) {
-		throw new Error(`${funcName} Something went wrong`);
-	}
-};
+    // If anything goes wrong, return a server error
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send(`Server Error: ${funcName}`);
+  }
+}

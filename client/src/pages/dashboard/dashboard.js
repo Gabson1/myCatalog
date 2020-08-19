@@ -15,7 +15,7 @@ const Dashboard = () => {
 			<SideBar />
 			<section id="pageContent">
 				<div id="headerContent">
-					<h2>Dashboard: An overview of your catalog</h2>
+					<h2>Dashboard: An overview of your portfolio</h2>
 					<p>Click here if you want to adjust the way the data is displayed</p>
 				</div>
 				<Grid id="dashboardContent" centered >

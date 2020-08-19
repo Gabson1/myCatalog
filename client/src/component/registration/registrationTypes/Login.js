@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 
@@ -8,11 +8,9 @@ import { setToast } from '../../../actions/toastAction';
 
 import useInput from '../../../hooks/useInput';
 
-const LoginForm = ({ signup, loginAction, isAuthenticated }) => {
+const LoginForm = ({ signup, loginAction }) => {
 	const email = useInput('');
 	const password = useInput('');
-
-	let history = useHistory();
 
 	const handleLogin = (e) => {
 		e.preventDefault();
@@ -23,13 +21,7 @@ const LoginForm = ({ signup, loginAction, isAuthenticated }) => {
 		};
 
 		loginAction(formData);
-
-		history.push('/dashboard');
 	};
-
-	if (isAuthenticated) {
-		return <Redirect to="/dashboard" />;
-	}
 
 	return (
 		<Grid textAlign='center' style={{height: '100vh'}} verticalAlign='middle'>
@@ -76,8 +68,4 @@ const LoginForm = ({ signup, loginAction, isAuthenticated }) => {
 	);
 };
 
-const mapStateToProps = state => ({
-	isAuthenticated: state.isAuthenticated
-});
-
-export default connect(mapStateToProps, { setToast, loginAction })(LoginForm);
+export default connect(null, { setToast, loginAction })(LoginForm);

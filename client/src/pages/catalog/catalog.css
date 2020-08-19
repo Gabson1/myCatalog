@@ -1,0 +1,49 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.page {
+    display: flex;
+}
+
+
+.page #pageContent {
+    margin-top: 5%;
+    margin-left: 10%;
+    width: 100%;
+}
+
+.page #pageContent #headerContent h2 {
+    text-decoration: underline;
+}
+
+.page #pageContent #catalogContent {
+    margin-top: 5%;
+    grid-column-gap: 1%;
+}
+
+.page #pageContent #catalogContent .gridItemWrapper {
+    border: 1px solid gray;
+}
+
+.page #pageContent #catalogContent .newCatalogButton {
+    background-color: transparent;
+    transition: transform .5s ease-in-out;
+}
+
+.page #pageContent #catalogContent .newCatalogButton:hover {
+    transform: scale(1.5);
+}
+
