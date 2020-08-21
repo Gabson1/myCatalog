@@ -14,12 +14,15 @@ export default function (state = initialState, action) {
 	const { type, payload } = action;
 
 	console.log('action?', action);
+	console.log('payload?', payload);
 
 	switch (type) {
 	case AUTH_SUCCESS:
 		return {
 			...state,
-			payload,
+			...payload,
+			isAuthenticated: true,
+			loading: false
 		};
 	case SIGNUP_SUCCESS:
 		return {

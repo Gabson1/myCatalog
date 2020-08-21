@@ -1,3 +1,3 @@
 export * from './inputValidator';
-export * from './jwt/jwtVerify';
-export * from './jwt/jwtSign';
+export * from './jwtSign';
+export * from './isAuthenticated';

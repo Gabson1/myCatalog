@@ -1,8 +1,0 @@
-import { AUTH_SUCCESS, AUTH_ERROR } from './actionTypes';
-import { verifyTokenRequest } from '../effects'
-
-// Todo: Verify the jwt token
-export const authenticateAction = () => async (dispatch) => {
-  await verifyTokenRequest()
-  dispatch({ type: AUTH_SUCCESS, });
-};

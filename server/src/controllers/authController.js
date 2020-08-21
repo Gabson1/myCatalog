@@ -1,5 +1,4 @@
 import { createUserService, loginUserService } from '../services';
-import { setStatusHeader } from '../utils/setStatusHeader';
 
 /**
  * @module signupUser

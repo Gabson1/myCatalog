@@ -10,7 +10,7 @@ let router = express.Router();
 // @access   Private
 router.get(
   '/',
-  validation.jwtVerify,
+  validation.isAuthenticated,
   validation.genericValidator,
 );
 
@@ -19,7 +19,6 @@ router.get(
 // @access   Private
 router.get(
   '/:id',
-
   validation.genericValidator,
   controller.getUserById
 );

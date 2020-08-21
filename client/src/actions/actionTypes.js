@@ -14,3 +14,6 @@ export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_ERROR = 'AUTH_ERROR';
+
+export const ADD_TABLE_SUCCESS = 'ADD_TABLE_SUCCESS';
+export const ADD_TABLE_FAILURE = 'ADD_TABLE_FAILURE';

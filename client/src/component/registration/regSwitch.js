@@ -6,11 +6,14 @@ import SignupForm from './registrationTypes/signup';
 import LoginForm from './registrationTypes/Login';
 
 import './regSwitch.css';
+import history from "../../middlewares/history";
 
 const RegSwitch = ({ isAuthenticated }) => {
 	const [reg, setReg] = useState('SIGNUP');
 
-	if (isAuthenticated) return <Redirect to='/dashboard' />;
+	console.log('------------------------------- isAuthenticated:', isAuthenticated);
+
+	if (isAuthenticated) return history.push('/dashboard');
 
 	const login = () => setReg('LOGIN');
 	const signup = () => setReg('SIGNUP');

@@ -1,14 +1,22 @@
 import React from 'react';
-import { Divider, Grid, Button, Image } from "semantic-ui-react";
+import { Divider, Grid } from "semantic-ui-react";
 
 import SideBar from '../../component/sidebar/sidebar';
-import { SingleTable } from './catalogComponents/singleTable';
+import { SingleTable } from './catalogComponents/singleTable/singleTable';
+import { NoTables } from "./catalogComponents/noTables";
+import AssetNewTable from "./catalogComponents/assetNewTable";
 
 import plusIcon from '../../assets/plus.svg';
 import './catalog.css';
 
 const Catalog = () => {
-	const itemWidth = 5;
+	const itemWidth = 7;
+
+	const tables = [
+		{ 'table_id': 1 },
+		{ 'table_id': 2 },
+		{ 'table_id': 3 }
+	]
 
 	return (
 		<main className="page">
@@ -19,15 +27,20 @@ const Catalog = () => {
 				</div>
 				<Grid id="catalogContent" >
 					<Grid.Column width={itemWidth/5}>
-						<Button className="newCatalogButton">
-							<Image src={plusIcon} size="tiny"/>
-						</Button>
+						<AssetNewTable />
 					</Grid.Column>
-					<Grid.Column className="gridItemWrapper" width={itemWidth}>
-						<h4>{'assetType'}</h4>
-						<Divider />
-						<SingleTable />
-					</Grid.Column>
+					{ tables.length > 0 && tables ?
+						tables.map((tablesData) => (
+							<Grid.Column className="gridItemWrapper" width={itemWidth} key={`tables-${tablesData.table_id}`} >
+								<h4>{'assetType'}</h4>
+								<p>{'description'}</p>
+								<Divider />
+								<SingleTable />
+							</Grid.Column>
+						))
+						:
+						<NoTables />
+					}
 				</Grid>
 			</section>
 		</main>

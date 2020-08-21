@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Grid, Button, Icon, Popup } from 'semantic-ui-react';
 
-import '../catalog.css';
+import '../../catalog.css';
 
-export const SingleTableItem = (props) => {
+export const SingleTableItemContent = (props) => {
   const {
     asset_id: assetId,
     asset_name: assetName,
@@ -16,7 +16,7 @@ export const SingleTableItem = (props) => {
   const [rowClick, setRowClick] = useState(false)
 
   const gridColumns = 5;
-  const columnWidth = 2
+  const columnWidth = 3
 
   if (rowClick) return <Redirect to={`/catalog/edit/${assetId}`}/>
 
