@@ -3,7 +3,7 @@ import { Grid, Button } from 'semantic-ui-react';
 
 import '../../catalog.css';
 
-export const SingleTableItemHeader = (props) => {
+export const CatalogHeader = (props) => {
   const {
     asset_id: assetId,
     asset_name: assetName,

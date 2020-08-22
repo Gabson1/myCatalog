@@ -1,4 +1,4 @@
-import { ADD_TABLE_SUCCESS } from '../actions/actionTypes';
+import { ADD_CATALOG_SUCCESS } from '../actions/actionTypes';
 
 const initialState = {
   loading: true,
@@ -15,7 +15,7 @@ export default function (state = initialState, action) {
   console.log('payload?', payload);
 
   switch (type) {
-    case ADD_TABLE_SUCCESS:
+    case ADD_CATALOG_SUCCESS:
       return {
         ...state,
         ...payload,

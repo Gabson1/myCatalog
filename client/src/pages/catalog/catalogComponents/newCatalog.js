@@ -1,49 +1,27 @@
 import React, { useState } from "react";
 import { connect, useDispatch } from 'react-redux';
-import { Button, Header, Image, Modal, Form } from "semantic-ui-react";
+import { Button, Header, Image, Modal, Form, Divider } from "semantic-ui-react";
 
-import { addNewTableAction } from '../../../actions';
+import { addNewCatalogAction } from '../../../actions';
+import useInput from '../../../hooks/useInput';
 
 import plusIcon from "../../../assets/plus.svg";
 
 import '../catalog.css'
 
-const AssetNewTable = () => {
+const NewCatalog = () => {
   const [open, setOpen] = useState(false);
   const [assetType, setAssetType] = useState();
+  const description = useInput('');
   const dispatch = useDispatch();
 
   const formInformation = [
-    {
-      id: 1,
-      label: 'Gold',
-      value: 'gold'
-    },
-    {
-      id: 2,
-      label: 'Silver',
-      value: 'silver'
-    },
-    {
-      id: 3,
-      label: 'Stocks',
-      value: 'stocks'
-    },
-    {
-      id: 4,
-      label: 'Real Estate',
-      value: 'real estate'
-    },
-    {
-      id: 5,
-      label: 'Watches',
-      value: 'watches'
-    },
-    {
-      id: 6,
-      label: 'Wine',
-      value: 'wine'
-    },
+    { id: 1, label: 'Gold', value: 'gold' },
+    { id: 2, label: 'Silver', value: 'silver' },
+    { id: 3, label: 'Stocks', value: 'stocks' },
+    { id: 4, label: 'Real Estate', value: 'real estate' },
+    { id: 5, label: 'Watches', value: 'watches' },
+    { id: 6, label: 'Wine', value: 'wine' },
   ];
 
   const handleCloseModal = () => {
@@ -52,7 +30,7 @@ const AssetNewTable = () => {
 }
 
 const handleSaveModal = () => {
-    dispatch(addNewTableAction(assetType));
+    dispatch(addNewCatalogAction(assetType, description));
     // Todo: send request to api && save selection to store and update ui
     setOpen(false)
 }
@@ -89,6 +67,16 @@ const handleSaveModal = () => {
                  ))
                }
              </Form.Group>
+             <Divider />
+             <Form.Input
+               fluid
+               icon='table'
+               iconPosition='left'
+               placeholder='Description of your catalog'
+               type='text'
+               value={description.value}
+               onChange={description.onChange}
+             />
            </Form>
          </Modal.Description>
        </Modal.Content>
@@ -109,4 +97,4 @@ const handleSaveModal = () => {
    );
 };
 
-export default connect(null)(AssetNewTable);
+export default connect(null)(NewCatalog);

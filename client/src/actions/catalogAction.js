@@ -1,16 +1,16 @@
-import { addNewTableRequest } from "../effects";
-import { ADD_TABLE_SUCCESS, ADD_TABLE_FAILURE } from "./actionTypes";
+import { addNewCatalogRequest } from "../effects";
+import { ADD_CATALOG_SUCCESS, ADD_CATALOG_FAILURE } from "./actionTypes";
 
-export const addNewTableAction = (assetType) => {
+export const addNewCatalogAction = (assetType) => {
   return async (dispatch) => {
     try {
-      const res = await addNewTableRequest(assetType)
+      const res = await addNewCatalogRequest(assetType)
       dispatch({
-        type: ADD_TABLE_SUCCESS,
+        type: ADD_CATALOG_SUCCESS,
         payload: res.data
       })
     } catch (err) {
-      dispatch({ type: ADD_TABLE_FAILURE, payload: err.message })
+      dispatch({ type: ADD_CATALOG_FAILURE, payload: err.message })
     }
   };
 };

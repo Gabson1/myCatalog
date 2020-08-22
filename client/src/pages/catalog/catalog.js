@@ -2,9 +2,9 @@ import React from 'react';
 import { Divider, Grid } from "semantic-ui-react";
 
 import SideBar from '../../component/sidebar/sidebar';
-import { SingleTable } from './catalogComponents/singleTable/singleTable';
-import { NoTables } from "./catalogComponents/noTables";
-import AssetNewTable from "./catalogComponents/assetNewTable";
+import { SingleCatalog } from './catalogComponents/singleCatalog/singleCatalog';
+import { NoCatalogs } from "./catalogComponents/noCatalogs";
+import AssetNewTable from "./catalogComponents/newCatalog";
 
 import plusIcon from '../../assets/plus.svg';
 import './catalog.css';
@@ -35,11 +35,11 @@ const Catalog = () => {
 								<h4>{'assetType'}</h4>
 								<p>{'description'}</p>
 								<Divider />
-								<SingleTable />
+								<SingleCatalog />
 							</Grid.Column>
 						))
 						:
-						<NoTables />
+						<NoCatalogs />
 					}
 				</Grid>
 			</section>

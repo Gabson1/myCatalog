@@ -7,9 +7,9 @@ const { apiCatalogRoute, backendUrl } = config;
 // The full base user route for apiValidation calls
 const fullApiCatalogRoute = backendUrl + apiCatalogRoute;
 
-export const addNewTableRequest = async (assetType) => {
+export const addNewCatalogRequest = async (assetType, description) => {
   try {
-    return axios.post(`${fullApiCatalogRoute}/add`, assetType);
+    return axios.post(`${fullApiCatalogRoute}/add`, { assetType, description });
   } catch (err) {
     throw new Error(`Something went wrong... ${err.message}`);
   }
