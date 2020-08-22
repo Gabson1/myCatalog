@@ -3,8 +3,10 @@ import cors from 'cors';
 import morgan from 'morgan';
 import express from 'express';
 import connectDb from './db';
+
 import authRouter from './router/authRouter';
 import userRouter from './router/userRouter';
+import catalogRouter from './router/catalogRouter';
 
 // Require dotenv to use environment variables everywhere in ./server/**
 require('dotenv').config()
@@ -34,7 +36,7 @@ server.use(morgan('dev'));
 // -------------------- Server router -------------------- //
 server.use('/api/auth', authRouter);
 server.use('/api/user', userRouter);
-// server.use('/api/catalog', catalogRouter);
+server.use('/api/catalog', catalogRouter);
 // server.use('/api/api', apiRouter);
 
 // -------------------- if node environment is production, make node serve static files -------------------- //

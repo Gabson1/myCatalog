@@ -85,6 +85,7 @@ const handleSaveModal = () => {
                        onClick={() => setAssetType(formData.value)}
                      />
                    </Form.Field>
+
                  ))
                }
              </Form.Group>

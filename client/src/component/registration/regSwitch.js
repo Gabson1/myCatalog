@@ -11,7 +11,7 @@ import history from "../../middlewares/history";
 const RegSwitch = ({ isAuthenticated }) => {
 	const [reg, setReg] = useState('SIGNUP');
 
-	console.log('------------------------------- isAuthenticated:', isAuthenticated);
+	console.log('------------------------------- jwtVerify:', isAuthenticated);
 
 	if (isAuthenticated) return history.push('/dashboard');
 

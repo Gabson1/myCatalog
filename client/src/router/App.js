@@ -27,4 +27,4 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps)(App);
 
-// Todo: Fix this. on page load make a call to the store to set the state to loaded --> if isAuthenticated = true ... if a token exists --> show all routes
+// Todo: Fix this. on page load make a call to the store to set the state to loaded --> if jwtVerify = true ... if a token exists --> show all routes

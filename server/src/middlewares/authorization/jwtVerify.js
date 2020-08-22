@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 
-// isAuthenticated checks whether a user has a valid token or not
+// jwtVerify checks whether a user has a valid token or not
 // this method is added to
-export const isAuthenticated = (req) => {
+export const jwtVerify = (req) => {
   console.log('req:', req);
   const jwtToken = req.token
 
