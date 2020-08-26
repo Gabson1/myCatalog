@@ -36,7 +36,7 @@ server.use(morgan('dev'));
 // -------------------- Server router -------------------- //
 server.use('/api/auth', authRouter);
 server.use('/api/user', userRouter);
-server.use('/api/singleCatalog', catalogRouter);
+server.use('/api/catalog', catalogRouter);
 // server.use('/api/api', apiRouter);
 
 // -------------------- if node environment is production, make node serve static files -------------------- //

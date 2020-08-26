@@ -10,7 +10,7 @@ let router = express.Router();
 // @access   Private
 router.get(
   '/',
-  validation.jwtVerify,
+  // validation.jwtVerify,
   validation.genericValidator,
 );
 

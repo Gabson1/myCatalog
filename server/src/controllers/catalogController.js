@@ -1,4 +1,9 @@
-import { addNewCatalogService, deleteCatalogService, updateCatalogService } from '../services';
+import {
+  addNewCatalogService,
+  deleteCatalogService,
+  getAllCatalogsService,
+  updateCatalogService
+} from '../services';
 
 /**
  * @module signupUser
@@ -12,26 +17,18 @@ import { addNewCatalogService, deleteCatalogService, updateCatalogService } from
  */
 export const addNewCatalog = async (req, res) => {
   try {
-    // Call the createUserService
-    const res = await addNewCatalogService(res, req.body);
-
-    // Send a json success message
-    res.json({ success: true, message: 'New Catalog added!', catalogs: [catalog] });
+    const res = await addNewCatalogService(req, res);
+    res.json({ success: res.success, message: res.message, catalogs: res.catalog });
   } catch (error) {
-    // If anything goes wrong, return a json error
     res.json({ statusCode: 500, message: error, contentType: 'application/json' });
   }
 };
 
 export const updateCatalog = async (req, res) => {
   try {
-    // Call the createUserService
     const res = await updateCatalogService(res, req.body);
-
-    // Send a json success message
-    res.json({ success: true, message: 'New Catalog added!', catalogs: [catalog] });
+    res.json({ success: res.success, message: res.message, catalog: res.catalog });
   } catch (error) {
-    // If anything goes wrong, return a json error
     res.json({ statusCode: 500, message: error, contentType: 'application/json' });
   }
 };
@@ -42,9 +39,19 @@ export const deleteCatalog = async (req, res) => {
     const res = await deleteCatalogService(res, req.body);
 
     // Send a json success message
-    res.json({ success: true, message: 'New Catalog added!', catalogs: [catalog] });
+    res.json({ success: true, message: 'Catalog removed!' });
   } catch (error) {
     // If anything goes wrong, return a json error
     res.json({ statusCode: 500, message: error, contentType: 'application/json' });
   }
 };
+
+export const getAllCatalogs = async (req, res) => {
+  try {
+    const catalog = await getAllCatalogsService()
+    res.json({ success: true, catalogs: catalog })
+  } catch (error) {
+    // If anything goes wrong, return a json error
+    res.json({ statusCode: 500, message: error, contentType: 'application/json' });
+  }
+}

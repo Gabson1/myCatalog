@@ -5,30 +5,30 @@ import * as controller from '../controllers';
 
 let router = express.Router();
 
-// @route    POST singleCatalog/add
+// @route    POST catalog/add
 // @desc     Create a new singleCatalog
 // @access   Private
-router.get(
+router.post(
   '/add',
-  validation.isValidAssetType,
-  validation.genericValidator,
+  // validation.isValidAssetType,
+  // validation.genericValidator,
   controller.addNewCatalog
 );
 
-// @route    POST singleCatalog/delete
+// @route    POST catalog/delete
 // @desc     Delete a singleCatalog
 // @access   Private
-router.get(
+router.post(
   '/delete',
   // verify whether user has gone through the full ui of deleting a singleCatalog
   // clicking on the delete button && confirming the popup modal
   controller.deleteCatalog
 );
 
-// @route    POST singleCatalog/update
+// @route    POST catalog/update
 // @desc     Update a new singleCatalog
 // @access   Private
-router.get(
+router.post(
   '/update',
   // validate the entry
   // what is the user updating?

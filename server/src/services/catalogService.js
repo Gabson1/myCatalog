@@ -2,56 +2,23 @@ import User from '../models/userModel';
 import Catalog from '../models/catalogModel';
 
 
-export const addNewCatalogService = async (req, res) => {
-  const funcName = 'addNewCatalogService';
-
-  const { assetType, description } = req.body;
+export const addNewCatalogService = async (req) => {
+  const { assetType, description, creator } = req.body;
 
   try {
-    const user = await User.findById(req.user.id).select('-password');
+   //  const user = await User.findById(req.user.id).select('-password');
 
     const newCatalog = new Catalog({
       assetType,
       description,
-      creator: user.id
+      creator: 'user'
     });
 
-    const catalog = await newCatalog.save()
+    const catalog = await newCatalog.save();
 
-    res.status(201).json({ catalog });
+    return { success: true, message: 'Catalog created successfully', catalog }
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send(`Server error ${funcName}`);
-  }
-};
-
-export const getAllCatalogsService = async (req, res) => {
-  const funcName = 'getAllCatalogsService';
-
-  try {
-    const catalogs = await Catalog.find().sort({ date: -1 });
-
-    res.status(201).json({ catalogs });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send(`Server error ${funcName}`);
-  }
-};
-
-export const getCatalogByIdService = async (req, res) => {
-  const funcName = 'getCatalogByIdService';
-
-  try {
-    const catalog = await Catalog.findById(req.params.id);
-
-    if (!catalog) {
-      return res.status(404).json({ msg: 'Catalog not found' })
-    }
-
-    res.status(201).json({ catalog });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send(`Server error ${funcName}`);
+    throw new Error(err.message);
   }
 };
 
@@ -72,7 +39,33 @@ export const deleteCatalogService = async (req, res) => {
     await catalog.remove()
 
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send(`Server error ${funcName}`);
+    throw new Error(err.message);
   }
 }
+
+export const getAllCatalogsService = async (req, res) => {
+  try {
+    // Todo: find only the catalogs for the given user
+    const catalog = await Catalog.find().sort({ date: -1 }).exec();
+
+    return { catalogs: catalog };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+export const getCatalogByIdService = async (req, res) => {
+  const funcName = 'getCatalogByIdService';
+
+  try {
+    const catalog = await Catalog.findById(req.params.id);
+
+    if (!catalog) {
+      return res.status(404).json({ msg: 'Catalog not found' })
+    }
+
+    res.status(201).json({ catalog });
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};

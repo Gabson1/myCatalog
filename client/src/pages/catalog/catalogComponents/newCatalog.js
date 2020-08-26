@@ -15,7 +15,7 @@ const NewCatalog = () => {
   const description = useInput('');
   const dispatch = useDispatch();
 
-  const formInformation = [
+  const assetInformation = [
     { id: 1, label: 'Gold', value: 'gold' },
     { id: 2, label: 'Silver', value: 'silver' },
     { id: 3, label: 'Stocks', value: 'stocks' },
@@ -30,8 +30,12 @@ const NewCatalog = () => {
 }
 
 const handleSaveModal = () => {
-    dispatch(addNewCatalogAction(assetType, description));
-    // Todo: send request to api && save selection to store and update ui
+    const newCatalogData = {
+      assetType,
+      description: description.value
+    };
+    dispatch(addNewCatalogAction(newCatalogData));
+    // Todo: send request to api && save selection to store && update ui
     setOpen(false)
 }
 
@@ -41,7 +45,7 @@ const handleSaveModal = () => {
        onOpen={() => setOpen(true)}
        open={open}
        trigger={
-         <Button className="newCatalogButton" onClick={() => console.log('hi')}>
+         <Button className="newCatalogButton" onClick={() => dispatch({ type: 'PREPARATION_ADD_NEW_CATALOG' })}>
            <Image src={plusIcon} size="tiny" />
          </Button>
        }
@@ -53,14 +57,14 @@ const handleSaveModal = () => {
            <Form>
              <Form.Group inline>
                {
-                 formInformation.map((formData) => (
-                   <Form.Field key={`form-field-${formData.id}`}>
+                 assetInformation.map((assetList) => (
+                   <Form.Field key={`form-field-${assetList.id}`}>
                      <Form.Radio
                        style={{ paddingLeft: '15px' }}
-                       label={formData.label}
-                       value={formData.value}
-                       checked={assetType === formData.value}
-                       onClick={() => setAssetType(formData.value)}
+                       label={assetList.label}
+                       value={assetList.value}
+                       checked={assetType === assetList.value}
+                       onClick={() => setAssetType(assetList.value)}
                      />
                    </Form.Field>
 
