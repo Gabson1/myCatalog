@@ -35,9 +35,8 @@ const handleSaveModal = () => {
       description: description.value
     };
     dispatch(addNewCatalogAction(newCatalogData));
-    // Todo: send request to api && save selection to store && update ui
     setOpen(false)
-}
+};
 
   return (
      <Modal

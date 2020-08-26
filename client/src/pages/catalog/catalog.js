@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Divider, Grid } from "semantic-ui-react";
 
 import SideBar from '../../component/sidebar/sidebar';
@@ -6,17 +6,32 @@ import { SingleCatalog } from './catalogComponents/singleCatalog/singleCatalog';
 import { NoCatalogs } from "./catalogComponents/noCatalogs";
 import AssetNewTable from "./catalogComponents/newCatalog";
 
+import {getAllCatalogsAction} from "../../actions";
 import plusIcon from '../../assets/plus.svg';
 import './catalog.css';
+import Loading from "../../component/loading/loading";
 
 const Catalog = () => {
+	const [catalogs, setCatalogs] = useState();
+	const [loading, setLoading] = useState(true);
 	const itemWidth = 7;
 
-	const tables = [
-		{ 'table_id': 1 },
-		{ 'table_id': 2 },
-		{ 'table_id': 3 }
-	]
+	const getAllCatalogs = useCallback(async () => {
+		try {
+			const res = await getAllCatalogsAction()
+			const catalogData = await res.json(res);
+
+			setCatalogs(catalogData);
+			setLoading(false);
+		} catch (err) {
+			console.log(`%c There was a problem: ${err}`, 'background: #222; color: white; border: 1px dotted white; padding: 10px');
+			setLoading(false);
+		}
+	}, []);
+
+	useEffect(() => {
+		getAllCatalogs();
+	}, [getAllCatalogs]);
 
 	return (
 		<main className="page">
@@ -29,13 +44,14 @@ const Catalog = () => {
 					<Grid.Column width={itemWidth/5}>
 						<AssetNewTable />
 					</Grid.Column>
-					{ tables.length > 0 && tables ?
-						tables.map((tablesData) => (
-							<Grid.Column className="gridItemWrapper" width={itemWidth} key={`tables-${tablesData.table_id}`} >
+					{ loading && <Loading />}
+					{ catalogs.length > 0 && catalogs ?
+						catalogs.map((catalogData, index) => (
+							<Grid.Column className="gridItemWrapper" width={itemWidth} key={`tables-${index}`} >
 								<h4>{'assetType'}</h4>
 								<p>{'description'}</p>
 								<Divider />
-								<SingleCatalog />
+								<SingleCatalog {...catalogData}/>
 							</Grid.Column>
 						))
 						:

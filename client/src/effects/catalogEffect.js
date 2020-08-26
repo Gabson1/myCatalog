@@ -13,4 +13,20 @@ export const addNewCatalogRequest = async (newCatalogData) => {
   } catch (err) {
     throw new Error(`Something went wrong... ${err.message}`);
   }
-}
+};
+
+export const deleteCatalogRequest = async (catalogId) => {
+  try {
+    return axios.post(`${fullApiCatalogRoute}/delete`, catalogId);
+  } catch (err) {
+    throw new Error(`Something went wrong... ${err.message}`);
+  }
+};
+
+export const getAllCatalogsRequest = async (userID) => {
+  try {
+    return axios.post(`${fullApiCatalogRoute}/:id`, userID);
+  } catch (err) {
+    throw new Error(`Something went wrong... ${err.message}`);
+  }
+};

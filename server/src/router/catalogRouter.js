@@ -36,5 +36,13 @@ router.post(
   controller.updateCatalog
 );
 
+// @route    GET catalog/:id
+// @desc     Get all catalogs
+// @access   Private
+router.get(
+  '/:id',
+  // validate user
+  controller.getAllCatalogs
+);
 
 export default router;
