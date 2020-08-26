@@ -43,6 +43,7 @@ export const getAllCatalogsAction = (userId) => {
   return async (dispatch) => {
     try {
       const res = await getAllCatalogsRequest(userId)
+      console.log('---------------------------------->', res);
       dispatch({
         type: GET_CATALOGS_SUCCESS,
         payload: res.config.data

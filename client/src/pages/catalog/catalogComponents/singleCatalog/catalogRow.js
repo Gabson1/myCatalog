@@ -4,15 +4,7 @@ import { Grid, Button, Icon, Popup } from 'semantic-ui-react';
 
 import '../../catalog.css';
 
-export const CatalogRow = (props) => {
-  const {
-    asset_id: assetId,
-    asset_name: assetName,
-    asset_quantity: assetQuantity,
-    asset_price: assetPrice,
-    asset_api_price: assetApiPrice
-  } = props;
-
+export const CatalogRow = ({ assetId, assetName, assetQuantity, singleQuantityPrice, totalQuantityPrice }) => {
   const [rowClick, setRowClick] = useState(false)
 
   const gridColumns = 5;
@@ -25,27 +17,27 @@ export const CatalogRow = (props) => {
       <Grid columns={gridColumns}>
         <Grid.Column width={columnWidth}>
           <p className='assetItems assetItemId'>
-            {'assetId'}
+            {assetId}
           </p>
         </Grid.Column>
         <Grid.Column width={columnWidth}>
           <p className='assetItems'>
-            {'assetName'}
+            {assetName}
           </p>
         </Grid.Column>
         <Grid.Column width={columnWidth}>
           <p className='assetItems'>
-            {'assetQuantity'}
+            {assetQuantity}
           </p>
         </Grid.Column>
         <Grid.Column width={columnWidth}>
           <p className='assetItems'>
-            {'assetPrice'}
+            {singleQuantityPrice}
           </p>
         </Grid.Column>
         <Grid.Column width={columnWidth}>
           <p className='assetItems'>
-            {'assetApiPrice'}
+            {totalQuantityPrice}
           </p>
         </Grid.Column>
       </Grid>

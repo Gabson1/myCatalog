@@ -10,18 +10,19 @@ import {getAllCatalogsAction} from "../../actions";
 import plusIcon from '../../assets/plus.svg';
 import './catalog.css';
 import Loading from "../../component/loading/loading";
+import {getAllCatalogsRequest} from "../../effects";
 
-const Catalog = () => {
-	const [catalogs, setCatalogs] = useState();
+const Catalog = (props) => {
+	const [catalogs, setCatalogs] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const itemWidth = 7;
 
 	const getAllCatalogs = useCallback(async () => {
 		try {
-			const res = await getAllCatalogsAction()
-			const catalogData = await res.json(res);
+			// const res = await getAllCatalogsAction()
+			const res = await getAllCatalogsRequest();
 
-			setCatalogs(catalogData);
+			setCatalogs(res.data.catalogs.catalogs);
 			setLoading(false);
 		} catch (err) {
 			console.log(`%c There was a problem: ${err}`, 'background: #222; color: white; border: 1px dotted white; padding: 10px');
@@ -32,6 +33,8 @@ const Catalog = () => {
 	useEffect(() => {
 		getAllCatalogs();
 	}, [getAllCatalogs]);
+
+	console.log('------------------------------------------>', catalogs);
 
 	return (
 		<main className="page">
@@ -45,18 +48,14 @@ const Catalog = () => {
 						<AssetNewTable />
 					</Grid.Column>
 					{ loading && <Loading />}
-					{ catalogs.length > 0 && catalogs ?
-						catalogs.map((catalogData, index) => (
-							<Grid.Column className="gridItemWrapper" width={itemWidth} key={`tables-${index}`} >
-								<h4>{'assetType'}</h4>
-								<p>{'description'}</p>
-								<Divider />
-								<SingleCatalog {...catalogData}/>
-							</Grid.Column>
-						))
-						:
-						<NoCatalogs />
-					}
+					{ catalogs.map((catalogData, index) => (
+						<Grid.Column className="gridItemWrapper" width={itemWidth} key={`catalog-${index}`} >
+							<h4>{catalogData.assetType}</h4>
+							<p>{catalogData.description}</p>
+							<Divider />
+							<SingleCatalog {...props} />
+						</Grid.Column>
+					))}
 				</Grid>
 			</section>
 		</main>

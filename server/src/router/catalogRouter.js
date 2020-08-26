@@ -40,7 +40,7 @@ router.post(
 // @desc     Get all catalogs
 // @access   Private
 router.get(
-  '/:id',
+  '/',
   // validate user
   controller.getAllCatalogs
 );

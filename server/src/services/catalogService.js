@@ -47,6 +47,7 @@ export const getAllCatalogsService = async (req, res) => {
   try {
     // Todo: find only the catalogs for the given user
     const catalog = await Catalog.find().sort({ date: -1 }).exec();
+    console.log(catalog)
 
     return { catalogs: catalog };
   } catch (err) {
