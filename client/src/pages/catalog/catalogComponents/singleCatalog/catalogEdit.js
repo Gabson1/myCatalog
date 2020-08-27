@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, {useCallback, useEffect, useState} from 'react';
+import { useDispatch } from 'react-redux';
 import { Table, Button, Icon } from 'semantic-ui-react';
+
+import { setCatalogEditingAction } from '../../../../actions';
 
 import '../../catalog.css';
 
 export const CatalogEdit = () => {
+  let [editing, setEditing] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect( () => {
+    if (editing) dispatch(setCatalogEditingAction(editing))
+  }, [editing]);
+
   return (
     <Table.Footer fullWidth>
       <Table.Row>
@@ -16,12 +25,12 @@ export const CatalogEdit = () => {
             labelPosition='left'
             primary
             size='small'
+            onClick={() => setEditing(true)}
           >
-            <Icon name='user' /> Add User
+            <Icon name='edit' /> Edit Catalog
           </Button>
-          <Button size='small'>Approve</Button>
-          <Button disabled size='small'>
-            Approve All
+          <Button disabled={!editing} size='small' primary>
+            Save
           </Button>
         </Table.HeaderCell>
       </Table.Row>

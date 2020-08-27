@@ -3,7 +3,7 @@ import { Grid, Table } from 'semantic-ui-react';
 
 import { CatalogHeader } from "./catalogHeader";
 import { CatalogEdit } from './catalogEdit';
-import { CatalogRow } from './catalogRow';
+import CatalogRow from './catalogRow';
 
 
 

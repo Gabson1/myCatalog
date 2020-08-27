@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import {connect, useDispatch} from 'react-redux';
-import { Divider, Grid } from "semantic-ui-react";
+import { connect, useDispatch } from 'react-redux';
+import { Divider, Grid } from 'semantic-ui-react';
 
 import { getAllCatalogsAction } from '../../actions';
 

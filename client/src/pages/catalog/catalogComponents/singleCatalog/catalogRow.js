@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Table } from 'semantic-ui-react';
 
 import '../../catalog.css';
 
-export const CatalogRow = ({ assetId, assetName, assetQuantity, singleQuantityPrice, totalQuantityPrice }) => {
+const CatalogRow = ({ assetId, assetName, assetQuantity, singleQuantityPrice, totalQuantityPrice, editing }) => {
   const [rowClick, setRowClick] = useState(false)
 
   const gridColumns = 5;
@@ -15,12 +16,19 @@ export const CatalogRow = ({ assetId, assetName, assetQuantity, singleQuantityPr
   return (
     <Table.Body>
       <Table.Row>
-        <Table.Cell>{assetId ? assetId : 'PLACEHOLDER'}</Table.Cell>
-        <Table.Cell>{assetName ? assetName : 'PLACEHOLDER'}</Table.Cell>
-        <Table.Cell>{assetQuantity ? assetQuantity : 'PLACEHOLDER'}</Table.Cell>
-        <Table.Cell>{singleQuantityPrice ? singleQuantityPrice : 'PLACEHOLDER'}</Table.Cell>
-        <Table.Cell>{totalQuantityPrice ? totalQuantityPrice : 'PLACEHOLDER'}</Table.Cell>
+        <Table.Cell contentEditable={editing}>{assetId ? assetId : 'PLACEHOLDER'}</Table.Cell>
+        <Table.Cell contentEditable={editing}>{assetName ? assetName : 'PLACEHOLDER'}</Table.Cell>
+        <Table.Cell contentEditable={editing}>{assetQuantity ? assetQuantity : 'PLACEHOLDER'}</Table.Cell>
+        <Table.Cell contentEditable={editing}>{singleQuantityPrice ? singleQuantityPrice : 'PLACEHOLDER'}</Table.Cell>
+        <Table.Cell contentEditable={editing}>{totalQuantityPrice ? totalQuantityPrice : 'PLACEHOLDER'}</Table.Cell>
       </Table.Row>
     </Table.Body>
   );
 };
+
+const mapStateToProps = state => ({
+  editing: state.catalog.editing
+});
+
+export default connect(mapStateToProps)(CatalogRow)
+

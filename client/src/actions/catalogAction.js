@@ -2,7 +2,8 @@ import { addNewCatalogRequest, deleteCatalogRequest, getAllCatalogsRequest } fro
 import {
   ADD_CATALOG_SUCCESS, ADD_CATALOG_FAILURE,
   DELETE_CATALOG_SUCCESS, DELETE_CATALOG_FAILURE,
-  GET_CATALOGS_SUCCESS, GET_CATALOGS_FAILURE
+  GET_CATALOGS_SUCCESS, GET_CATALOGS_FAILURE,
+  SET_CATALOG_EDITING
 } from "./actionTypes";
 
 export const addNewCatalogAction = (newCatalogData) => {
@@ -53,5 +54,14 @@ export const getAllCatalogsAction = (userId) => {
         payload: err.message
       })
     }
+  };
+};
+
+export const setCatalogEditingAction = (editing) => {
+  return (dispatch) => {
+    dispatch({
+      type: SET_CATALOG_EDITING,
+      payload: editing
+    })
   };
 };
