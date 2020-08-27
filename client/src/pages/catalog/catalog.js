@@ -1,37 +1,24 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import {connect, useDispatch} from 'react-redux';
 import { Divider, Grid } from "semantic-ui-react";
 
+import { getAllCatalogsAction } from '../../actions';
+
 import SideBar from '../../component/sidebar/sidebar';
+import AssetNewTable from './catalogComponents/newCatalog';
+import { NoCatalogs } from './catalogComponents/noCatalogs';
 import { SingleCatalog } from './catalogComponents/singleCatalog/singleCatalog';
-import { NoCatalogs } from "./catalogComponents/noCatalogs";
-import AssetNewTable from "./catalogComponents/newCatalog";
 
-import {getAllCatalogsAction} from "../../actions";
-import plusIcon from '../../assets/plus.svg';
 import './catalog.css';
-import Loading from "../../component/loading/loading";
-import {getAllCatalogsRequest} from "../../effects";
 
-const Catalog = (props) => {
-	const [catalogs, setCatalogs] = useState([]);
-	const [loading, setLoading] = useState(true);
-	const itemWidth = 7;
+const Catalog = ({ catalogs }) => {
+	const dispatch = useDispatch();
 
-	const getAllCatalogs = useCallback(async () => {
-		try {
-			// const res = await getAllCatalogsAction()
-			const res = await getAllCatalogsRequest();
-			setCatalogs(res.data.catalog);
-			setLoading(false);
-		} catch (err) {
-			console.log(`%c There was a problem: ${err}`, 'background: #222; color: white; border: 1px dotted white; padding: 10px');
-			setLoading(false);
-		}
-	}, []);
+	const itemWidth = 8;
 
 	useEffect(() => {
-		getAllCatalogs();
-	}, [getAllCatalogs]);
+		dispatch(getAllCatalogsAction())
+	}, []);
 
 	return (
 		<main className="page">
@@ -44,14 +31,19 @@ const Catalog = (props) => {
 					<Grid.Column width={itemWidth/5}>
 						<AssetNewTable />
 					</Grid.Column>
-					{ loading && <Loading />}
-					{ catalogs.length > 0 && catalogs ?
+					{ catalogs ?
 					catalogs.map((catalogData, index) => (
-						<Grid.Column className="gridItemWrapper" width={itemWidth} key={`catalog-${index}`} >
+						<Grid.Column id={`catalog-wrapper-${index}`} className="gridItemWrapper" width={itemWidth} key={`catalog-${index}`} >
 							<h4>{catalogData.assetType}</h4>
 							<p>{catalogData.description}</p>
 							<Divider />
-							<SingleCatalog {...props} />
+							{ catalogData.assets.length > 0 ?
+								catalogData.assets.map((assetData, index) => (
+								<SingleCatalog key={`catalog-${index}`} {...assetData}/>
+							))
+								:
+								<b>No assets added yet</b>
+							}
 						</Grid.Column>
 					))
 						:
@@ -63,4 +55,9 @@ const Catalog = (props) => {
 	);
 };
 
-export default Catalog;
+
+const mapStateToProps = state => ({
+	catalogs: state.catalog.catalogs[0]
+});
+
+export default connect(mapStateToProps)(Catalog);
