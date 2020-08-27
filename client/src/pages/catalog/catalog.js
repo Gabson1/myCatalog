@@ -21,8 +21,7 @@ const Catalog = (props) => {
 		try {
 			// const res = await getAllCatalogsAction()
 			const res = await getAllCatalogsRequest();
-
-			setCatalogs(res.data.catalogs.catalogs);
+			setCatalogs(res.data.catalog);
 			setLoading(false);
 		} catch (err) {
 			console.log(`%c There was a problem: ${err}`, 'background: #222; color: white; border: 1px dotted white; padding: 10px');
@@ -33,8 +32,6 @@ const Catalog = (props) => {
 	useEffect(() => {
 		getAllCatalogs();
 	}, [getAllCatalogs]);
-
-	console.log('------------------------------------------>', catalogs);
 
 	return (
 		<main className="page">
@@ -48,14 +45,18 @@ const Catalog = (props) => {
 						<AssetNewTable />
 					</Grid.Column>
 					{ loading && <Loading />}
-					{ catalogs.map((catalogData, index) => (
+					{ catalogs.length > 0 && catalogs ?
+					catalogs.map((catalogData, index) => (
 						<Grid.Column className="gridItemWrapper" width={itemWidth} key={`catalog-${index}`} >
 							<h4>{catalogData.assetType}</h4>
 							<p>{catalogData.description}</p>
 							<Divider />
 							<SingleCatalog {...props} />
 						</Grid.Column>
-					))}
+					))
+						:
+						<NoCatalogs />
+					}
 				</Grid>
 			</section>
 		</main>

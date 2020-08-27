@@ -49,7 +49,7 @@ export const deleteCatalog = async (req, res) => {
 export const getAllCatalogs = async (req, res) => {
   try {
     const catalog = await getAllCatalogsService()
-    res.json({ success: true, catalogs: catalog })
+    res.json({ success: true, catalog })
   } catch (error) {
     // If anything goes wrong, return a json error
     res.json({ statusCode: 500, message: error, contentType: 'application/json' });
