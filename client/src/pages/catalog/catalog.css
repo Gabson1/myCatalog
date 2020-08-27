@@ -31,3 +31,7 @@
 .page #pageContent #catalogContent .newCatalogButton:hover {
     transform: scale(1.5);
 }
+
+.page #pageContent #catalogContent .catalogsWrapper {
+    width: 80%;
+}
