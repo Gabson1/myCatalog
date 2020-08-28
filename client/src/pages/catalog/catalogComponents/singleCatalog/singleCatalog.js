@@ -1,9 +1,9 @@
 import React from 'react';
-import { Grid, Table } from 'semantic-ui-react';
+import { Table } from 'semantic-ui-react';
 
 import { CatalogHeader } from "./catalogHeader";
-import { CatalogEdit } from './catalogEdit';
-import CatalogRow from './catalogRow';
+import { CatalogFooter } from './catalogFooter';
+import { CatalogRow } from './catalogRow';
 
 
 
@@ -14,7 +14,7 @@ export const SingleCatalog = (props) => {
     <Table celled>
       <CatalogHeader {...props} />
       <CatalogRow {...props} />
-      <CatalogEdit {...props} />
+      <CatalogFooter {...props} />
     </Table>
   );
 }

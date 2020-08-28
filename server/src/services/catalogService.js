@@ -3,7 +3,7 @@ import Catalog from '../models/catalogModel';
 
 
 export const addNewCatalogService = async (req) => {
-  const { assetType, description, creator } = req.body;
+  const { assetType, description, creator, assets } = req.body;
 
   try {
    //  const user = await User.findById(req.user.id).select('-password');
@@ -11,7 +11,8 @@ export const addNewCatalogService = async (req) => {
     const newCatalog = new Catalog({
       assetType,
       description,
-      creator: 'user'
+      creator,
+      assets
     });
 
     const catalog = await newCatalog.save();

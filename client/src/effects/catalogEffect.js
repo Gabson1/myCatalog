@@ -30,3 +30,11 @@ export const getAllCatalogsRequest = async () => {
     throw new Error(`Something went wrong... ${err.message}`);
   }
 };
+
+export const editCatalogRequest = async () => {
+  try {
+    return axios.post(`${fullApiCatalogRoute}/edit/:id`);
+  } catch (err) {
+    throw new Error(`Something went wrong... ${err.message}`);
+  }
+}

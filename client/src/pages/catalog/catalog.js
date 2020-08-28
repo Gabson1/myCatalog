@@ -11,7 +11,7 @@ import { SingleCatalog } from './catalogComponents/singleCatalog/singleCatalog';
 
 import './catalog.css';
 
-const Catalog = ({ catalogs }) => {
+const Catalog = ({ catalogs, editing }) => {
 	const dispatch = useDispatch();
 
 	const itemWidth = 8;
@@ -32,6 +32,7 @@ const Catalog = ({ catalogs }) => {
 					<Grid.Column width={2}>
 						<AssetNewTable />
 					</Grid.Column>
+					<div id='modal-root' />
 					<Grid columns={columnCount} className="catalogsWrapper">
 					{ catalogs ?
 					catalogs.map((catalogData, index) => (
@@ -60,7 +61,8 @@ const Catalog = ({ catalogs }) => {
 
 
 const mapStateToProps = state => ({
-	catalogs: state.catalog.catalogs[0]
+	catalogs: state.catalog.catalogs[0],
+	editing: state.catalog.editing
 });
 
 export default connect(mapStateToProps)(Catalog);

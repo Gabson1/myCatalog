@@ -35,3 +35,10 @@
 .page #pageContent #catalogContent .catalogsWrapper {
     width: 80%;
 }
+
+.page #pageContent #catalogContent .editCatalogModal {
+    position: absolute;
+    top: 53%;
+    left: 73%;
+    transform: translate(-50%, -50%);
+}

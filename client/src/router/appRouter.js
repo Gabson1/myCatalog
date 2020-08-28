@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
-import history from '../middlewares/history';
 
 import Toast from '../component/toast/Toast';
 import Dashboard from '../pages/dashboard/dashboard';
@@ -8,6 +7,7 @@ import Catalog from '../pages/catalog/catalog';
 import Api from '../pages/api/api';
 import Setting from '../pages/setting/setting';
 import NotFound from '../component/notfound/notFound';
+
 
 const AppRouter = () => {
 
