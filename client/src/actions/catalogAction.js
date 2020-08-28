@@ -61,22 +61,6 @@ export const getAllCatalogsAction = (userId) => {
   };
 };
 
-export const setCatalogEditingAction = (catalogId, editing, action='SET') => {
-  return (dispatch) => {
-    if (action === 'STOP') {
-      dispatch({
-        type: STOP_CATALOG_EDITING,
-        payload: catalogId, editing, action
-      })
-    } else {
-      dispatch({
-        type: SET_CATALOG_EDITING,
-        payload: catalogId, editing, action
-      })
-    }
-  };
-};
-
 
 export const editCatalogDataAction = (newCatalogData) => {
   return async (dispatch) => {
