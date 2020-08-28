@@ -1,22 +1,51 @@
 import React from 'react';
-import { Grid, Input, Label } from 'semantic-ui-react';
+import {Button, Grid, Input, Label, Segment} from 'semantic-ui-react';
 import {connect} from "react-redux";
 
 
-const CatalogEditModal = ({ catalogs }) => {
+const CatalogEditModal = ({ catalogs, assetId, assetName, assetQuantity, singleQuantityPrice, totalQuantityPrice }) => {
 
-  console.log(catalogs[9].assets[0]);
-  { catalogs[9].assets.map((assetData) => (
-    console.log(assetData)
-  ))};
-
+  const catalogData = catalogs[0];
   return (
     <Grid columns={3}>
-      { catalogs[9].assets.map((assetData) => (
+      <Grid.Column>
+        <Label>Catalog Asset Type</Label>
+        <Input placeholder={catalogData.assetType} />
+      </Grid.Column>
+      <Grid.Column>
+        <Label>Catalog Description</Label>
+        <Input placeholder={catalogData.description} />
+      </Grid.Column>
+      { catalogs[0].assets.map((assetData) => (
+        <React.Fragment>
+          <Grid.Column>
+            <Label>Asset Name</Label>
+            <Input placeholder={assetData.assetName} />
+          </Grid.Column>
+          <Grid.Column>
+            <Label>Asset Quantity</Label>
+            <Input placeholder={assetData.assetQuantity} />
+          </Grid.Column>
+          <Grid.Column>
+            <Label>Single Asset Price</Label>
+            <Input placeholder={assetData.singleQuantityPrice} />
+          </Grid.Column>
+          <Grid.Column>
+            <Label>Total Asset Price</Label>
+            <Input placeholder={assetData.totalQuantityPrice} />
+          </Grid.Column>
+        </React.Fragment>
+        ))}
         <Grid.Column>
-          <Input placeholder={assetData.assetName} />
+          <Button
+            style={{ width: '50%' }}
+            color='teal'
+            fluid
+            onClick={() => console.log('hi')}
+          >
+            Save new data
+          </Button>
         </Grid.Column>
-      ))}
     </Grid>
   );
 };
