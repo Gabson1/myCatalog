@@ -3,26 +3,16 @@ import express from 'express';
 import * as validation from '../middlewares';
 import * as controller from '../controllers';
 
-let router = express.Router();
+const router = express.Router();
 
-// @route    POST auth/signup
-// @desc     Signup user
-// @access   Public
-router.post(
-	'/signup',
-	validation.createUserValidation,
-	validation.genericValidator,
-	controller.signupUser
-);
-
-// @route    POST auth/login
-// @desc     Login user
-// @access   Public
-router.post(
-	'/login',
-	validation.loginUserValidation,
-	validation.genericValidator,
-	controller.loginUser
+// @route    GET auth/
+// @desc     Verify token authenticity and load user
+// @access   Private
+router.get(
+  '/',
+  // validation.jwtVerify,
+  // validation.genericValidator,
+  controller.loadUser,
 );
 
 export default router;

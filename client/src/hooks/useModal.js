@@ -1,13 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 
-import {Modal} from '../component/modal/modal';
+import { Modal } from '../component/modal/modal';
 
-// Renders a modal to the modal root and handles the visibility state
-// of this modal.
-//
-// NOTE: Each modal you want to render should use a separate hook!!!
-// Otherwise your modals will share their visibility state which might lead
-// to overlapping and unclosable elements.
+// Renders a modal to the modal root and handles the visibility state of this modal.
 export const useModal = () => {
   const [isVisible, setIsVisible] = useState(false)
 
@@ -15,9 +10,9 @@ export const useModal = () => {
   const hide = () => setIsVisible(false)
 
   const RenderModal = ({ children }: { children: React.ReactChild }) => (
-    <React.Fragment>
+    <Fragment>
       {isVisible && <Modal closeModal={hide}>{children}</Modal>}
-    </React.Fragment>
+    </Fragment>
   )
 
   return {

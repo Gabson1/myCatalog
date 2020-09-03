@@ -1,30 +1,29 @@
 import React, { Fragment, useEffect } from 'react';
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch } from 'react-redux';
 
-import { authenticateAction } from '../actions';
+import { authenticateUserAction } from '../actions';
 
 import AppRouter from './appRouter';
 import RegSwitch from '../component/registration/regSwitch';
 
 const App = ({ isAuthenticated }) => {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-	useEffect( () => {
-		dispatch(authenticateAction());
-	}, [isAuthenticated]);
+  useEffect(() => {
+    dispatch(authenticateUserAction());
+  }, [dispatch, isAuthenticated]);
 
-	return (
-		<Fragment>
-			{ isAuthenticated ? <AppRouter/> : <RegSwitch/> }
-		</Fragment>
-	)
+  return (
+    <>
+      { isAuthenticated ? <AppRouter /> : <RegSwitch /> }
+    </>
+  );
 };
 
-const mapStateToProps = state => ({
-	isAuthenticated: state.user.isAuthenticated
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.user.isAuthenticated,
 });
-
 
 export default connect(mapStateToProps)(App);
 
-// Todo: Fix this. on page load make a call to the store to set the state to loaded --> if jwtVerify = true ... if a token exists --> show all routes
+// Todo: useSelector instead of connect()

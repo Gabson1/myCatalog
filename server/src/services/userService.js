@@ -1,21 +1,75 @@
+import bcrypt from 'bcrypt';
+
 import User from '../models/userModel';
+import { jwtSign } from '../middlewares';
 
-export const findUserByIdService = async (req, res) => {
+export const createUserService = async (res, { username, email, password }) => {
   // funcName is used for debugging purposes
-  const funcName = 'findUserByIdService';
+  const funcName = 'createUserService';
+
   try {
-    // First find the user by id and return it as the user object (not including password)
-    const user = await User.findById(req.user.id).select('-password');
+    // First check whether there is another user with the same email
+    let user = await User.findOne({ email });
 
-    // If no user is found return an error
-    if (!user) return res.status(400).json({ errors: [{ msg: 'User does not exist' }] });
+    // If one is found, return an error
+    if (user) return res.status(400).json({ errors: [{ msg: 'User already exists' }] });
 
-    // Return the user as a json object
-    res.json(user);
+    // Before saving the user params, encrypt the password
+    const salt = await bcrypt.genSalt(10);
+    password = await bcrypt.hash(password, salt);
 
-    // If anything goes wrong, return a server error
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send(`Server Error: ${funcName}`);
+    // Save the user as a new User object
+    user = new User({
+      username,
+      email,
+      password,
+    });
+
+    // Save the user object
+    await user.save();
+
+    // This payload, consisting of the user id, will be used for the jwt signature
+    const payload = {};
+    payload.user = { id: user._id };
+
+    // Create a jwt user token
+    payload.token = jwtSign(payload);
+
+    return payload;
+    // If anything goes wrong, return an error
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(`Server error: ${funcName}`);
   }
-}
+};
+
+export const loginUserService = async (res, { email, password }) => {
+  // funcName is used for debugging purposes
+  const funcName = 'loginUserService';
+  try {
+    // First check whether there is a user with the same email
+    const user = await User.findOne({ email });
+
+    // If none is found, return an error
+    if (!user) return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
+
+    // Because the password was encrypted before saving, we must use the bcrypt.compare method to compare the password from the req.body to the password from the document
+    const match = await bcrypt.compare(password, user.password);
+
+    // If it does not match, return an error
+    if (!match) return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
+
+    // This payload, consisting of the user id, will be used for the jwt signature
+    const payload = {};
+    payload.user = { id: user._id };
+
+    // Create a jwt user token
+    payload.token = jwtSign(payload);
+
+    return payload;
+    // If anything goes wrong, return an error
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(`Server error: ${funcName}`);
+  }
+};

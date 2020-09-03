@@ -1,5 +1,5 @@
-import React from 'react'
-import _ from 'lodash'
+import React from 'react';
+import _ from 'lodash';
 
 import '../setting.css';
 
@@ -10,15 +10,13 @@ const settingOptions = [
   'setting4',
 ];
 
-export const SettingOptions = () => {
-  return (
-    <div className="componentWrapper">
-      {settingOptions.map((items) => (
-        <div color={items} key={items} className="items">
-          {_.capitalize(items)}
-          <p>some dummy texts</p>
-        </div>
-      ))}
-    </div>
-  )
-}
+export const SettingOptions = () => (
+  <div className="componentWrapper">
+    {settingOptions.map((items) => (
+      <div color={items} key={items} className="items">
+        {_.capitalize(items)}
+        <p>some dummy texts</p>
+      </div>
+    ))}
+  </div>
+);

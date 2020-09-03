@@ -1,41 +1,21 @@
-import { loginRequest, signupRequest } from '../effects';
-import { LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_SUCCESS, SIGNUP_FAILURE, SIGNUP_SUCCESS } from './actionTypes';
+import { AUTH_SUCCESS, AUTH_ERROR } from './actionTypes';
+import { loadUserRequest } from '../effects';
 
+import { getStoredAuthToken } from '../utils/authToken';
 
-// Signup User
-export const signupAction = (formData) => {
-	return async (dispatch) => {
-		try {
-			const res = await signupRequest(formData)
-			dispatch({
-				type: SIGNUP_SUCCESS,
-				payload: res.data
-			})
-		} catch (err) {
-			dispatch({ type: SIGNUP_FAILURE, payload: err.message })
-		}
-	};
-};
+export const authenticateUserAction = () => async (dispatch) => {
+  try {
+    const token = getStoredAuthToken();
+    const res = await loadUserRequest(token);
 
-// Login User
-export const loginAction = (formData) => {
-	return async (dispatch) => {
-		try {
-			const res = await loginRequest(formData)
-			dispatch({
-				type: LOGIN_SUCCESS,
-				payload: res.data
-			})
-		} catch (err) {
-			dispatch({ type: LOGIN_FAILURE, payload: err.message })
-		}
-	};
-};
-
-// Logout
-export const logoutAction = () => dispatch => {
-	localStorage.removeItem('user');
-	dispatch({
-		type: LOGOUT_SUCCESS,
-	});
+    dispatch({
+      type: AUTH_SUCCESS,
+      payload: res.data.userPayload,
+    });
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR,
+      payload: err.message,
+    });
+  }
 };

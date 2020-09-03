@@ -2,13 +2,13 @@ import {
   ADD_CATALOG_SUCCESS,
   DELETE_CATALOG_SUCCESS,
   GET_CATALOGS_SUCCESS,
-  SET_CATALOG_EDITING
+  SET_CATALOG_EDITING,
 } from '../actions/actionTypes';
 
 const initialState = {
   loading: true,
   catalogs: [],
-  editing: false
+  editing: false,
 };
 
 export default function (state = initialState, action) {
@@ -19,7 +19,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        catalogs: [payload, ...state.catalogs]
+        catalogs: [payload, ...state.catalogs],
       };
     case DELETE_CATALOG_SUCCESS:
       return {
@@ -30,13 +30,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        catalogs: [payload, ...state.catalogs]
+        catalogs: [payload, ...state.catalogs],
       };
     case SET_CATALOG_EDITING:
       return {
         ...state,
-        editing: payload
-      }
+        editing: payload,
+      };
     default:
       return state;
   }

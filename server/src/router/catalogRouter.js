@@ -3,7 +3,7 @@ import express from 'express';
 import * as validation from '../middlewares';
 import * as controller from '../controllers';
 
-let router = express.Router();
+const router = express.Router();
 
 // @route    POST catalog/add
 // @desc     Create a new singleCatalog
@@ -12,7 +12,7 @@ router.post(
   '/add',
   // validation.isValidAssetType,
   // validation.genericValidator,
-  controller.addNewCatalog
+  controller.addNewCatalog,
 );
 
 // @route    POST catalog/delete
@@ -22,7 +22,7 @@ router.post(
   '/delete',
   // verify whether user has gone through the full ui of deleting a singleCatalog
   // clicking on the delete button && confirming the popup modal
-  controller.deleteCatalog
+  controller.deleteCatalog,
 );
 
 // @route    POST catalog/update
@@ -33,7 +33,7 @@ router.post(
   // validate the entry
   // what is the user updating?
   // - assetType of singleCatalog? description of singleCatalog? asset entry within singleCatalog?
-  controller.updateCatalog
+  controller.updateCatalog,
 );
 
 // @route    GET catalog/:id
@@ -42,7 +42,7 @@ router.post(
 router.get(
   '/',
   // validate user
-  controller.getAllCatalogs
+  controller.getAllCatalogs,
 );
 
 export default router;

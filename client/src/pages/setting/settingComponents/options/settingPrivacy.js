@@ -1,13 +1,10 @@
-import React from 'react'
-import _ from 'lodash'
+import React from 'react';
+import _ from 'lodash';
 
 import '../../setting.css';
 
-
-export const SettingPrivacy = () => {
-  return (
-    <div className="componentWrapper">
-      Privacy
-    </div>
-  )
-}
+export const SettingPrivacy = () => (
+  <div className="componentWrapper">
+    Privacy
+  </div>
+);

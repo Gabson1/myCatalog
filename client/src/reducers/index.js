@@ -5,9 +5,9 @@ import toast from './toastReducer';
 import catalog from './catalogReducer';
 
 const rootReducer = combineReducers({
-	user,
-	toast,
-	catalog
+  user,
+  toast,
+  catalog,
 });
 
 export default rootReducer;

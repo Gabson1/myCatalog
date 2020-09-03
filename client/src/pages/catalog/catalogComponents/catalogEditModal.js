@@ -1,10 +1,13 @@
 import React from 'react';
-import {Button, Grid, Input, Label, Segment} from 'semantic-ui-react';
-import {connect} from "react-redux";
+import { connect } from 'react-redux';
+import {
+  Button, Grid, Input, Label,
+} from 'semantic-ui-react';
 
-
-const CatalogEditModal = ({ catalogs, assetId, assetName, assetQuantity, singleQuantityPrice, totalQuantityPrice }) => {
-
+const CatalogEditModal = ({
+  catalogs, assetId, assetName, assetQuantity, singleQuantityPrice, totalQuantityPrice,
+}) => {
+  // TODO: Receive catalogID from 'Edit Catalog' action and display corresponding data
   const catalogData = catalogs[0];
   return (
     <Grid columns={3}>
@@ -17,7 +20,7 @@ const CatalogEditModal = ({ catalogs, assetId, assetName, assetQuantity, singleQ
         <Input placeholder={catalogData.description} />
       </Grid.Column>
       { catalogs[0].assets.map((assetData) => (
-        <React.Fragment>
+        <>
           <Grid.Column>
             <Label>Asset Name</Label>
             <Input placeholder={assetData.assetName} />
@@ -34,23 +37,23 @@ const CatalogEditModal = ({ catalogs, assetId, assetName, assetQuantity, singleQ
             <Label>Total Asset Price</Label>
             <Input placeholder={assetData.totalQuantityPrice} />
           </Grid.Column>
-        </React.Fragment>
-        ))}
-        <Grid.Column>
-          <Button
-            style={{ width: '50%' }}
-            color='teal'
-            fluid
-            onClick={() => console.log('hi')}
-          >
-            Save new data
-          </Button>
-        </Grid.Column>
+        </>
+      ))}
+      <Grid.Column>
+        <Button
+          style={{ width: '50%' }}
+          color="teal"
+          fluid
+          onClick={() => console.log('hi')}
+        >
+          Save new data
+        </Button>
+      </Grid.Column>
     </Grid>
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   catalogs: state.catalog.catalogs[0],
 });
 

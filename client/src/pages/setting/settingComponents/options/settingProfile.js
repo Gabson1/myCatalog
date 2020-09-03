@@ -1,13 +1,9 @@
-import React from 'react'
-import _ from 'lodash'
+import React from 'react';
 
 import '../../setting.css';
 
-
-export const SettingProfile = () => {
-  return (
-    <div className="componentWrapper">
-      Profile
-    </div>
-  )
-}
+export const SettingProfile = () => (
+  <div className="componentWrapper">
+    Profile
+  </div>
+);

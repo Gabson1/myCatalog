@@ -1,23 +1,26 @@
 import User from '../models/userModel';
 import Catalog from '../models/catalogModel';
 
-
 export const addNewCatalogService = async (req) => {
-  const { assetType, description, creator, assets } = req.body;
+  const {
+    assetType, description, creator, assets,
+  } = req.body;
 
   try {
-   //  const user = await User.findById(req.user.id).select('-password');
+    //  const user = await User.findById(req.user.id).select('-password');
 
     const newCatalog = new Catalog({
       assetType,
       description,
       creator,
-      assets
+      assets,
     });
 
     const catalog = await newCatalog.save();
 
-    return { success: true, message: 'Catalog created successfully', catalog }
+    return {
+      success: true, statusCode: 200, message: 'Catalog created successfully', catalog,
+    };
   } catch (err) {
     throw new Error(err.message);
   }
@@ -31,18 +34,17 @@ export const deleteCatalogService = async (req, res) => {
   const funcName = 'deleteCatalogService';
 
   try {
-    const catalog = await Catalog.findById(req.params.id)
+    const catalog = await Catalog.findById(req.params.id);
 
     if (!catalog) {
-      return res.status(404).json({ msg: 'Catalog not found' })
+      return res.status(404).json({ msg: 'Catalog not found' });
     }
 
-    await catalog.remove()
-
+    await catalog.remove();
   } catch (err) {
     throw new Error(err.message);
   }
-}
+};
 
 export const getAllCatalogsService = async (req, res) => {
   try {
@@ -60,7 +62,7 @@ export const getCatalogByIdService = async (req, res) => {
     const catalog = await Catalog.findById(req.params.id);
 
     if (!catalog) {
-      return res.status(404).json({ msg: 'Catalog not found' })
+      return res.status(404).json({ msg: 'Catalog not found' });
     }
 
     res.status(201).json({ catalog });

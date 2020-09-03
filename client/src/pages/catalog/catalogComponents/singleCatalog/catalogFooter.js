@@ -4,25 +4,27 @@ import { Table, Button, Icon } from 'semantic-ui-react';
 import { useModal } from '../../../../hooks/useModal';
 
 import '../../catalog.css';
-import CatalogEditModal from "../catalogEditModal";
+import CatalogEditModal from '../catalogEditModal';
 
 export const CatalogFooter = () => {
-  const { show, RenderModal } = useModal()
+  const { show, RenderModal } = useModal();
 
   return (
     <Table.Footer fullWidth>
       <Table.Row>
         <Table.HeaderCell />
-        <Table.HeaderCell colSpan='4'>
+        <Table.HeaderCell colSpan="4">
           <Button
-            floated='right'
+            floated="right"
             icon
-            labelPosition='left'
+            labelPosition="left"
             primary
-            size='small'
+            size="small"
             onClick={show}
           >
-            <Icon name='edit' /> Edit Catalog
+            <Icon name="edit" />
+            {' '}
+            Edit Catalog
           </Button>
           <RenderModal>
             <CatalogEditModal />
@@ -32,4 +34,3 @@ export const CatalogFooter = () => {
     </Table.Footer>
   );
 };
-
