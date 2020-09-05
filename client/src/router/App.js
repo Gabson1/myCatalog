@@ -21,17 +21,11 @@ const App = ({ isAuthenticated }) => {
   );
 };
 
-App.propTypes = {
-  isAuthenticated: PropTypes.bool,
-};
+App.propTypes = { isAuthenticated: PropTypes.bool };
 
-App.defaultProps = {
-  isAuthenticated: PropTypes.bool,
-};
+App.defaultProps = { isAuthenticated: PropTypes.bool };
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.user.isAuthenticated,
-});
+const mapStateToProps = state => ({ isAuthenticated: state.user.isAuthenticated });
 
 export default connect(mapStateToProps)(App);
 

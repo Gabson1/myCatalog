@@ -1,7 +1,14 @@
-/* eslint-disable react/no-array-index-key,no-underscore-dangle */
 import React, { useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
-import { Divider, Grid } from 'semantic-ui-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Grid } from 'semantic-ui-react';
+
+import {
+  selectCreatorId,
+  selectCatalogList,
+  // selectCatalogEditing,
+  // selectCatalogListError,
+  // selectCatalogListIsFetching
+} from '../../selectors/catalogSelectors';
 
 import { getAllCatalogsAction } from '../../actions';
 
@@ -12,15 +19,19 @@ import { SingleCatalog } from './catalogComponents/singleCatalog/singleCatalog';
 
 import './catalog.css';
 
-const Catalog = ({ catalogs, userId }) => {
+const Catalog = () => {
   const dispatch = useDispatch();
+  const userId = useSelector(selectCreatorId);
+  const catalogs = useSelector(selectCatalogList);
+  // const editing = useSelector(selectCatalogEditing);
+  // const fetching = useSelector(selectCatalogListIsFetching);
+  // const error = useSelector(selectCatalogListError);
 
-  const itemWidth = 8;
   const columnCount = 2;
 
   useEffect(() => {
     dispatch(getAllCatalogsAction(userId));
-  }, [dispatch]);
+  }, [dispatch, userId]);
 
   return (
     <main className="page">
@@ -35,20 +46,7 @@ const Catalog = ({ catalogs, userId }) => {
           </Grid.Column>
           <div id="modal-root" />
           <Grid columns={columnCount} className="catalogsWrapper">
-            { catalogs
-              ? catalogs.map((catalogData, index) => (
-                <Grid.Column width={itemWidth} id={`catalog-wrapper-${index}`} className="gridItemWrapper" key={`catalog-${index}`}>
-                  <h4>{catalogData.assetType ? catalogData.assetType : 'PLACEHOLDER'}</h4>
-                  <p>{catalogData.description ? catalogData.description : 'PLACEHOLDER'}</p>
-                  <Divider />
-                  { catalogData.assets.length > 0
-                    ? catalogData.assets.map((assetData) => (
-                      <SingleCatalog key={`catalog-${index}`} {...assetData} />
-                    ))
-                    : <b>No assets added yet</b>}
-                </Grid.Column>
-              ))
-              : <NoCatalogs /> }
+            <SingleCatalog />
           </Grid>
         </Grid>
       </section>
@@ -56,10 +54,4 @@ const Catalog = ({ catalogs, userId }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  catalogs: state.catalog.catalogs,
-  editing: state.catalog.editing,
-  userId: state.user.user._id,
-});
-
-export default connect(mapStateToProps)(Catalog);
+export default Catalog;

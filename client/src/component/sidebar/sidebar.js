@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  Icon, Menu, Sidebar, Image,
-} from 'semantic-ui-react';
+import { Icon, Menu, Sidebar, Image } from 'semantic-ui-react';
 
 import './sidebar.css';
 import avatarIcon from '../../assets/svg/avatar.svg';
@@ -42,8 +40,6 @@ const SideBar = ({ user }) => (
   </Sidebar>
 );
 
-const mapStateToProps = (state) => ({
-  user: state.user.user,
-});
+const mapStateToProps = state => ({ user: state.user.user });
 
 export default connect(mapStateToProps)(SideBar);

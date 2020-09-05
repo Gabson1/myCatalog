@@ -18,7 +18,7 @@ const changesItems = [
 
 export const ChangesItems = () => (
   <div className="componentWrapper">
-    {changesItems.map((items) => (
+    {changesItems.map(items => (
       <div color={items} key={items} className="items">
         {_.capitalize(items)}
         <p>some dummy texts</p>

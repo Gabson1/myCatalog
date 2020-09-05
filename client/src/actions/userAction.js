@@ -6,7 +6,7 @@ import {
 import { storeAuthToken, removeStoredAuthToken } from '../utils/authToken';
 
 // Signup User
-export const signupAction = (formData) => async (dispatch) => {
+export const signupAction = formData => async (dispatch) => {
   try {
     const res = await signupRequest(formData);
     storeAuthToken(res.data.data.token);
@@ -21,7 +21,7 @@ export const signupAction = (formData) => async (dispatch) => {
 };
 
 // Login User
-export const loginAction = (formData) => async (dispatch) => {
+export const loginAction = formData => async (dispatch) => {
   try {
     const res = await loginRequest(formData);
     storeAuthToken(res.data.data.token);

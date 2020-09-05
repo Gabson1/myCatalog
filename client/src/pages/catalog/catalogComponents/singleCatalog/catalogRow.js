@@ -4,7 +4,11 @@ import { Table } from 'semantic-ui-react';
 import '../../catalog.css';
 
 export const CatalogRow = ({
-  assetId, assetName, assetQuantity, singleQuantityPrice, totalQuantityPrice,
+  assetId,
+  assetName,
+  assetQuantity,
+  singleQuantityPrice,
+  totalQuantityPrice,
 }) => (
   <Table.Body>
     <Table.Row>

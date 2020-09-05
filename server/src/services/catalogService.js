@@ -1,4 +1,3 @@
-import User from '../models/userModel';
 import Catalog from '../models/catalogModel';
 
 export const addNewCatalogService = async (req) => {
@@ -9,7 +8,6 @@ export const addNewCatalogService = async (req) => {
   } = req.body;
 
   try {
-
     const newCatalog = new Catalog({
       assetType,
       description,

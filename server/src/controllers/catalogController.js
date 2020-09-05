@@ -18,7 +18,6 @@ import {
 export const addNewCatalog = async (req, res) => {
   try {
     const result = await addNewCatalogService(req, res);
-
     res.json({
       success: result.success,
       statusCode: result.statusCode,
@@ -26,7 +25,11 @@ export const addNewCatalog = async (req, res) => {
       catalogs: result.catalog,
     });
   } catch (err) {
-    res.json({ statusCode: 500, message: err, contentType: 'application/json' });
+    res.json({
+      statusCode: 500,
+      message: err,
+      contentType: 'application/json',
+    });
   }
 };
 

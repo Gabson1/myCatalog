@@ -59,7 +59,7 @@ const NewCatalog = ({ user }) => {
           <Form>
             <Form.Group inline>
               {
-                 assetInformation.map((assetList) => (
+                 assetInformation.map(assetList => (
                    <Form.Field key={`form-field-${assetList.id}`}>
                      <Form.Radio
                        style={{ paddingLeft: '15px' }}
@@ -103,7 +103,7 @@ const NewCatalog = ({ user }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   // eslint-disable-next-line no-underscore-dangle
   user: state.user.user._id,
 });

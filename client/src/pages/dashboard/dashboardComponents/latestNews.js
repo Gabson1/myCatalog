@@ -18,7 +18,7 @@ const newsItems = [
 
 export const NewsItems = () => (
   <div className="componentWrapper">
-    {newsItems.map((items) => (
+    {newsItems.map(items => (
       <div color={items} key={items} className="items">
         {_.capitalize(items)}
         <p>some dummy texts</p>

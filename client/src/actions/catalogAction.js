@@ -10,7 +10,7 @@ import {
   EDIT_CATALOG_SUCCESS, EDIT_CATALOG_FAILURE,
 } from './actionTypes';
 
-export const addNewCatalogAction = (newCatalogData) => async (dispatch) => {
+export const addNewCatalogAction = newCatalogData => async (dispatch) => {
   try {
     const res = await addNewCatalogRequest(newCatalogData);
     dispatch({
@@ -25,7 +25,7 @@ export const addNewCatalogAction = (newCatalogData) => async (dispatch) => {
   }
 };
 
-export const deleteCatalogAction = (catalogId) => async (dispatch) => {
+export const deleteCatalogAction = catalogId => async (dispatch) => {
   try {
     const res = await deleteCatalogRequest(catalogId);
     dispatch({
@@ -40,7 +40,7 @@ export const deleteCatalogAction = (catalogId) => async (dispatch) => {
   }
 };
 
-export const getAllCatalogsAction = (userId) => async (dispatch) => {
+export const getAllCatalogsAction = userId => async (dispatch) => {
   try {
     const res = await getAllCatalogsRequest(userId);
     dispatch({
@@ -55,7 +55,7 @@ export const getAllCatalogsAction = (userId) => async (dispatch) => {
   }
 };
 
-export const editCatalogDataAction = (newCatalogData) => async (dispatch) => {
+export const editCatalogDataAction = newCatalogData => async (dispatch) => {
   try {
     const res = await editCatalogRequest(newCatalogData);
     dispatch({

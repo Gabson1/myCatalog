@@ -12,7 +12,7 @@ const settingOptions = [
 
 export const SettingOptions = () => (
   <div className="componentWrapper">
-    {settingOptions.map((items) => (
+    {settingOptions.map(items => (
       <div color={items} key={items} className="items">
         {_.capitalize(items)}
         <p>some dummy texts</p>

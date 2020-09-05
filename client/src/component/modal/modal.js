@@ -15,7 +15,7 @@ export const Modal = React.memo(({ children, closeModal }) => {
   return ReactDOM.createPortal(
     <div className="modalWrapper">
       <div className="modalContent">
-        <button onClick={closeModal} style={{ float: 'right' }} type='button'>Close</button>
+        <button onClick={closeModal} style={{ float: 'right' }} type="button">Close</button>
         {children}
       </div>
     </div>,

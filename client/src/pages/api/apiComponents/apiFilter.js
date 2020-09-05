@@ -18,7 +18,7 @@ const apiItems = [
 
 export const ApiFilter = () => (
   <div className="componentWrapper">
-    {apiItems.map((items) => (
+    {apiItems.map(items => (
       <div color={items} key={items} className="items">
         {_.capitalize(items)}
         <p>some dummy texts</p>

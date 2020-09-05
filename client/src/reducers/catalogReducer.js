@@ -19,7 +19,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        catalogs: [payload, ...state.catalogs],
+        catalogs: payload,
       };
     case DELETE_CATALOG_SUCCESS:
       return {
@@ -31,7 +31,6 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
         catalogs: payload,
-                ...state.catalogs,
       };
     case SET_CATALOG_EDITING:
       return {

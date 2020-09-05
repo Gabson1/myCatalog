@@ -1,6 +1,4 @@
-import {
-  AUTH_SUCCESS, SIGNUP_SUCCESS, LOGIN_SUCCESS, LOGOUT_SUCCESS,
-} from '../actions/actionTypes';
+import { AUTH_SUCCESS, SIGNUP_SUCCESS, LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../actions/actionTypes';
 
 const initialState = {
   token: null,
