@@ -3,17 +3,18 @@ import Catalog from '../models/catalogModel';
 
 export const addNewCatalogService = async (req) => {
   const {
-    assetType, description, creator, assets,
+    assetType,
+    description,
+    userId,
   } = req.body;
 
   try {
-    //  const user = await User.findById(req.user.id).select('-password');
 
     const newCatalog = new Catalog({
       assetType,
       description,
-      creator,
-      assets,
+      creator: userId,
+      assets: [],
     });
 
     const catalog = await newCatalog.save();
@@ -47,9 +48,18 @@ export const deleteCatalogService = async (req, res) => {
 };
 
 export const getAllCatalogsService = async (req, res) => {
+  const { userid } = req.headers;
+
   try {
-    // Todo: find only the catalogs for the given user
-    return await Catalog.find().sort({ date: -1 }).exec();
+    const catalogs = await Catalog.find({ creator: userid }).exec();
+
+    if (!catalogs) {
+      return res.status(404).json({ msg: 'No catalogs for user' });
+    }
+
+    return {
+      success: true, statusCode: 200, message: 'Catalogs found successfully', catalogs,
+    };
   } catch (err) {
     throw new Error(err.message);
   }
@@ -60,7 +70,6 @@ export const getCatalogByIdService = async (req, res) => {
 
   try {
     const catalog = await Catalog.findById(req.params.id);
-
     if (!catalog) {
       return res.status(404).json({ msg: 'Catalog not found' });
     }

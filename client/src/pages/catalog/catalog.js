@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key,no-underscore-dangle */
 import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { Divider, Grid } from 'semantic-ui-react';
@@ -11,14 +12,14 @@ import { SingleCatalog } from './catalogComponents/singleCatalog/singleCatalog';
 
 import './catalog.css';
 
-const Catalog = ({ catalogs }) => {
+const Catalog = ({ catalogs, userId }) => {
   const dispatch = useDispatch();
 
   const itemWidth = 8;
   const columnCount = 2;
 
   useEffect(() => {
-    dispatch(getAllCatalogsAction());
+    dispatch(getAllCatalogsAction(userId));
   }, [dispatch]);
 
   return (
@@ -41,13 +42,13 @@ const Catalog = ({ catalogs }) => {
                   <p>{catalogData.description ? catalogData.description : 'PLACEHOLDER'}</p>
                   <Divider />
                   { catalogData.assets.length > 0
-                    ? catalogData.assets.map((assetData, index) => (
+                    ? catalogData.assets.map((assetData) => (
                       <SingleCatalog key={`catalog-${index}`} {...assetData} />
-							  ))
-                    :								<b>No assets added yet</b>}
+                    ))
+                    : <b>No assets added yet</b>}
                 </Grid.Column>
-					  ))
-              :						<NoCatalogs />}
+              ))
+              : <NoCatalogs /> }
           </Grid>
         </Grid>
       </section>
@@ -56,8 +57,9 @@ const Catalog = ({ catalogs }) => {
 };
 
 const mapStateToProps = (state) => ({
-  catalogs: state.catalog.catalogs[0],
+  catalogs: state.catalog.catalogs,
   editing: state.catalog.editing,
+  userId: state.user.user._id,
 });
 
 export default connect(mapStateToProps)(Catalog);

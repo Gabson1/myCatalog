@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const catalogSchema = new Schema({
   assetType: { type: String, required: true },
   description: { type: String, required: false },
-  creator: { type: String, required: true, ref: 'User' },
+  creator: { type: Schema.Types.ObjectID, required: true, ref: 'User' },
   assets: [{
     assetName: { type: String, required: false },
     assetQuantity: { type: Number, required: false },

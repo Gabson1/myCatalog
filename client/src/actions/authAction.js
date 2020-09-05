@@ -8,9 +8,11 @@ export const authenticateUserAction = () => async (dispatch) => {
     const token = getStoredAuthToken();
     const res = await loadUserRequest(token);
 
+    console.log('res from the auathaction:', res);
+
     dispatch({
       type: AUTH_SUCCESS,
-      payload: res.data.userPayload,
+      payload: res.data.loadedUser,
     });
   } catch (err) {
     dispatch({

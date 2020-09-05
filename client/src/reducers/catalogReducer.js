@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   loading: true,
-  catalogs: [],
+  catalogs: null,
   editing: false,
 };
 
@@ -30,7 +30,8 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        catalogs: [payload, ...state.catalogs],
+        catalogs: payload,
+                ...state.catalogs,
       };
     case SET_CATALOG_EDITING:
       return {

@@ -6,4 +6,6 @@ export const jwtSign = (payload) => jwt.sign(
   { expiresIn: '7 days' },
 );
 
-export const jwtVerify = (res) => { jwt.verify(res.headers.authorization, process.env.JWT_SECRET); };
+export const jwtVerify = (res) => {
+  jwt.verify(res.headers.authorization, process.env.JWT_SECRET);
+};

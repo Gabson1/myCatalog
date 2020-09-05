@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect, useDispatch } from 'react-redux';
 
 import { authenticateUserAction } from '../actions';
@@ -14,10 +15,18 @@ const App = ({ isAuthenticated }) => {
   }, [dispatch, isAuthenticated]);
 
   return (
-    <>
+    <Fragment>
       { isAuthenticated ? <AppRouter /> : <RegSwitch /> }
-    </>
+    </Fragment>
   );
+};
+
+App.propTypes = {
+  isAuthenticated: PropTypes.bool,
+};
+
+App.defaultProps = {
+  isAuthenticated: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({

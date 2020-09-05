@@ -17,19 +17,29 @@ import {
  */
 export const addNewCatalog = async (req, res) => {
   try {
-    const res = await addNewCatalogService(req, res);
+    const result = await addNewCatalogService(req, res);
+
     res.json({
-      success: res.success, statusCode: res.statusCode, message: res.message, catalogs: res.catalog,
+      success: result.success,
+      statusCode: result.statusCode,
+      message: result.message,
+      catalogs: result.catalog,
     });
   } catch (err) {
-    res.json({ statusCode: 500, message: err });
+    res.json({ statusCode: 500, message: err, contentType: 'application/json' });
   }
 };
 
 export const updateCatalog = async (req, res) => {
   try {
-    const res = await updateCatalogService(res, req.body);
-    res.json({ success: res.success, message: res.message, catalog: res.catalog });
+    const result = await updateCatalogService(req, res);
+
+    res.json({
+      success: result.success,
+      statusCode: result.statusCode,
+      message: result.message,
+      catalogs: result.catalog,
+    });
   } catch (err) {
     res.json({ statusCode: 500, message: err, contentType: 'application/json' });
   }
@@ -37,23 +47,28 @@ export const updateCatalog = async (req, res) => {
 
 export const deleteCatalog = async (req, res) => {
   try {
-    // Call the createUserService
-    const res = await deleteCatalogService(res, req.body);
+    const result = await deleteCatalogService(req, res);
 
-    // Send a json success message
-    res.json({ success: true, message: 'Catalog removed!' });
+    res.json({
+      success: result.success,
+      statusCode: result.statusCode,
+      message: result.message,
+    });
   } catch (err) {
-    // If anything goes wrong, return a json error
     res.json({ statusCode: 500, message: err, contentType: 'application/json' });
   }
 };
 
 export const getAllCatalogs = async (req, res) => {
   try {
-    const catalog = await getAllCatalogsService();
-    res.json({ success: true, catalog });
+    const result = await getAllCatalogsService(req, res);
+    res.json({
+      success: result.success,
+      statusCode: result.statusCode,
+      message: result.message,
+      catalogs: result.catalogs,
+    });
   } catch (err) {
-    // If anything goes wrong, return a json error
     res.json({ statusCode: 500, message: err, contentType: 'application/json' });
   }
 };

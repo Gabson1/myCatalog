@@ -16,31 +16,31 @@ export default function (state = initialState, action) {
     case AUTH_SUCCESS:
       return {
         ...state,
-        token: payload,
-        isAuthenticated: true,
+        user: payload,
         loading: false,
+        isAuthenticated: true,
       };
     case SIGNUP_SUCCESS:
       return {
         ...state,
         user: payload,
-        isAuthenticated: true,
         loading: false,
+        isAuthenticated: true,
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
         ...payload,
-        isAuthenticated: true,
         loading: false,
+        isAuthenticated: true,
       };
     case LOGOUT_SUCCESS:
       return {
         ...state,
-        token: null,
-        isAuthenticated: false,
-        loading: false,
         user: null,
+        token: null,
+        loading: false,
+        isAuthenticated: false,
       };
     default:
       return state;

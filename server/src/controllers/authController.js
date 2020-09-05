@@ -12,14 +12,9 @@ import { loadUserService } from '../services';
  */
 export const loadUser = async (req, res) => {
   try {
-    const result = await loadUserService(req, res);
-    res.json({
-      success: result.success,
-      statusCode: result.statusCode,
-      message: result.message,
-      data: result.user,
-    });
+    const loadedUser = await loadUserService(req, res);
+    res.json({ loadedUser });
   } catch (err) {
-    res.json({ success: false, statusCode: 500, message: 'Something went wrong' });
+    res.json({ success: false, statusCode: 500, message: 'Something went wrong with loading the user' });
   }
 };

@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+/* eslint-disable max-len,no-console */
 import path from 'path';
 import cors from 'cors';
 import morgan from 'morgan';

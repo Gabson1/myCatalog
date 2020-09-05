@@ -36,7 +36,7 @@ router.post(
   controller.updateCatalog,
 );
 
-// @route    GET catalog/:id
+// @route    GET catalog/
 // @desc     Get all catalogs
 // @access   Private
 router.get(

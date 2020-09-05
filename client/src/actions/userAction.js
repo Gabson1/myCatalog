@@ -9,7 +9,6 @@ import { storeAuthToken, removeStoredAuthToken } from '../utils/authToken';
 export const signupAction = (formData) => async (dispatch) => {
   try {
     const res = await signupRequest(formData);
-    console.log('------------------------------------->res', res);
     storeAuthToken(res.data.data.token);
 
     dispatch({
@@ -25,6 +24,8 @@ export const signupAction = (formData) => async (dispatch) => {
 export const loginAction = (formData) => async (dispatch) => {
   try {
     const res = await loginRequest(formData);
+    storeAuthToken(res.data.data.token);
+
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,

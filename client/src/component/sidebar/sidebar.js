@@ -1,12 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   Icon, Menu, Sidebar, Image,
 } from 'semantic-ui-react';
 
 import './sidebar.css';
-import logoIcon from '../../assets/svg/logo.svg';
+import avatarIcon from '../../assets/svg/avatar.svg';
 
-const SideBar = () => (
+const SideBar = ({ user }) => (
   <Sidebar
     id="sidebarMenu"
     as={Menu}
@@ -18,7 +19,9 @@ const SideBar = () => (
     width="thin"
   >
     <Menu.Item className="sidebarItem">
-      <Image style={{ 'font-size': 24 }} avatar alt="Logo Icon" src={logoIcon} />
+      <Image style={{ 'font-size': 24 }} avatar alt="Logo Icon" src={avatarIcon} />
+      <p>{user.username}</p>
+      <p>{user.email}</p>
     </Menu.Item>
     <Menu.Item as="a" className="sidebarItem" href="/">
       <Icon name="dashboard" />
@@ -39,4 +42,8 @@ const SideBar = () => (
   </Sidebar>
 );
 
-export default SideBar;
+const mapStateToProps = (state) => ({
+  user: state.user.user,
+});
+
+export default connect(mapStateToProps)(SideBar);

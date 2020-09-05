@@ -23,9 +23,9 @@ export const deleteCatalogRequest = async (catalogId) => {
   }
 };
 
-export const getAllCatalogsRequest = async () => {
+export const getAllCatalogsRequest = async (userId) => {
   try {
-    return axios.get(`${fullApiCatalogRoute}/`);
+    return axios.get(`${fullApiCatalogRoute}/`, { headers: { userId } });
   } catch (err) {
     throw new Error(`Something went wrong... ${err.message}`);
   }

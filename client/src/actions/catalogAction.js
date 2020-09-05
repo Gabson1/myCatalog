@@ -45,7 +45,7 @@ export const getAllCatalogsAction = (userId) => async (dispatch) => {
     const res = await getAllCatalogsRequest(userId);
     dispatch({
       type: GET_CATALOGS_SUCCESS,
-      payload: res.data.catalog,
+      payload: res.data.catalogs,
     });
   } catch (err) {
     dispatch({

@@ -11,7 +11,7 @@ import plusIcon from '../../../assets/svg/plus.svg';
 
 import '../catalog.css';
 
-const NewCatalog = () => {
+const NewCatalog = ({ user }) => {
   const [open, setOpen] = useState(false);
   const [assetType, setAssetType] = useState();
   const description = useInput('');
@@ -35,6 +35,7 @@ const NewCatalog = () => {
     const newCatalogData = {
       assetType,
       description: description.value,
+      userId: user,
     };
     dispatch(addNewCatalogAction(newCatalogData));
     setOpen(false);
@@ -102,4 +103,9 @@ const NewCatalog = () => {
   );
 };
 
-export default connect(null)(NewCatalog);
+const mapStateToProps = (state) => ({
+  // eslint-disable-next-line no-underscore-dangle
+  user: state.user.user._id,
+});
+
+export default connect(mapStateToProps)(NewCatalog);

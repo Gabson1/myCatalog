@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 
 import { Modal } from '../component/modal/modal';
 
