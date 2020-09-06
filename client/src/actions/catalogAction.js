@@ -1,6 +1,7 @@
 import {
   addNewCatalogRequest, deleteCatalogRequest,
   getAllCatalogsRequest, editCatalogRequest,
+  importCatalogRequest, exportCatalogRequest,
 } from '../effects';
 import {
   ADD_CATALOG_SUCCESS, ADD_CATALOG_FAILURE,
@@ -8,6 +9,8 @@ import {
   GET_CATALOGS_SUCCESS, GET_CATALOGS_FAILURE,
   // SET_CATALOG_EDITING, STOP_CATALOG_EDITING,
   EDIT_CATALOG_SUCCESS, EDIT_CATALOG_FAILURE,
+  IMPORT_CATALOG_SUCCESS, IMPORT_CATALOG_FAILURE,
+  EXPORT_CATALOG_SUCCESS, EXPORT_CATALOG_FAILURE,
 } from './actionTypes';
 
 export const addNewCatalogAction = newCatalogData => async (dispatch) => {
@@ -65,6 +68,36 @@ export const editCatalogDataAction = newCatalogData => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: EDIT_CATALOG_FAILURE,
+      payload: err.message,
+    });
+  }
+};
+
+export const importCatalogAction = file => async (dispatch) => {
+  try {
+    const res = await importCatalogRequest(file);
+    dispatch({
+      type: IMPORT_CATALOG_SUCCESS,
+      payload: res.data.catalog,
+    });
+  } catch (err) {
+    dispatch({
+      type: IMPORT_CATALOG_FAILURE,
+      payload: err.message,
+    });
+  }
+};
+
+export const exportCatalogAction = userId => async (dispatch) => {
+  try {
+    const res = await exportCatalogRequest(userId);
+    dispatch({
+      type: EXPORT_CATALOG_SUCCESS,
+      payload: res.data.catalog,
+    });
+  } catch (err) {
+    dispatch({
+      type: EXPORT_CATALOG_FAILURE,
       payload: err.message,
     });
   }

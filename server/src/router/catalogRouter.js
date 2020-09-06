@@ -45,4 +45,22 @@ router.get(
   controller.getAllCatalogs,
 );
 
+// @route    POST catalog/
+// @desc     Import catalog
+// @access   Private
+router.post(
+  '/import',
+  // validate input
+  controller.importCatalogs,
+);
+
+// @route    POST catalog/
+// @desc     Import catalog
+// @access   Private
+router.post(
+  '/export',
+  // validate input
+  controller.exportCatalogs,
+);
+
 export default router;

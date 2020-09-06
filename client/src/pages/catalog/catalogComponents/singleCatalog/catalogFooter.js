@@ -1,13 +1,16 @@
 import React from 'react';
 import { Table, Button, Icon } from 'semantic-ui-react';
 
+import CatalogEditModal from '../catalogModal/catalogEditModal';
+import CatalogAddModal from '../catalogModal/catalogAddModal';
+
 import { useModal } from '../../../../hooks/useModal';
 
 import '../../catalog.css';
-import CatalogEditModal from '../catalogEditModal';
 
 export const CatalogFooter = () => {
-  const { show, RenderModal } = useModal();
+  const { show: showAdd, RenderModal: RenderAdd } = useModal();
+  const { show: showEdit, RenderModal: RenderEdit } = useModal();
 
   return (
     <Table.Footer fullWidth>
@@ -20,15 +23,28 @@ export const CatalogFooter = () => {
             labelPosition="left"
             primary
             size="small"
-            onClick={show}
+            onClick={showAdd}
+          >
+            <Icon name="plus" />
+            Add new assets
+          </Button>
+          <Button
+            floated="right"
+            icon
+            labelPosition="left"
+            primary
+            size="small"
+            onClick={showEdit}
           >
             <Icon name="edit" />
-            {' '}
             Edit Catalog
           </Button>
-          <RenderModal>
+          <RenderAdd>
+            <CatalogAddModal />
+          </RenderAdd>
+          <RenderEdit>
             <CatalogEditModal />
-          </RenderModal>
+          </RenderEdit>
         </Table.HeaderCell>
       </Table.Row>
     </Table.Footer>

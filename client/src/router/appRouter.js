@@ -7,6 +7,7 @@ import Catalog from '../pages/catalog/catalog';
 import Api from '../pages/api/api';
 import Setting from '../pages/setting/setting';
 import NotFound from '../component/notfound/notFound';
+import CatalogImportModal from '../pages/catalog/catalogComponents/catalogImportModal';
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -16,6 +17,7 @@ const AppRouter = () => (
       <Route exact path="/catalog" component={Catalog} />
       <Route exact path="/api" component={Api} />
       <Route exact path="/setting" component={Setting} />
+      <Route exact path="/catalog/import" component={CatalogImportModal} />
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>

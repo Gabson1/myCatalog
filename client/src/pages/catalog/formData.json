@@ -1,0 +1,33 @@
+{
+  "assetInformation": [
+  {
+    "id": 1,
+    "label": "Gold",
+    "value": "gold"
+  },
+  {
+    "id": 2,
+    "label": "Silver",
+    "value": "silver"
+  },
+  {
+    "id": 3,
+    "label": "Wine",
+    "value": "wine"
+  },
+  {
+    "id": 4,
+    "label": "Stocks",
+    "value": "stocks"
+  },
+  {
+    "id": 5,
+    "label": "Real Estate",
+    "value": "real estate"
+  },
+  {
+    "id": 6,
+    "label": "Watches",
+    "value": "watches"
+  }]
+}

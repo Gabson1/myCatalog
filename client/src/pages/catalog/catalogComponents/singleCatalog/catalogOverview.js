@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Fragment, useEffect } from 'react';
-import { Divider, Grid, Table } from 'semantic-ui-react';
+import { Divider, Table } from 'semantic-ui-react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCatalogsAction } from '../../../../actions';
@@ -12,7 +12,7 @@ import { CatalogFooter } from './catalogFooter';
 import { CatalogRow } from './catalogRow';
 import { NoCatalogs } from '../noCatalogs';
 
-export const SingleCatalog = (props) => {
+const CatalogOverview = () => {
   const dispatch = useDispatch();
   const userId = useSelector(selectCreatorId);
   const catalogs = useSelector(selectCatalogList);
@@ -23,14 +23,18 @@ export const SingleCatalog = (props) => {
 
   return (
     <Fragment>
-      { catalogs && catalogs.length ? catalogs.map(catalogData => (
-        <div style={{ border: '1px solid black' }}>
-          <CatalogInformation {...catalogData} />
+      { catalogs && catalogs.length ? catalogs.map((catalogData, index) => (
+        <div
+          key={`single-catalog-${index}`}
+          style={{ border: '1px solid black' }}
+        >
+          <CatalogInformation assetType={catalogData.assetType} description={catalogData.description} />
           <Divider />
           <Table celled>
             <CatalogHeader />
             { catalogData && catalogData.length && catalogData.assets.map(assetsData => (
               <CatalogRow
+                key={`single-asset-${index}`}
                 assetId={assetsData._id}
                 assetName={assetsData.assetName}
                 assetQuantity={assetsData.assetQuantity}
@@ -38,7 +42,7 @@ export const SingleCatalog = (props) => {
                 totalQuantityPrice={assetsData.totalQuantityPrice}
               />
             ))}
-            <CatalogFooter {...props} />
+            <CatalogFooter />
           </Table>
         </div>
       ))
@@ -46,3 +50,5 @@ export const SingleCatalog = (props) => {
     </Fragment>
   );
 };
+
+export default CatalogOverview;

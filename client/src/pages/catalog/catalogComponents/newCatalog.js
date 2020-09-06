@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import {
   Button, Header, Image, Modal, Form, Divider,
@@ -13,6 +14,7 @@ import '../catalog.css';
 
 const NewCatalog = ({ user }) => {
   const [open, setOpen] = useState(false);
+  const [showCatalogImport, setShowCatalogImport] = useState(false);
   const [assetType, setAssetType] = useState();
   const description = useInput('');
   const dispatch = useDispatch();
@@ -21,9 +23,6 @@ const NewCatalog = ({ user }) => {
     { id: 1, label: 'Gold', value: 'gold' },
     { id: 2, label: 'Silver', value: 'silver' },
     { id: 3, label: 'Wine', value: 'wine' },
-    // { id: 4, label: 'Stocks', value: 'stocks' },
-    // { id: 5, label: 'Real Estate', value: 'real estate' },
-    // { id: 6, label: 'Watches', value: 'watches' },
   ];
 
   const handleCloseModal = () => {
@@ -40,6 +39,8 @@ const NewCatalog = ({ user }) => {
     dispatch(addNewCatalogAction(newCatalogData));
     setOpen(false);
   };
+
+  if (showCatalogImport) return <Redirect to="/catalog/import" exact strict />;
 
   return (
     <Modal
@@ -78,7 +79,7 @@ const NewCatalog = ({ user }) => {
               fluid
               icon="table"
               iconPosition="left"
-              placeholder="Description of your catalog"
+              placeholder="Choose the description of your catalog"
               type="text"
               value={description.value}
               onChange={description.onChange}
@@ -86,11 +87,21 @@ const NewCatalog = ({ user }) => {
           </Form>
         </Modal.Description>
       </Modal.Content>
-
       <Modal.Actions>
-        <Button color="black" onClick={() => handleCloseModal()}>
-          Cancel
-        </Button>
+        <Button
+          color="purple"
+          floated="left"
+          content="Import existing catalogs"
+          onClick={() => setShowCatalogImport(true)}
+        />
+        <Button
+          color="black"
+          content="Cancel"
+          labelPosition="right"
+          icon="cancel"
+          onClick={() => handleCloseModal()}
+          negative
+        />
         <Button
           content="Save"
           labelPosition="right"

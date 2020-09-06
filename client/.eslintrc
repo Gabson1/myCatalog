@@ -92,7 +92,7 @@
       "no-else-return": "error",
       "no-const-assign": "error",
       "no-useless-escape": "error",
-      "no-underscore-dangle": "error",
+      "no-underscore-dangle": "off",
       "no-multiple-empty-lines": "error",
       "max-len": ["error", { "code": 170 }],
       "id-length": ["error", {"min": 3, "exceptions": ["_", "ref", "alt", "fs", "App", "app", "API", "api", "sap", "HOC", "log", "get", "url"], "properties": "never"}],

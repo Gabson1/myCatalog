@@ -77,3 +77,17 @@ export const getCatalogByIdService = async (req, res) => {
     throw new Error(err.message);
   }
 };
+
+export const importCatalogsService = async (req, res) => {
+  try {
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+export const exportCatalogsService = async (req, res) => {
+  try {
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};

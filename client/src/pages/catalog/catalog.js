@@ -1,37 +1,15 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+
 import { Grid } from 'semantic-ui-react';
-
-import {
-  selectCreatorId,
-  selectCatalogList,
-  // selectCatalogEditing,
-  // selectCatalogListError,
-  // selectCatalogListIsFetching
-} from '../../selectors/catalogSelectors';
-
-import { getAllCatalogsAction } from '../../actions';
 
 import SideBar from '../../component/sidebar/sidebar';
 import AssetNewTable from './catalogComponents/newCatalog';
-import { NoCatalogs } from './catalogComponents/noCatalogs';
-import { SingleCatalog } from './catalogComponents/singleCatalog/singleCatalog';
+import CatalogOverview from './catalogComponents/singleCatalog/catalogOverview';
 
 import './catalog.css';
 
 const Catalog = () => {
-  const dispatch = useDispatch();
-  const userId = useSelector(selectCreatorId);
-  const catalogs = useSelector(selectCatalogList);
-  // const editing = useSelector(selectCatalogEditing);
-  // const fetching = useSelector(selectCatalogListIsFetching);
-  // const error = useSelector(selectCatalogListError);
-
   const columnCount = 2;
-
-  useEffect(() => {
-    dispatch(getAllCatalogsAction(userId));
-  }, [dispatch, userId]);
 
   return (
     <main className="page">
@@ -46,7 +24,7 @@ const Catalog = () => {
           </Grid.Column>
           <div id="modal-root" />
           <Grid columns={columnCount} className="catalogsWrapper">
-            <SingleCatalog />
+            <CatalogOverview />
           </Grid>
         </Grid>
       </section>

@@ -38,3 +38,19 @@ export const editCatalogRequest = async () => {
     throw new Error(`Something went wrong... ${err.message}`);
   }
 };
+
+export const importCatalogRequest = async (file) => {
+  try {
+    return axios.post(`${fullApiCatalogRoute}/catalog/import`, file);
+  } catch (err) {
+    throw new Error(`Something went wrong... ${err.message}`);
+  }
+};
+
+export const exportCatalogRequest = async (userId) => {
+  try {
+    return axios.get(`${fullApiCatalogRoute}/catalog/export`, { headers: { userId } });
+  } catch (err) {
+    throw new Error(`Something went wrong... ${err.message}`);
+  }
+};

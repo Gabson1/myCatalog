@@ -1,7 +1,7 @@
 import {
   addNewCatalogService,
   deleteCatalogService,
-  getAllCatalogsService,
+  getAllCatalogsService, importCatalogsService,
   updateCatalogService,
 } from '../services';
 
@@ -70,6 +70,32 @@ export const getAllCatalogs = async (req, res) => {
       statusCode: result.statusCode,
       message: result.message,
       catalogs: result.catalogs,
+    });
+  } catch (err) {
+    res.json({ statusCode: 500, message: err, contentType: 'application/json' });
+  }
+};
+
+export const importCatalogs = async (req, res) => {
+  try {
+    const result = await importCatalogsService(req, res);
+    res.json({
+      success: result.success,
+      statusCode: result.statusCode,
+      message: result.message,
+    });
+  } catch (err) {
+    res.json({ statusCode: 500, message: err, contentType: 'application/json' });
+  }
+};
+
+export const exportCatalogs = async (req, res) => {
+  try {
+    const result = await exportCatalogsService(req, res);
+    res.json({
+      success: result.success,
+      statusCode: result.statusCode,
+      message: result.message,
     });
   } catch (err) {
     res.json({ statusCode: 500, message: err, contentType: 'application/json' });
