@@ -7,14 +7,12 @@ import '../catalog.css';
 const CatalogEditHeader = () => (
   <Table.Header>
     <Table.Row>
-      <Table.HeaderCell>Catalog ID</Table.HeaderCell>
-      <Table.HeaderCell>Asset Type</Table.HeaderCell>
-      <Table.HeaderCell>Catalog Description</Table.HeaderCell>
       <Table.HeaderCell>Asset ID</Table.HeaderCell>
       <Table.HeaderCell>Asset Name</Table.HeaderCell>
       <Table.HeaderCell>Asset Quantity</Table.HeaderCell>
       <Table.HeaderCell>Single Asset Price</Table.HeaderCell>
       <Table.HeaderCell>Total Asset Price</Table.HeaderCell>
+      <Table.HeaderCell />
     </Table.Row>
   </Table.Header>
 );

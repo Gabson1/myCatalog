@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
 
-import './catalogEdit.css';
+import './catalogOverview.css';
 
 const CatalogOverviewBody = ({
   catalogId,

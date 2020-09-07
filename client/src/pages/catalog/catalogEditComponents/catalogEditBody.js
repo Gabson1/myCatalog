@@ -1,12 +1,12 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
 
-import '../../catalog.css';
+import './catalogEdit.css';
 
-const CatalogRow = ({
+const CatalogOverviewBody = ({
   assetId,
   assetName,
-  assetQuantity,
+  assetsQuantity,
   singleQuantityPrice,
   totalQuantityPrice,
 }) => (
@@ -14,11 +14,12 @@ const CatalogRow = ({
     <Table.Row>
       <Table.Cell>{assetId}</Table.Cell>
       <Table.Cell>{assetName}</Table.Cell>
-      <Table.Cell>{assetQuantity}</Table.Cell>
+      <Table.Cell>{assetsQuantity}</Table.Cell>
       <Table.Cell>{singleQuantityPrice}</Table.Cell>
       <Table.Cell>{totalQuantityPrice}</Table.Cell>
+      <Table.Cell>CHECKBOX</Table.Cell>
     </Table.Row>
   </Table.Body>
 );
 
-export default CatalogRow;
+export default CatalogOverviewBody;

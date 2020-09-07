@@ -1,11 +1,11 @@
 import React from 'react';
 
-import '../catalog.css';
+import './catalog.css';
 
 const NoCatalogs = () => (
   <div>
     <p>There seems to be nothing here yet</p>
-    <p>Click the button on the left to create your first table</p>
+    <p>Click the button above to create your first catalog</p>
   </div>
 );
 
