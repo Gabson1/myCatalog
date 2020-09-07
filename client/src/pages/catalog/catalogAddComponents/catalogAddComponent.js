@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Button, Divider } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 
 import { selectCreatorId } from '../../../selectors/catalogSelectors';
 
@@ -9,8 +9,9 @@ import { addNewCatalogAction } from '../../../actions';
 import useInput from '../../../hooks/useInput';
 
 import SideBar from '../../../component/sidebar/sidebar';
+import BackArrow from '../../../component/arrow/arrow';
+
 import CatalogImport from './catalogImport';
-import CatalogOverviewExport from '../catalogOverviewComponents/catalogOverviewExport';
 
 import '../catalog.css';
 
@@ -42,6 +43,7 @@ const NewCatalog = () => {
         <div id="headerContent">
           <h2>Add a new catalog</h2>
         </div>
+        <BackArrow />
         <div style={{ display: 'flex' }}>
           <Form style={{ marginTop: '20px', width: '50%' }} onSubmit={handleSaveModal}>
             <Form.Group inline>

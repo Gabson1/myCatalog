@@ -28,10 +28,6 @@
     transition: transform .5s ease-in-out;
 }
 
-.page #pageContent #catalogContent .newCatalogButton:hover {
-    transform: scale(1.5);
-}
-
 .page #pageContent #catalogContent .catalogsWrapper {
     width: 80%;
 }
