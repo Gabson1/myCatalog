@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import React, { Fragment, useEffect } from 'react';
 import { Divider, Table } from 'semantic-ui-react';
 
@@ -28,7 +27,10 @@ const CatalogOverview = () => {
           key={`single-catalog-${index}`}
           style={{ border: '1px solid black' }}
         >
-          <CatalogInformation assetType={catalogData.assetType} description={catalogData.description} />
+          <CatalogInformation
+            assetType={catalogData.assetType}
+            description={catalogData.description}
+          />
           <Divider />
           <Table celled>
             <CatalogHeader />

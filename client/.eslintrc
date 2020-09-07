@@ -7,6 +7,7 @@
     "flowtype"
 ],
   "globals": {
+    "_id": true,
     "Blob": true,
     "document": true,
     "store": true,

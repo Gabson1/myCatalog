@@ -18,7 +18,7 @@ export const addNewCatalogAction = newCatalogData => async (dispatch) => {
     const res = await addNewCatalogRequest(newCatalogData);
     dispatch({
       type: ADD_CATALOG_SUCCESS,
-      payload: res.config.data,
+      payload: res.data.catalogs,
     });
   } catch (err) {
     dispatch({
@@ -33,7 +33,7 @@ export const deleteCatalogAction = catalogId => async (dispatch) => {
     const res = await deleteCatalogRequest(catalogId);
     dispatch({
       type: DELETE_CATALOG_SUCCESS,
-      payload: res.config.data,
+      payload: res.data.catalogs,
     });
   } catch (err) {
     dispatch({
@@ -46,6 +46,7 @@ export const deleteCatalogAction = catalogId => async (dispatch) => {
 export const getAllCatalogsAction = userId => async (dispatch) => {
   try {
     const res = await getAllCatalogsRequest(userId);
+
     dispatch({
       type: GET_CATALOGS_SUCCESS,
       payload: res.data.catalogs,

@@ -19,7 +19,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        catalogs: payload,
+        editing: false,
       };
     case DELETE_CATALOG_SUCCESS:
       return {

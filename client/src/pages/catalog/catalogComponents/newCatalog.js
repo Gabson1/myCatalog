@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Button, Header, Image, Modal, Form, Divider,
 } from 'semantic-ui-react';
@@ -8,16 +8,19 @@ import {
 import { addNewCatalogAction } from '../../../actions';
 import useInput from '../../../hooks/useInput';
 
+import { selectCreatorId } from '../../../selectors/catalogSelectors';
+
 import plusIcon from '../../../assets/svg/plus.svg';
 
 import '../catalog.css';
 
-const NewCatalog = ({ user }) => {
+const NewCatalog = () => {
   const [open, setOpen] = useState(false);
   const [showCatalogImport, setShowCatalogImport] = useState(false);
   const [assetType, setAssetType] = useState();
   const description = useInput('');
   const dispatch = useDispatch();
+  const userId = useSelector(selectCreatorId);
 
   const assetInformation = [
     { id: 1, label: 'Gold', value: 'gold' },
@@ -34,7 +37,7 @@ const NewCatalog = ({ user }) => {
     const newCatalogData = {
       assetType,
       description: description.value,
-      userId: user,
+      userId,
     };
     dispatch(addNewCatalogAction(newCatalogData));
     setOpen(false);
@@ -114,9 +117,4 @@ const NewCatalog = ({ user }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  // eslint-disable-next-line no-underscore-dangle
-  user: state.user.user._id,
-});
-
-export default connect(mapStateToProps)(NewCatalog);
+export default NewCatalog;
