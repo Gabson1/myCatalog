@@ -7,8 +7,9 @@ import {
 
 const initialState = {
   loading: true,
-  catalogs: null,
+  catalogs: [],
   editing: false,
+  catalogEditId: null,
 };
 
 export default function (state = initialState, action) {
@@ -30,12 +31,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        catalogs: payload,
+        catalogs: [...payload],
       };
     case SET_CATALOG_EDITING:
       return {
         ...state,
-        editing: payload,
+        editing: payload.editMode,
+        catalogEditId: payload.catalogId,
       };
     default:
       return state;

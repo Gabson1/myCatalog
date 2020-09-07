@@ -17,7 +17,10 @@ export const signupUser = async (req, res) => {
 
     // Send a json success message
     res.json({
-      statusCode: 200, success: true, message: 'Registration successful!', data: payload,
+      statusCode: 200,
+      success: true,
+      message: 'Registration successful!',
+      data: payload,
     });
   } catch (err) {
     // If anything goes wrong, return a json error
@@ -39,11 +42,14 @@ export const signupUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   try {
     // Call the loginUserService
-    const token = await loginUserService(res, req.body);
+    const payload = await loginUserService(res, req.body);
 
     // Send a json success message
     res.json({
-      statusCode: 200, success: true, message: `${req.body.email} has successfully logged in`, token,
+      statusCode: 200,
+      success: true,
+      message: `${req.body.email} has successfully logged in`,
+      data: payload,
     });
   } catch (err) {
     // If anything goes wrong, return a json error

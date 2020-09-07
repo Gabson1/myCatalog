@@ -1,11 +1,15 @@
 import React from 'react';
+
 import { Table } from 'semantic-ui-react';
 
-import '../../catalog.css';
+import '../catalog.css';
 
-export const CatalogHeader = () => (
+const CatalogEditHeader = () => (
   <Table.Header>
     <Table.Row>
+      <Table.HeaderCell>Catalog ID</Table.HeaderCell>
+      <Table.HeaderCell>Asset Type</Table.HeaderCell>
+      <Table.HeaderCell>Catalog Description</Table.HeaderCell>
       <Table.HeaderCell>Asset ID</Table.HeaderCell>
       <Table.HeaderCell>Asset Name</Table.HeaderCell>
       <Table.HeaderCell>Asset Quantity</Table.HeaderCell>
@@ -14,3 +18,5 @@ export const CatalogHeader = () => (
     </Table.Row>
   </Table.Header>
 );
+
+export default CatalogEditHeader;

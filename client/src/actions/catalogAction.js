@@ -7,8 +7,8 @@ import {
   ADD_CATALOG_SUCCESS, ADD_CATALOG_FAILURE,
   DELETE_CATALOG_SUCCESS, DELETE_CATALOG_FAILURE,
   GET_CATALOGS_SUCCESS, GET_CATALOGS_FAILURE,
-  // SET_CATALOG_EDITING, STOP_CATALOG_EDITING,
-  EDIT_CATALOG_SUCCESS, EDIT_CATALOG_FAILURE,
+  SET_CATALOG_EDITING, STOP_CATALOG_EDITING,
+  // EDIT_CATALOG_SUCCESS, EDIT_CATALOG_FAILURE,
   IMPORT_CATALOG_SUCCESS, IMPORT_CATALOG_FAILURE,
   EXPORT_CATALOG_SUCCESS, EXPORT_CATALOG_FAILURE,
 } from './actionTypes';
@@ -59,16 +59,15 @@ export const getAllCatalogsAction = userId => async (dispatch) => {
   }
 };
 
-export const editCatalogDataAction = newCatalogData => async (dispatch) => {
+export const editCatalogModeAction = (editMode, catalogId) => async (dispatch) => {
   try {
-    const res = await editCatalogRequest(newCatalogData);
     dispatch({
-      type: EDIT_CATALOG_SUCCESS,
-      payload: res.data.catalog,
+      type: SET_CATALOG_EDITING,
+      payload: { editMode, catalogId },
     });
   } catch (err) {
     dispatch({
-      type: EDIT_CATALOG_FAILURE,
+      type: STOP_CATALOG_EDITING,
       payload: err.message,
     });
   }

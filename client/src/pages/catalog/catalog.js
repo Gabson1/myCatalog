@@ -1,14 +1,18 @@
 import React from 'react';
-
+import { useSelector } from 'react-redux';
 import { Grid } from 'semantic-ui-react';
 
+import { selectCatalogEditing } from '../../selectors/catalogSelectors';
+
 import SideBar from '../../component/sidebar/sidebar';
-import AssetNewTable from './catalogComponents/newCatalog';
-import CatalogOverview from './catalogComponents/singleCatalog/catalogOverview';
+
+import CatalogEditComponent from './catalogEditComponents/catalogEditComponent';
+import CatalogOverviewComponent from './catalogOverviewComponents/catalogOverviewComponent';
 
 import './catalog.css';
 
 const Catalog = () => {
+  const isEditMode = useSelector(selectCatalogEditing);
   const columnCount = 2;
 
   return (
@@ -18,15 +22,15 @@ const Catalog = () => {
         <div id="headerContent">
           <h2>Catalog: An overview of your assets</h2>
         </div>
-        <Grid id="catalogContent" columns={columnCount}>
-          <Grid.Column width={2}>
-            <AssetNewTable />
-          </Grid.Column>
-          <div id="modal-root" />
-          <Grid columns={columnCount} className="catalogsWrapper">
-            <CatalogOverview />
-          </Grid>
-        </Grid>
+        { isEditMode
+          ? (
+            <Grid id="catalogContent" columns={columnCount}>
+              <div id="modal-root" />
+              <Grid columns={columnCount} className="catalogsWrapper">
+                <CatalogEditComponent />
+              </Grid>
+            </Grid>
+          ) : <CatalogOverviewComponent /> }
       </section>
     </main>
   );
