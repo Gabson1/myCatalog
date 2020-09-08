@@ -1,4 +1,5 @@
 import Catalog from '../models/catalogModel';
+import mongoose from 'mongoose';
 
 export const addNewCatalogService = async (req) => {
   const {
@@ -25,40 +26,23 @@ export const addNewCatalogService = async (req) => {
   }
 };
 
-export const editCatalogAssetsService = async (req) => {
+export const addAssetService = async (req) => {
   const {
     catalogId,
     newAssetData,
   } = req.body;
 
   try {
-    const newAsset = await Catalog.findOneAndUpdate(
+    const newAsset = await Catalog.findByIdAndUpdate(
       { _id: catalogId },
-      { $push: { assets: newAssetData } },
-    );
+      { $addToSet: { assets: newAssetData } },
+    ).exec();
 
     const asset = await newAsset.save();
 
-    console.log('my asset: ', asset);
     return {
       success: true, statusCode: 200, message: 'Asset added successfully', asset,
     };
-  } catch (err) {
-    throw new Error(err.message);
-  }
-};
-
-export const deleteCatalogService = async (req, res) => {
-  const funcName = 'deleteCatalogService';
-
-  try {
-    const catalog = await Catalog.findById(req.params.id);
-
-    if (!catalog) {
-      return res.status(404).json({ msg: 'Catalog not found' });
-    }
-
-    await catalog.remove();
   } catch (err) {
     throw new Error(err.message);
   }
@@ -82,18 +66,41 @@ export const getAllCatalogsService = async (req, res) => {
   }
 };
 
-export const getCatalogByIdService = async (req, res) => {
-  const funcName = 'getCatalogByIdService';
+export const editAssetService = async (req) => {
+  const {
+    assetId,
+    editAssetData,
+  } = req.body;
 
   try {
-    const catalog = await Catalog.findById(req.params.id);
-    if (!catalog) {
-      return res.status(404).json({ msg: 'Catalog not found' });
-    }
+    const condition = { 'assets._id': assetId };
+    // const condition2 = { 'assets._id': mongoose.types.ObjectId(assetId) };
+    const update = {
+      assetName: editAssetData.assetName,
+      assetQuantity: editAssetData.assetQuantity,
+      singleQuantityPrice: editAssetData.singleQuantityPrice,
+      totalQuantityPrice: editAssetData.totalQuantityPrice,
+    };
+    const options = { new: true };
 
-    res.status(201).json({ catalog });
+    const newAsset = await Catalog.findOneAndUpdate(condition, { $push: update }, options).exec();
+
+    return {
+      success: true, statusCode: 200, message: 'Asset added successfully', newAsset,
+    };
   } catch (err) {
-    throw new Error(err.message);
+    console.log(err);
+  }
+};
+
+export const deleteDocumentService = async (req) => {
+  const { id } = req.body;
+  try {
+    await Catalog.deleteOne({ id }).exec();
+
+    return { success: true, statusCode: 200, message: 'Document removed successfully' };
+  } catch (err) {
+    console.log('err  ', err);
   }
 };
 

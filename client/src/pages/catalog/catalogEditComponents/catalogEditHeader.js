@@ -12,7 +12,6 @@ const CatalogEditHeader = () => (
       <Table.HeaderCell>Asset Quantity</Table.HeaderCell>
       <Table.HeaderCell>Single Asset Price</Table.HeaderCell>
       <Table.HeaderCell>Total Asset Price</Table.HeaderCell>
-      <Table.HeaderCell />
     </Table.Row>
   </Table.Header>
 );

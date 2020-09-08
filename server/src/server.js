@@ -19,7 +19,7 @@ const host = process.env.HOST || 'localhost';
 
 // -------------------- Initialize middlewares -------------------- //
 server.use(express.json());
-server.use(express.urlencoded({ extended: false }));
+server.use(express.urlencoded({ extended: true }));
 
 server.use(cors());
 server.use(morgan('dev'));

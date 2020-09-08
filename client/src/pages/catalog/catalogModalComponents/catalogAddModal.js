@@ -6,7 +6,7 @@ import useInput from '../../../hooks/useInput';
 
 import { selectCatalogId } from '../../../selectors/catalogSelectors';
 
-import { editCatalogAssetsActions } from '../../../actions';
+import { addAssetAction } from '../../../actions';
 
 const CatalogAddModal = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const CatalogAddModal = () => {
       totalQuantityPrice: totalQuantityPrice.value,
     };
 
-    dispatch(editCatalogAssetsActions(catalogId, newAssetData));
+    dispatch(addAssetAction(catalogId, newAssetData));
   };
 
   return (

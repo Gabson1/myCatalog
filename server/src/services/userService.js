@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 
 import User from '../models/userModel';
 import { jwtSign } from '../middlewares';
+import Catalog from '../models/catalogModel';
 
 export const createUserService = async (res, { username, email, password }) => {
   // funcName is used for debugging purposes
@@ -68,6 +69,29 @@ export const loginUserService = async (res, { email, password }) => {
 
     return payload;
     // If anything goes wrong, return an error
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(`Server error: ${funcName}`);
+  }
+};
+
+export const updateUserProfileService = async (req, res) => {
+  const funcName = 'updateUserProfileService';
+
+  const { newUserData, userId } = req.body;
+  try {
+    const condition = { _id: userId };
+    const update = {
+      username: newUserData.username,
+      email: newUserData.email,
+    };
+    const options = { new: true };
+
+    const updatedUser = await Catalog.findOneAndUpdate(condition, { $push: update }, options).exec();
+
+    return {
+      success: true, statusCode: 200, message: 'User updated successfully', updatedUser,
+    };
   } catch (err) {
     console.error(err.message);
     res.status(500).send(`Server error: ${funcName}`);

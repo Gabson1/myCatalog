@@ -1,15 +1,21 @@
-import React from 'react';
-import { Divider, Grid, Image } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Divider, Grid } from 'semantic-ui-react';
 
 import SideBar from '../../component/sidebar/sidebar';
 import { SettingOptions } from './settingComponents/settingOptions';
 import { SettingProfile } from './settingComponents/options/settingProfile';
+import { SettingPrivacy } from './settingComponents/options/settingPrivacy';
 
-import avatar from '../../assets/svg/avatar.svg';
 import './setting.css';
 
 const Setting = () => {
+  const [filterType, setFilterType] = useState('User Profile');
   const itemWidth = 6;
+
+  const handleFilterTypeSetter = (eve) => {
+    const filter = eve.target.innerText;
+    setFilterType(filter);
+  };
 
   return (
     <main className="page">
@@ -22,13 +28,10 @@ const Setting = () => {
           <Grid.Column className="gridItemWrapper" width={itemWidth / 3}>
             <h4>Setting options</h4>
             <Divider />
-            <SettingOptions />
+            <SettingOptions clickText={eve => handleFilterTypeSetter(eve)} />
           </Grid.Column>
           <Grid.Column className="gridItemWrapper" width={itemWidth}>
-            <h4>settingOption</h4>
-            <Divider />
-            <Image src={avatar} size="tiny" ui />
-            <SettingProfile />
+            { filterType === 'User Profile' ? <SettingProfile /> : <SettingPrivacy /> }
           </Grid.Column>
         </Grid>
       </section>

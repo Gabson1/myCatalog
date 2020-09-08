@@ -36,6 +36,10 @@
     gap: 10px;
 }
 
-.page #pageContent #apiContent .gridItemWrapper .componentWrapper .items{
+.page #pageContent #apiContent .gridItemWrapper .componentWrapper .items {
     border: 1px solid gray;
+}
+
+.page #pageContent #apiContent .gridItemWrapper .componentWrapper .items .clickableText {
+    cursor: pointer;
 }

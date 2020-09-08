@@ -1,22 +1,14 @@
 import React from 'react';
-import _ from 'lodash';
 
 import '../setting.css';
 
-const settingOptions = [
-  'setting1',
-  'setting2',
-  'setting3',
-  'setting4',
-];
-
-export const SettingOptions = () => (
+export const SettingOptions = ({ clickText }) => (
   <div className="componentWrapper">
-    {settingOptions.map(items => (
-      <div color={items} key={items} className="items">
-        {_.capitalize(items)}
-        <p>some dummy texts</p>
-      </div>
-    ))}
+    <div className="items">
+      <p className="clickableText" onClick={clickText}>User Profile</p>
+    </div>
+    <div className="items">
+      <p className="clickableText" onClick={clickText}>Privacy Settings</p>
+    </div>
   </div>
 );

@@ -9,15 +9,18 @@ const CatalogOverviewBody = ({
   assetsQuantity,
   singleQuantityPrice,
   totalQuantityPrice,
+  clickRow,
 }) => (
   <Table.Body>
-    <Table.Row>
+    <Table.Row
+      className="clickableTableRow"
+      onClick={clickRow}
+    >
       <Table.Cell>{assetId}</Table.Cell>
       <Table.Cell>{assetName}</Table.Cell>
       <Table.Cell>{assetsQuantity}</Table.Cell>
       <Table.Cell>{singleQuantityPrice}</Table.Cell>
       <Table.Cell>{totalQuantityPrice}</Table.Cell>
-      <Table.Cell>CHECKBOX</Table.Cell>
     </Table.Row>
   </Table.Body>
 );

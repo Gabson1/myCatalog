@@ -25,4 +25,14 @@ router.post(
   controller.loginUser,
 );
 
+// @route    POST user/update
+// @desc     Update user profile
+// @access   Public
+router.post(
+  '/update',
+  // validation.loginUserValidation,
+  // validation.genericValidator,
+  controller.updateUserProfile,
+);
+
 export default router;

@@ -3,12 +3,11 @@ import { Button, Icon } from 'semantic-ui-react';
 
 import { useModal } from '../../../hooks/useModal';
 
-import CatalogEditModal from '../catalogModalComponents/catalogEditModal';
+import CatalogExportModal from '../catalogModalComponents/catalogExportModal';
 
 import './catalogEdit.css';
 
-const CatalogEditFooter = () => {
-  const { show: showEdit, RenderModal: RenderEdit } = useModal();
+const CatalogEditFooter = ({ clickDelete }) => {
   const { show: showExport, RenderModal: RenderExport } = useModal();
 
   return (
@@ -17,16 +16,24 @@ const CatalogEditFooter = () => {
         floated="right"
         icon
         labelPosition="left"
-        primary
+        color="red"
         size="small"
-        onClick={showEdit}
+        onClick={clickDelete}
       >
-        <Icon name="plus" />
-        Edit your catalog
+        <Icon name="angle double down" />
+        Delete this catalog
       </Button>
-      <RenderEdit>
-        <CatalogEditModal />
-      </RenderEdit>
+      <Button
+        floated="right"
+        icon
+        labelPosition="left"
+        secondary
+        size="small"
+        onClick={showExport}
+      >
+        <Icon name="angle double down" />
+        Export your catalog
+      </Button>
       <RenderExport>
         <CatalogExportModal />
       </RenderExport>

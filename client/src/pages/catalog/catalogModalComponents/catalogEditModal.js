@@ -1,37 +1,77 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Grid, Input, Label } from 'semantic-ui-react';
 
-const CatalogEditModal = () => {
-  const catalogFields = [
-    { id: 1, key: 'assetName' },
-    { id: 2, key: 'assetQuantity' },
-    { id: 3, key: 'singleQuantityPrice' },
-    { id: 4, key: 'totalQuantityPrice' },
-  ];
+import useInput from '../../../hooks/useInput';
 
-  const handleAddCatalog = useCallback(() => {
-    // handle saving new asset data here
-  }, []);
+import { selectAssetId } from '../../../selectors/catalogSelectors';
+
+import { editAssetAction, deleteDocumentAction } from '../../../actions';
+
+const CatalogEditModal = () => {
+  const dispatch = useDispatch();
+  const assetId = useSelector(selectAssetId);
+  const assetName = useInput('');
+  const assetQuantity = useInput('');
+  const singleQuantityPrice = useInput('');
+  const totalQuantityPrice = useInput('');
+
+  const handleEditAsset = () => {
+    const editAssetData = {
+      assetName: assetName.value,
+      assetQuantity: assetQuantity.value,
+      singleQuantityPrice: singleQuantityPrice.value,
+      totalQuantityPrice: totalQuantityPrice.value,
+    };
+
+    dispatch(editAssetAction(assetId, editAssetData));
+  };
+
+  const handleDeleteAsset = (docId) => {
+    dispatch(deleteDocumentAction(docId));
+  };
 
   return (
     <Grid columns={4}>
+      <p>
+        Currently updating:
+        <strong>{assetId}</strong>
+      </p>
       <Grid.Row>
-        { catalogFields.map(catalogField => (
-          <Grid.Column id={`catalog-field-${catalogField.id}`} key={catalogField.id}>
-            <Label>{catalogField.key}</Label>
-            <Input />
-          </Grid.Column>
-        ))}
+        <Grid.Column>
+          <Label>Asset Name</Label>
+          <Input value={assetName.value} onChange={assetName.onChange} />
+        </Grid.Column>
+        <Grid.Column>
+          <Label>Asset Quantity</Label>
+          <Input value={assetQuantity.value} onChange={assetQuantity.onChange} />
+        </Grid.Column>
+        <Grid.Column>
+          <Label>Single Quantity Price</Label>
+          <Input value={singleQuantityPrice.value} onChange={singleQuantityPrice.onChange} />
+        </Grid.Column>
+        <Grid.Column>
+          <Label>Total Quantity Price</Label>
+          <Input value={totalQuantityPrice.value} onChange={totalQuantityPrice.onChange} />
+        </Grid.Column>
       </Grid.Row>
       <Grid.Row>
         <Grid.Column>
           <Button
             color="teal"
             fluid
-            onClick={() => console.log('save me')}
+            onClick={() => handleEditAsset()}
           >
             Save Data
+          </Button>
+        </Grid.Column>
+        <Grid.Column>
+          <Button
+            color="red"
+            fluid
+            onClick={() => handleDeleteAsset(assetId)}
+          >
+            Delete Asset
           </Button>
         </Grid.Column>
       </Grid.Row>

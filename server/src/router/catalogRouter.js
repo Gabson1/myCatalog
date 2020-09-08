@@ -22,7 +22,16 @@ router.post(
   '/delete',
   // verify whether user has gone through the full ui of deleting a singleCatalog
   // clicking on the delete button && confirming the popup modal
-  controller.deleteCatalog,
+  controller.deleteDocument,
+);
+
+// @route    POST catalog/add/asset
+// @desc     Add a new asset to a catalog
+// @access   Private
+router.post(
+  '/add/asset',
+  // validation.isValidAssetFields,
+  controller.addAsset,
 );
 
 // @route    POST catalog/edit/asset
@@ -31,7 +40,7 @@ router.post(
 router.post(
   '/edit/asset',
   // validation.isValidAssetFields,
-  controller.editCatalogAssets,
+  controller.editAsset,
 );
 
 // @route    GET catalog/

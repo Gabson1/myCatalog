@@ -1,14 +1,17 @@
 import {
-  addNewCatalogRequest, deleteCatalogRequest,
-  getAllCatalogsRequest, editCatalogAssetRequest,
+  addNewCatalogRequest, deleteDocumentRequest,
+  getAllCatalogsRequest, addAssetRequest,
   importCatalogRequest, exportCatalogRequest,
+  editAssetRequest,
 } from '../effects';
 import {
   ADD_CATALOG_SUCCESS, ADD_CATALOG_FAILURE,
   DELETE_CATALOG_SUCCESS, DELETE_CATALOG_FAILURE,
   GET_CATALOGS_SUCCESS, GET_CATALOGS_FAILURE,
   SET_CATALOG_EDITING, STOP_CATALOG_EDITING,
-  EDIT_CATALOG_SUCCESS, EDIT_CATALOG_FAILURE,
+  SET_ASSET_EDITING, STOP_ASSET_EDITING,
+  ADD_ASSET_SUCCESS, ADD_ASSET_FAILURE,
+  EDIT_ASSET_SUCCESS, EDIT_ASSET_FAILURE,
   IMPORT_CATALOG_SUCCESS, IMPORT_CATALOG_FAILURE,
   EXPORT_CATALOG_SUCCESS, EXPORT_CATALOG_FAILURE,
 } from './actionTypes';
@@ -64,19 +67,53 @@ export const editCatalogModeAction = (editMode, catalogId) => async (dispatch) =
   }
 };
 
-// This action send a post request to update the assets of a specified catalog and
+// This action send a post request to insert a new asset for a specified catalog and
 // updates the store with the new asset documents
-export const editCatalogAssetsActions = (catalogId, newAssetData) => async (dispatch) => {
+export const addAssetAction = (catalogId, newAssetData) => async (dispatch) => {
   try {
-    const res = await editCatalogAssetRequest(catalogId, newAssetData);
+    const res = await addAssetRequest(catalogId, newAssetData);
 
     dispatch({
-      type: EDIT_CATALOG_SUCCESS,
+      type: ADD_ASSET_SUCCESS,
       payload: res.data.catalogs.assets,
     });
   } catch (err) {
     dispatch({
-      type: EDIT_CATALOG_FAILURE,
+      type: ADD_ASSET_FAILURE,
+      payload: err.message,
+    });
+  }
+};
+
+// This action sets the 'editing' state of the application to true and
+// updates the store with the assetId which is being edited
+export const editAssetModeAction = (editMode, assetId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: SET_ASSET_EDITING,
+      payload: { editMode, assetId },
+    });
+  } catch (err) {
+    dispatch({
+      type: STOP_ASSET_EDITING,
+      payload: err.message,
+    });
+  }
+};
+
+// This action send a post request to update the assets of a specified catalog and
+// updates the store with the new asset documents
+export const editAssetAction = (assetId, editAssetData) => async (dispatch) => {
+  try {
+    const res = await editAssetRequest(assetId, editAssetData);
+
+    dispatch({
+      type: EDIT_ASSET_SUCCESS,
+      payload: res.data.catalogs.assets,
+    });
+  } catch (err) {
+    dispatch({
+      type: EDIT_ASSET_FAILURE,
       payload: err.message,
     });
   }
@@ -84,9 +121,9 @@ export const editCatalogAssetsActions = (catalogId, newAssetData) => async (disp
 
 // This action send a post request to remove a catalog for a specified user and
 // updates the store with the updated catalog collection
-export const deleteCatalogAction = catalogId => async (dispatch) => {
+export const deleteDocumentAction = docId => async (dispatch) => {
   try {
-    const res = await deleteCatalogRequest(catalogId);
+    const res = await deleteDocumentRequest(docId);
     dispatch({
       type: DELETE_CATALOG_SUCCESS,
       payload: res.data.catalogs,

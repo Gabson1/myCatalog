@@ -16,7 +16,10 @@
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 85%;
+    position: absolute;
+    left: 200px;
+    bottom: 400px;
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
