@@ -14,6 +14,7 @@ const catalogSchema = new Schema({
     // assetApiPricePP: { type: Number, required: false, ref: 'Api' },
     // assetApiPriceT: { type: Number, required: false, ref: 'Api' },
   }],
+  // createdAt: { type: Number, timestamps: true, name: String },
 });
 
 module.exports = mongoose.model('Catalog', catalogSchema);

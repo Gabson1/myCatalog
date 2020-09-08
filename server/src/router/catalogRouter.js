@@ -25,15 +25,13 @@ router.post(
   controller.deleteCatalog,
 );
 
-// @route    POST catalog/update
-// @desc     Update a new singleCatalog
+// @route    POST catalog/edit/asset
+// @desc     Update the assets of a catalog
 // @access   Private
 router.post(
-  '/update',
-  // validate the entry
-  // what is the user updating?
-  // - assetType of singleCatalog? description of singleCatalog? asset entry within singleCatalog?
-  controller.updateCatalog,
+  '/edit/asset',
+  // validation.isValidAssetFields,
+  controller.editCatalogAssets,
 );
 
 // @route    GET catalog/

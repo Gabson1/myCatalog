@@ -6,7 +6,7 @@ import { selectCreatorId, selectCatalogList } from '../../../selectors/catalogSe
 
 import '../catalog.css';
 
-const CatalogOverviewExport = () => {
+const CatalogExportModal = () => {
   const dispatch = useDispatch();
   const catalogs = useSelector(selectCatalogList);
   const userId = useSelector(selectCreatorId);
@@ -27,4 +27,4 @@ const CatalogOverviewExport = () => {
   );
 };
 
-export default CatalogOverviewExport;
+export default CatalogExportModal;

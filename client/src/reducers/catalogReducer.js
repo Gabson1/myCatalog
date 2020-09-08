@@ -1,6 +1,6 @@
 import {
   ADD_CATALOG_SUCCESS,
-  DELETE_CATALOG_SUCCESS,
+  DELETE_CATALOG_SUCCESS, EDIT_CATALOG_SUCCESS,
   GET_CATALOGS_SUCCESS,
   SET_CATALOG_EDITING,
 } from '../actions/actionTypes';
@@ -38,6 +38,12 @@ export default function (state = initialState, action) {
         ...state,
         editing: payload.editMode,
         catalogEditId: payload.catalogId,
+      };
+    case EDIT_CATALOG_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        newAssets: [...payload],
       };
     default:
       return state;

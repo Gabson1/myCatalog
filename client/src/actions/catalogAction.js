@@ -1,6 +1,6 @@
 import {
   addNewCatalogRequest, deleteCatalogRequest,
-  getAllCatalogsRequest, editCatalogRequest,
+  getAllCatalogsRequest, editCatalogAssetRequest,
   importCatalogRequest, exportCatalogRequest,
 } from '../effects';
 import {
@@ -8,11 +8,13 @@ import {
   DELETE_CATALOG_SUCCESS, DELETE_CATALOG_FAILURE,
   GET_CATALOGS_SUCCESS, GET_CATALOGS_FAILURE,
   SET_CATALOG_EDITING, STOP_CATALOG_EDITING,
-  // EDIT_CATALOG_SUCCESS, EDIT_CATALOG_FAILURE,
+  EDIT_CATALOG_SUCCESS, EDIT_CATALOG_FAILURE,
   IMPORT_CATALOG_SUCCESS, IMPORT_CATALOG_FAILURE,
   EXPORT_CATALOG_SUCCESS, EXPORT_CATALOG_FAILURE,
 } from './actionTypes';
 
+// This action send a post request to add a new catalog for a specified user and
+// updates the store with the new catalog document
 export const addNewCatalogAction = newCatalogData => async (dispatch) => {
   try {
     const res = await addNewCatalogRequest(newCatalogData);
@@ -28,21 +30,8 @@ export const addNewCatalogAction = newCatalogData => async (dispatch) => {
   }
 };
 
-export const deleteCatalogAction = catalogId => async (dispatch) => {
-  try {
-    const res = await deleteCatalogRequest(catalogId);
-    dispatch({
-      type: DELETE_CATALOG_SUCCESS,
-      payload: res.data.catalogs,
-    });
-  } catch (err) {
-    dispatch({
-      type: DELETE_CATALOG_FAILURE,
-      payload: err.message,
-    });
-  }
-};
-
+// This action send a get request to update the application with all catalogs of a specified user and
+// updates the store with all retrieved documents
 export const getAllCatalogsAction = userId => async (dispatch) => {
   try {
     const res = await getAllCatalogsRequest(userId);
@@ -59,6 +48,8 @@ export const getAllCatalogsAction = userId => async (dispatch) => {
   }
 };
 
+// This action sets the 'editing' state of the application to true and
+// updates the store with the catalogId which is being edited
 export const editCatalogModeAction = (editMode, catalogId) => async (dispatch) => {
   try {
     dispatch({
@@ -68,6 +59,41 @@ export const editCatalogModeAction = (editMode, catalogId) => async (dispatch) =
   } catch (err) {
     dispatch({
       type: STOP_CATALOG_EDITING,
+      payload: err.message,
+    });
+  }
+};
+
+// This action send a post request to update the assets of a specified catalog and
+// updates the store with the new asset documents
+export const editCatalogAssetsActions = (catalogId, newAssetData) => async (dispatch) => {
+  try {
+    const res = await editCatalogAssetRequest(catalogId, newAssetData);
+
+    dispatch({
+      type: EDIT_CATALOG_SUCCESS,
+      payload: res.data.catalogs.assets,
+    });
+  } catch (err) {
+    dispatch({
+      type: EDIT_CATALOG_FAILURE,
+      payload: err.message,
+    });
+  }
+};
+
+// This action send a post request to remove a catalog for a specified user and
+// updates the store with the updated catalog collection
+export const deleteCatalogAction = catalogId => async (dispatch) => {
+  try {
+    const res = await deleteCatalogRequest(catalogId);
+    dispatch({
+      type: DELETE_CATALOG_SUCCESS,
+      payload: res.data.catalogs,
+    });
+  } catch (err) {
+    dispatch({
+      type: DELETE_CATALOG_FAILURE,
       payload: err.message,
     });
   }

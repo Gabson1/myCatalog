@@ -2,7 +2,7 @@ import {
   addNewCatalogService,
   deleteCatalogService,
   getAllCatalogsService, importCatalogsService,
-  updateCatalogService,
+  editCatalogAssetsService,
 } from '../services';
 
 /**
@@ -33,15 +33,16 @@ export const addNewCatalog = async (req, res) => {
   }
 };
 
-export const updateCatalog = async (req, res) => {
+export const editCatalogAssets = async (req, res) => {
   try {
-    const result = await updateCatalogService(req, res);
+    const result = await editCatalogAssetsService(req, res);
 
+    console.log('------------->', result);
     res.json({
       success: result.success,
       statusCode: result.statusCode,
       message: result.message,
-      catalogs: result.catalog,
+      catalogs: result.asset,
     });
   } catch (err) {
     res.json({ statusCode: 500, message: err, contentType: 'application/json' });

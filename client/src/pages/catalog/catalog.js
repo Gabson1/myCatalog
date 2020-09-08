@@ -13,6 +13,7 @@ const Catalog = () => (
       <div id="headerContent">
         <h2>Catalog: An overview of your assets</h2>
       </div>
+      <div id="modalRoot" />
       <CatalogOverviewComponent />
     </section>
   </main>

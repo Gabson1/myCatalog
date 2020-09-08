@@ -31,9 +31,9 @@ export const getAllCatalogsRequest = async (userId) => {
   }
 };
 
-export const editCatalogRequest = async () => {
+export const editCatalogAssetRequest = async (catalogId, newAssetData) => {
   try {
-    return axios.post(`${fullApiCatalogRoute}/edit/:id`);
+    return axios.post(`${fullApiCatalogRoute}/edit/asset`, { catalogId, newAssetData });
   } catch (err) {
     throw new Error(`Something went wrong... ${err.message}`);
   }

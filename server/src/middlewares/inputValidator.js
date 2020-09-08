@@ -11,6 +11,10 @@ export const loginUserValidation = [
   check('password', 'Password is required').exists(),
 ];
 
-export const isValidAssetType = [
-  check('assetType', 'Please choose an asset type').not().isEmpty(),
+export const isValidAssetFields = [
+  check('assetName', 'Please enter a valid name').not().isEmpty(),
+  check('assetQuantity', 'Please enter a valid quantity').not().isEmpty(),
+  check('singleQuantityPrice', 'Please enter a single quantity price').not().isEmpty(),
+  check('totalQuantityPrice', 'Please enter a total quantity price').not().isEmpty(),
+
 ];

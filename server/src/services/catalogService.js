@@ -25,8 +25,27 @@ export const addNewCatalogService = async (req) => {
   }
 };
 
-export const updateCatalogService = async (req, res) => {
+export const editCatalogAssetsService = async (req) => {
+  const {
+    catalogId,
+    newAssetData,
+  } = req.body;
 
+  try {
+    const newAsset = await Catalog.findOneAndUpdate(
+      { _id: catalogId },
+      { $push: { assets: newAssetData } },
+    );
+
+    const asset = await newAsset.save();
+
+    console.log('my asset: ', asset);
+    return {
+      success: true, statusCode: 200, message: 'Asset added successfully', asset,
+    };
+  } catch (err) {
+    throw new Error(err.message);
+  }
 };
 
 export const deleteCatalogService = async (req, res) => {
