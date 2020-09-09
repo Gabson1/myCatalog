@@ -1,4 +1,4 @@
-/* eslint-disable consistent-return */
+/* eslint-disable consistent-return,no-console */
 import jwt from 'jsonwebtoken';
 
 export const authStrategy = (req, res, next) => {
@@ -9,8 +9,6 @@ export const authStrategy = (req, res, next) => {
     if (err) {
       console.log('Error in processing the token', err);
       next(err);
-    } else {
-      console.log('uWu sensei', user); // remove this
     }
     req.user = user;
     next();

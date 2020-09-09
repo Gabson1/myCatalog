@@ -1,7 +1,8 @@
 import {
   addNewCatalogService,
   deleteDocumentService,
-  getAllCatalogsService, importCatalogsService,
+  getAllCatalogsService,
+  importCatalogsService, exportCatalogsService,
   addAssetService, editAssetService,
 } from '../services';
 

@@ -21,7 +21,7 @@ export const addNewCatalogService = async (req) => {
       success: true, statusCode: 200, message: 'Catalog created successfully', catalog,
     };
   } catch (err) {
-    throw new Error(err.message);
+    return err;
   }
 };
 
@@ -43,7 +43,7 @@ export const addAssetService = async (req) => {
       success: true, statusCode: 200, message: 'Asset added successfully', asset,
     };
   } catch (err) {
-    throw new Error(err.message);
+    return err;
   }
 };
 
@@ -61,7 +61,7 @@ export const getAllCatalogsService = async (req, res) => {
       success: true, statusCode: 200, message: 'Catalogs found successfully', catalogs,
     };
   } catch (err) {
-    throw new Error(err.message);
+    return err;
   }
 };
 
@@ -87,13 +87,13 @@ export const editAssetService = async (req, res) => {
       new: true, lean: true, omitUndefined: true, returnOriginal: false, remove: {}, fields: {},
     };
 
-    const newAsset = await Catalog.findOneAndUpdate({ condition }, { $set: updateData }, { new: true }).exec();
+    const newAsset = await Catalog.findOneAndUpdate({ condition }, { $set: updateData }, { options }).exec();
 
     return {
       success: true, statusCode: 200, message: 'Asset added successfully', asset: newAsset,
     };
   } catch (err) {
-    console.log(err);
+    return err;
   }
 };
 
@@ -104,20 +104,20 @@ export const deleteDocumentService = async (req) => {
 
     return { success: true, statusCode: 200, message: 'Document removed successfully' };
   } catch (err) {
-    console.log('err  ', err);
+    return err;
   }
 };
 
 export const importCatalogsService = async (req, res) => {
   try {
   } catch (err) {
-    throw new Error(err.message);
+    return err;
   }
 };
 
 export const exportCatalogsService = async (req, res) => {
   try {
   } catch (err) {
-    throw new Error(err.message);
+    return err;
   }
 };

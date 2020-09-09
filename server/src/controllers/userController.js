@@ -24,8 +24,7 @@ export const signupUser = async (req, res) => {
     });
   } catch (err) {
     // If anything goes wrong, return a json error
-    // res.json({ statusCode: error, message: error.msg, contentType: 'application/json' });
-    console.log('error: ', err);
+    res.json({ statusCode: err, message: err.msg, contentType: 'application/json' });
   }
 };
 
