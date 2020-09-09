@@ -1,23 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Message, Button } from 'semantic-ui-react';
 
-import { cookieAction } from '../../actions/cookie';
+import { selectUser } from '../../selectors/userSelectors';
+
+import { cookieConsentAction } from '../../actions';
+
 import './cookie.css';
 
 const Cookie = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
   const [showCookie, setShowCookie] = useState(true);
 
   const cookieWrapperStyle = `${showCookie ? 'showCookieWrapper' : 'dismissCookieWrapper'}`;
 
-  const updateStoreWithCookieConsent = (e) => {
-    e.preventDefault();
-
+  const updateStoreWithCookieConsent = () => {
     setShowCookie(false);
 
-    const response = { showCookie: showCookie.valueOf() };
+    const consent = { showCookie: showCookie.valueOf() };
 
-    cookieAction(response);
+    dispatch(cookieConsentAction(user._id, consent));
   };
   return (
     <Message className={cookieWrapperStyle}>
@@ -28,6 +31,4 @@ const Cookie = () => {
   );
 };
 
-export default connect(null, { cookieAction })(Cookie);
-
-// TODO: finish this
+export default Cookie;

@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { useCallback, useEffect, useState } from 'react';
 import config from '../../../env.json';
 
@@ -20,7 +19,7 @@ export const NewsItems = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <div className="componentWrapper">

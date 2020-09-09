@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form, Input } from 'semantic-ui-react';
+import { Button, Form } from 'semantic-ui-react';
 
-import { selectUser } from '../../../../selectors/userSelector';
+import { selectUser } from '../../../../selectors/userSelectors';
 
 import '../../setting.css';
 import { editUserProfileAction } from '../../../../actions';

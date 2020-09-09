@@ -5,8 +5,6 @@ const useInput = (defaultValue) => {
 
   const onChange = event => setValue(event.target.value);
 
-  console.log('changing:', value);
-
   return { value, setValue, onChange };
 };
 

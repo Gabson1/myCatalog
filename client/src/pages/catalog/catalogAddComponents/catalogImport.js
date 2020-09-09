@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Button, Form } from 'semantic-ui-react';
 import { importCatalogAction } from '../../../actions';
-import { selectCreatorId, selectCatalogList } from '../../../selectors/catalogSelectors';
+// import { selectCreatorId, selectCatalogList } from '../../../selectors/catalogSelectors';
 
 import '../catalog.css';
 
 const CatalogImport = () => {
   const dispatch = useDispatch();
-  const catalogs = useSelector(selectCatalogList);
-  const userId = useSelector(selectCreatorId);
+  // const catalogs = useSelector(selectCatalogList);
+  // const userId = useSelector(selectCreatorId);
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileSetter = (event) => {

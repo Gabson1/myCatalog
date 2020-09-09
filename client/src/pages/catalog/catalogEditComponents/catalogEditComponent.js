@@ -5,8 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Button, Table } from 'semantic-ui-react';
 
-import history from '../../../middlewares/history';
-
 import { useModal } from '../../../hooks/useModal';
 
 import { selectCatalogList, selectCatalogId } from '../../../selectors/catalogSelectors';

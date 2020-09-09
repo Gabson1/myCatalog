@@ -6,7 +6,6 @@ import { EDIT_USERPROFILE_SUCCESS, EDIT_USERPROFILE_FAILURE } from './actionType
 export const editUserProfileAction = (userId, newUserData) => async (dispatch) => {
   try {
     const res = await editUserProfileRequest(userId, newUserData);
-    console.log(res.data.user);
     dispatch({
       type: EDIT_USERPROFILE_SUCCESS,
       payload: res.data.user,

@@ -4,7 +4,7 @@ import {
   Icon, Menu, Sidebar, Image, Button,
 } from 'semantic-ui-react';
 
-import { selectUser } from '../../selectors/userSelector';
+import { selectUser } from '../../selectors/userSelectors';
 import { logoutAction } from '../../actions';
 
 import avatarIcon from '../../assets/svg/avatar.svg';

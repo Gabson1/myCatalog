@@ -1,5 +1,6 @@
 // Cookie
-export const COOKIE_ACCEPT = 'COOKIE_ACCEPT';
+export const COOKIE_ACCEPT_SUCCESS = 'COOKIE_ACCEPT_SUCCESS';
+export const COOKIE_ACCEPT_FAILURE = 'COOKIE_ACCEPT_FAILURE';
 
 // Toast
 export const SET_TOAST = 'SET_TOAST';

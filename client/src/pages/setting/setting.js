@@ -32,6 +32,7 @@ const Setting = () => {
             <SettingOptions clickText={eve => handleFilterTypeSetter(eve)} />
           </Grid.Column>
           <Grid.Column className="gridItemWrapper" width={itemWidth}>
+            {/* eslint-disable-next-line no-nested-ternary */}
             { filterType === 'User Profile' ? <SettingProfile /> : filterType === 'Privacy Settings' ? <SettingPrivacy /> : <SettingPolicy /> }
           </Grid.Column>
         </Grid>

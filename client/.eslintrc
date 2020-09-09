@@ -7,6 +7,7 @@
     "flowtype"
 ],
   "globals": {
+    "fetch": true,
     "_id": true,
     "Blob": true,
     "document": true,
@@ -72,7 +73,7 @@
       "react/no-this-in-sfc": "error",
       "react/forbid-prop-types": "off",
       "react/prop-types": "off",
-      "react/no-array-index-key": "error",
+      "react/no-array-index-key": "off",
       "react/state-in-constructor": "off",
       "react/jsx-wrap-multilines": "error",
       "react-hooks/rules-of-hooks": "error",

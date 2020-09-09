@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input, Button } from 'semantic-ui-react';
 
-import { selectUser } from '../../../../selectors/userSelector';
+import { selectUser } from '../../../../selectors/userSelectors';
 import useInput from '../../../../hooks/useInput';
 
 import { editUserProfileAction } from '../../../../actions';

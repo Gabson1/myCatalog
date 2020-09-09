@@ -1,8 +1,11 @@
 import history from '../middlewares/history';
 
-import { loginRequest, signupRequest } from '../effects';
+import { loginRequest, signupRequest, cookieConsentRequest } from '../effects';
 import {
-  LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_SUCCESS, SIGNUP_FAILURE, SIGNUP_SUCCESS,
+  SIGNUP_FAILURE, SIGNUP_SUCCESS,
+  LOGIN_FAILURE, LOGIN_SUCCESS,
+  LOGOUT_SUCCESS,
+  COOKIE_ACCEPT_SUCCESS, COOKIE_ACCEPT_FAILURE,
 } from './actionTypes';
 
 import { storeAuthToken, removeStoredAuthToken } from '../utils/authToken';
@@ -42,4 +45,20 @@ export const logoutAction = () => (dispatch) => {
   removeStoredAuthToken();
   dispatch({ type: LOGOUT_SUCCESS });
   history.push('/');
+};
+
+export const cookieConsentAction = (userId, consent) => async (dispatch) => {
+  try {
+    const res = await cookieConsentRequest(userId, consent);
+
+    dispatch({
+      type: COOKIE_ACCEPT_SUCCESS,
+      payload: res.data.catalogs.assets,
+    });
+  } catch (err) {
+    dispatch({
+      type: COOKIE_ACCEPT_FAILURE,
+      payload: err.message,
+    });
+  }
 };
