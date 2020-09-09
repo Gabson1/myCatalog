@@ -1,3 +1,3 @@
+export * from './genericValidator';
 export * from './inputValidator';
-export * from './jwt/jwtVerify';
-export * from './jwt/jwtSign';
+export * from './jwtAuth';

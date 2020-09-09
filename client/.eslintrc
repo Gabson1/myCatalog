@@ -1,42 +1,119 @@
 {
-    "env": {
-        "browser": true,
-        "es6": true
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
+  "extends": "airbnb",
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "react-hooks",
+    "flowtype"
+],
+  "globals": {
+    "_id": true,
+    "Blob": true,
+    "document": true,
+    "store": true,
+    "describe": true,
+    "expect": true,
+    "beforeEach": true,
+    "window": true,
+    "dispatch": true,
+    "getState": true,
+    "$Values": true,
+    "$Keys": true,
+    "FormData": true,
+    "localStorage": true,
+    "FileReader": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "ecmaVersion": 6,
+      "jsx": true
     }
+},
+    "rules": {
+    "jsx-a11y/anchor-is-valid": "error", // HTML <a> element, with a valid href attribute
+      "jsx-a11y/alt-text": "error", // Elements that require alternative text have meaningful information
+      "jsx-a11y/no-redundant-roles": "error", // Setting an ARIA role that matches its default/implicit role is redundant
+      "jsx-a11y/lang": "error", // The lang prop on the <html> element must have a valid value based on ISO country and language codes.
+      "jsx-a11y/aria-props": "error", // Elements cannot use an invalid ARIA attribute | https://www.w3.org/WAI/PF/aria-1.1/states_and_properties
+      "jsx-a11y/aria-role": [ "error", { // Elements with ARIA roles must use a valid, non-abstract ARIA role | https://www.w3.org/TR/wai-aria/#role_definitions
+        "ignoreNonDOM": true
+    }],
+      "jsx-a11y/no-noninteractive-element-interactions": ["error", // Non-interactive HTML elements and non-interactive ARIA require a ROLE attribute or are hidden with ARIA
+        {
+            "handlers": [
+                "onClick",
+                "onMouseDown",
+                "onMouseUp",
+                "onKeyPress",
+                "onKeyDown",
+                "onKeyUp"
+            ]
+        }
+    ],
+      "jsx-a11y/click-events-have-key-events": "off",
+      "jsx-a11y/label-has-associated-control": "off",
+      "jsx-a11y/no-static-element-interactions": "error",
+      "jsx-a11y/label-has-for": "off",
+      "import/named": "error",
+      "import/no-cycle": "error",
+      "import/no-named-as-default": "off",
+      "import/prefer-default-export": "off",
+      "import/no-useless-path-segments": "error",
+      "import/no-named-as-default-member": "error",
+      "prefer-promise-reject-errors": "off",
+      "flowtype/define-flow-type": 1,
+      "flowtype/use-flow-type": 1,
+      "react/no-typos": "off",
+      "react/no-danger": "error",
+      "react/sort-comp": "off",
+      "react/jsx-indent": "error",
+      "react/jsx-fragments": "off",
+      "react/no-this-in-sfc": "error",
+      "react/forbid-prop-types": "off",
+      "react/prop-types": "off",
+      "react/no-array-index-key": "error",
+      "react/state-in-constructor": "off",
+      "react/jsx-wrap-multilines": "error",
+      "react-hooks/rules-of-hooks": "error",
+      "react/require-default-props": "off",
+      "react/jsx-filename-extension": "off",
+      "react/jsx-props-no-spreading": "off",
+      "react-hooks/exhaustive-deps": "error",
+      "react/no-did-update-set-state": "error",
+      "react/no-access-state-in-setstate": "error",
+      "react/static-property-placement": ["error", "property assignment"],
+      "react/prefer-stateless-function": ["error", { "ignorePureComponents": true }],
+      "react/destructuring-assignment": ["error", "always", { "ignoreClassFields": true }],
+      "camelcase": "error",
+      "no-alert": "error",
+      "no-console": "error",
+      "no-debugger": "error",
+      "quote-props": "error",
+      "no-else-return": "error",
+      "no-const-assign": "error",
+      "no-useless-escape": "error",
+      "no-underscore-dangle": "off",
+      "no-multiple-empty-lines": "error",
+      "max-len": ["error", { "code": 170 }],
+      "id-length": ["error", {"min": 3, "exceptions": ["_", "ref", "alt", "fs", "App", "app", "API", "api", "sap", "HOC", "log", "get", "url"], "properties": "never"}],
+      "lines-between-class-members": "error",
+      "curly": ["error", "multi-line", "consistent"],
+      "arrow-parens": ["error", "as-needed", { "requireForBlockBody":  true }],
+      "operator-linebreak": ["error", "before", {"overrides": { "=": "ignore"}} ],
+      "comma-dangle": ["error", {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "ignore"
+    }],
+      "object-curly-newline": ["error", {
+        "ObjectExpression": { "multiline": true, "minProperties": 4 },
+        "ObjectPattern": { "multiline": true, "minProperties": 4 },
+        "ImportDeclaration": { "multiline": true, "minProperties": 5 },
+        "ExportDeclaration": { "multiline": true, "minProperties": 4 }
+    }]}
 }
+
+

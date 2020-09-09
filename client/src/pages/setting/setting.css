@@ -17,25 +17,26 @@
     cursor: pointer;
 }
 
-.page #pageContent #apiContent {
+.page #pageContent #settingContent {
     margin-top: 5%;
     grid-column-gap: 1%;
 }
 
-.page #pageContent #apiContent .gridItemWrapper {
+.page #pageContent #settingContent .gridItemWrapper {
     border: 1px solid gray;
 }
 
-.page #pageContent #apiContent .gridItemWrapper:last-child {
+.page #pageContent #settingContent .gridItemWrapper:last-child {
     margin-left: 10%;
 }
 
-.page #pageContent #apiContent .gridItemWrapper .componentWrapper {
+.page #pageContent #settingContent .gridItemWrapper .componentWrapper {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.page #pageContent #apiContent .gridItemWrapper .componentWrapper .items{
-    border: 1px solid gray;
+.page #pageContent #settingContent .gridItemWrapper .componentWrapper .items .clickableText:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }

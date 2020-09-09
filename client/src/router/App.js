@@ -1,33 +1,32 @@
-import React, { useEffect } from 'react';
-import { connect} from "react-redux";
-import { authenticateAction } from '../actions/userAction';
+import React, { Fragment, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect, useDispatch } from 'react-redux';
+
+import { authenticateUserAction } from '../actions';
 
 import AppRouter from './appRouter';
 import RegSwitch from '../component/registration/regSwitch';
 
-import { ThemeProvider } from 'styled-components';
-import GlobalStyle from './globalStyle';
-import { darkTheme } from './theme';
-
 const App = ({ isAuthenticated }) => {
-	useEffect(() => {
-		authenticateAction()
-	}, []);
+  const dispatch = useDispatch();
 
-	return (
-		<ThemeProvider theme={darkTheme}>
-			<GlobalStyle>
-				{ isAuthenticated ? <AppRouter/> : <RegSwitch/> }
-			</GlobalStyle>
-		</ThemeProvider>
-	)
+  useEffect(() => {
+    dispatch(authenticateUserAction());
+  }, [dispatch, isAuthenticated]);
+
+  return (
+    <Fragment>
+      { isAuthenticated ? <AppRouter /> : <RegSwitch /> }
+    </Fragment>
+  );
 };
 
-const mapStateToProps = state => ({
-	isAuthenticated: state.user.isAuthenticated
-});
+App.propTypes = { isAuthenticated: PropTypes.bool };
 
+App.defaultProps = { isAuthenticated: PropTypes.bool };
 
-export default connect(mapStateToProps , { authenticateAction } )(App);
+const mapStateToProps = state => ({ isAuthenticated: state.user.isAuthenticated });
 
-// Todo: Fix this. on page load make a call to the store to set the state to loaded --> if isAuthenticated = true ... if a token exists --> show all routes
+export default connect(mapStateToProps)(App);
+
+// Todo: useSelector instead of connect()

@@ -1,13 +1,20 @@
 import mongoose from 'mongoose';
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const catalogSchema = new Schema({
-	name: { type: String, required: true },
-	description: { type: String, required: true },
-	image: { type: String, required: false },
-	price: { type: Number},
-	creator: { type: mongoose.Types.ObjectId, required: true, ref: 'User' },
+  assetType: { type: String, required: false },
+  description: { type: String, required: false },
+  creator: { type: Schema.Types.ObjectID, required: false, ref: 'User' },
+  assets: [{
+    assetName: { type: String, required: false },
+    assetQuantity: { type: Number, required: false },
+    singleQuantityPrice: { type: Number, required: false },
+    totalQuantityPrice: { type: Number, required: false },
+    // assetApiPricePP: { type: Number, required: false, ref: 'Api' },
+    // assetApiPriceT: { type: Number, required: false, ref: 'Api' },
+  }],
+  // createdAt: { type: Number, timestamps: true, name: String },
 });
 
 module.exports = mongoose.model('Catalog', catalogSchema);
