@@ -56,7 +56,7 @@ export const editAsset = async (req, res) => {
       success: result.success,
       statusCode: result.statusCode,
       message: result.message,
-      catalogs: result.asset,
+      assets: result.asset,
     });
   } catch (err) {
     res.json({ statusCode: 500, message: err, contentType: 'application/json' });

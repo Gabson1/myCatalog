@@ -34,4 +34,5 @@
 
 .page #pageContent #dashboardContent .gridItemWrapper .componentWrapper .items{
     border: 1px solid gray;
+    box-shadow: 2px 2px 2px black;
 }

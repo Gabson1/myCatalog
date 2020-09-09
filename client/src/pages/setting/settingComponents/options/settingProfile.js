@@ -27,7 +27,7 @@ export const SettingProfile = () => {
   return (
     <div className="componentWrapper">
       <form onSubmit={handleNewUserData}>
-        <p>From here you can adjust your user settings</p>
+        <h4>From here you can adjust your user settings</h4>
         <div style={{ display: 'flex' }}>
           <div>
             <p>
@@ -55,7 +55,6 @@ export const SettingProfile = () => {
           />
         </div>
       </form>
-
     </div>
   );
 };

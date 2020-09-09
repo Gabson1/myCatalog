@@ -1,5 +1,4 @@
 import Catalog from '../models/catalogModel';
-import mongoose from 'mongoose';
 
 export const addNewCatalogService = async (req) => {
   const {
@@ -66,27 +65,32 @@ export const getAllCatalogsService = async (req, res) => {
   }
 };
 
-export const editAssetService = async (req) => {
+export const editAssetService = async (req, res) => {
   const {
     assetId,
     editAssetData,
   } = req.body;
 
-  try {
-    const condition = { 'assets._id': assetId };
-    // const condition2 = { 'assets._id': mongoose.types.ObjectId(assetId) };
-    const update = {
-      assetName: editAssetData.assetName,
-      assetQuantity: editAssetData.assetQuantity,
-      singleQuantityPrice: editAssetData.singleQuantityPrice,
-      totalQuantityPrice: editAssetData.totalQuantityPrice,
-    };
-    const options = { new: true };
+  const {
+    assetName, assetQuantity, singleQuantityPrice, totalQuantityPrice,
+  } = editAssetData;
 
-    const newAsset = await Catalog.findOneAndUpdate(condition, { $push: update }, options).exec();
+  try {
+    const condition = { _id: assetId };
+    const updateData = {
+      assetName: assetName,
+      assetQuantity: assetQuantity,
+      singleQuantityPrice: singleQuantityPrice,
+      totalQuantityPrice: totalQuantityPrice,
+    };
+    const options = {
+      new: true, lean: true, omitUndefined: true, returnOriginal: false, remove: {}, fields: {},
+    };
+
+    const newAsset = await Catalog.findOneAndUpdate({ condition }, { $set: updateData }, { new: true }).exec();
 
     return {
-      success: true, statusCode: 200, message: 'Asset added successfully', newAsset,
+      success: true, statusCode: 200, message: 'Asset added successfully', asset: newAsset,
     };
   } catch (err) {
     console.log(err);

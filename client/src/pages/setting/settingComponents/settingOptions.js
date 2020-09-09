@@ -10,5 +10,8 @@ export const SettingOptions = ({ clickText }) => (
     <div className="items">
       <p className="clickableText" onClick={clickText}>Privacy Settings</p>
     </div>
+    <div className="items">
+      <p className="clickableText" onClick={clickText}>Privacy Policy</p>
+    </div>
   </div>
 );

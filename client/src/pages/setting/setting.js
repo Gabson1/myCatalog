@@ -5,6 +5,7 @@ import SideBar from '../../component/sidebar/sidebar';
 import { SettingOptions } from './settingComponents/settingOptions';
 import { SettingProfile } from './settingComponents/options/settingProfile';
 import { SettingPrivacy } from './settingComponents/options/settingPrivacy';
+import { SettingPolicy } from './settingComponents/options/settingPolicy';
 
 import './setting.css';
 
@@ -24,14 +25,14 @@ const Setting = () => {
         <div id="headerContent">
           <h2>Setting: Adjust your profile</h2>
         </div>
-        <Grid id="apiContent">
+        <Grid id="settingContent">
           <Grid.Column className="gridItemWrapper" width={itemWidth / 3}>
             <h4>Setting options</h4>
             <Divider />
             <SettingOptions clickText={eve => handleFilterTypeSetter(eve)} />
           </Grid.Column>
           <Grid.Column className="gridItemWrapper" width={itemWidth}>
-            { filterType === 'User Profile' ? <SettingProfile /> : <SettingPrivacy /> }
+            { filterType === 'User Profile' ? <SettingProfile /> : filterType === 'Privacy Settings' ? <SettingPrivacy /> : <SettingPolicy /> }
           </Grid.Column>
         </Grid>
       </section>

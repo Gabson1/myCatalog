@@ -1,3 +1,5 @@
+import history from '../middlewares/history';
+
 import { loginRequest, signupRequest } from '../effects';
 import {
   LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_SUCCESS, SIGNUP_FAILURE, SIGNUP_SUCCESS,
@@ -39,4 +41,5 @@ export const loginAction = formData => async (dispatch) => {
 export const logoutAction = () => (dispatch) => {
   removeStoredAuthToken();
   dispatch({ type: LOGOUT_SUCCESS });
+  history.push('/');
 };

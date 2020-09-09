@@ -3,6 +3,7 @@ import path from 'path';
 import cors from 'cors';
 import morgan from 'morgan';
 import express from 'express';
+import mongoose from 'mongoose';
 
 import connectDb from './db';
 import authRouter from './router/authRouter';
@@ -23,6 +24,7 @@ server.use(express.urlencoded({ extended: true }));
 
 server.use(cors());
 server.use(morgan('dev'));
+mongoose.set('debug', true);
 
 // -------------------- Server router -------------------- //
 server.use('/api/auth', authRouter);
