@@ -1,24 +1,45 @@
-import { registrationTypes as t } from '../types';
-import { loginRequest, signupRequest } from "../effects/userEffect";
+import history from '../middlewares/history';
 
-export const loginAction = (payload) => {
-  return async (dispatch) => {
-    try {
-      const response = await loginRequest(payload.email, payload.password)
-      dispatch({ type: t.LOGIN_SUCCESS, payload: response })
-    } catch (e) {
-      dispatch({ type: t.LOGIN_FAILURE })
-    }
-  };
+import { loginRequest, signupRequest } from '../effects';
+import {
+  LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_SUCCESS, SIGNUP_FAILURE, SIGNUP_SUCCESS,
+} from './actionTypes';
+
+import { storeAuthToken, removeStoredAuthToken } from '../utils/authToken';
+
+// Signup User
+export const signupAction = formData => async (dispatch) => {
+  try {
+    const res = await signupRequest(formData);
+    storeAuthToken(res.data.data.token);
+
+    dispatch({
+      type: SIGNUP_SUCCESS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({ type: SIGNUP_FAILURE, payload: err.message });
+  }
 };
 
-export const signupAction = (payload) => {
-  return async (dispatch) => {
-    try {
-      const response = await signupRequest(payload.username, payload.email, payload.password)
-      dispatch({ type: t.SIGNUP_SUCCESS, payload: response })
-    } catch (e) {
-      dispatch({ type: t.SIGNUP_FAILURE })
-    }
-  };
+// Login User
+export const loginAction = formData => async (dispatch) => {
+  try {
+    const res = await loginRequest(formData);
+    storeAuthToken(res.data.data.token);
+
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({ type: LOGIN_FAILURE, payload: err.message });
+  }
+};
+
+// Logout
+export const logoutAction = () => (dispatch) => {
+  removeStoredAuthToken();
+  dispatch({ type: LOGOUT_SUCCESS });
+  history.push('/');
 };

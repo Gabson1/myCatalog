@@ -1,1 +1,1 @@
-export * from './history.mid';
+export * from './history';

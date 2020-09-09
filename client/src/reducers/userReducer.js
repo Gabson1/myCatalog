@@ -1,46 +1,46 @@
-import { registrationTypes as t } from '../types/login';
+import { AUTH_SUCCESS, SIGNUP_SUCCESS, LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../actions/actionTypes';
 
 const initialState = {
-  isLoggedIn: false,
-  user: {}
+  token: null,
+  isAuthenticated: null,
+  loading: true,
+  user: null,
 };
 
-export const loginReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case t.LOGIN_SUCCESS:
-      return {
-        ...state,
-        isLoggedIn: true,
-        user: action.payload
-      };
-    case t.LOGIN_FAILURE:
-      return state
-    case t.LOGOUT:
-      return {
-        ...state,
-        isLoggedIn: false
-      }
-    default:
-      return state
-  }
-}
+export default function (state = initialState, action) {
+  const { type, payload } = action;
 
-export const signupReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case t.SIGNUP_SUCCESS:
+  switch (type) {
+    case AUTH_SUCCESS:
       return {
         ...state,
-        isLoggedIn: true,
-        user: action.payload
+        user: payload,
+        loading: false,
+        isAuthenticated: true,
       };
-    case t.SIGNUP_FAILURE:
-      return state
-    case t.LOGOUT:
+    case SIGNUP_SUCCESS:
       return {
         ...state,
-        isLoggedIn: false
-      }
+        user: payload,
+        loading: false,
+        isAuthenticated: true,
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        ...payload,
+        loading: false,
+        isAuthenticated: true,
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        user: null,
+        token: null,
+        loading: false,
+        isAuthenticated: false,
+      };
     default:
-      return state
+      return state;
   }
 }

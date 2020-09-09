@@ -1,0 +1,40 @@
+.page {
+    display: flex;
+}
+
+
+.page #pageContent {
+    margin-top: 5%;
+    margin-left: 10%;
+    width: 100%;
+}
+
+.page #pageContent #headerContent h2 {
+    text-decoration: underline;
+}
+
+.page #pageContent #catalogContent {
+    margin-top: 5%;
+    grid-column-gap: 25px;
+    grid-row-gap: 25px;
+}
+
+.page #pageContent #catalogContent .gridItemWrapper {
+    border: 1px solid gray;
+}
+
+.page #pageContent #catalogContent .newCatalogButton {
+    background-color: transparent;
+    transition: transform .5s ease-in-out;
+}
+
+.page #pageContent #catalogContent .catalogsWrapper {
+    width: 80%;
+}
+
+.page #pageContent #catalogContent .editCatalogModal {
+    position: absolute;
+    top: 53%;
+    left: 73%;
+    transform: translate(-50%, -50%);
+}
