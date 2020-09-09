@@ -22,8 +22,6 @@ export const NewsItems = () => {
     fetchData();
   }, []);
 
-  console.log('articleDA', articleData);
-
   return (
     <div className="componentWrapper">
       { articleData.map((articles, index) => (
