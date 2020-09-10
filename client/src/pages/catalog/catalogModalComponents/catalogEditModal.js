@@ -6,7 +6,7 @@ import useInput from '../../../hooks/useInput';
 
 import { selectAssetId, selectCatalogId } from '../../../selectors/catalogSelectors';
 
-import { editAssetAction, deleteDocumentAction } from '../../../actions';
+import { editAssetAction, deleteAssetAction } from '../../../actions';
 
 const CatalogEditModal = () => {
   const dispatch = useDispatch();
@@ -28,8 +28,8 @@ const CatalogEditModal = () => {
     dispatch(editAssetAction(catalogId, assetId, editAssetData));
   };
 
-  const handleDeleteAsset = (docId) => {
-    dispatch(deleteDocumentAction(docId));
+  const handleDeleteAsset = () => {
+    dispatch(deleteAssetAction(assetId));
   };
 
   return (

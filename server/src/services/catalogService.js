@@ -95,10 +95,27 @@ export const editAssetService = async (req) => {
   }
 };
 
-export const deleteDocumentService = async (req) => {
+export const deleteCatalogService = async (req) => {
   const { id } = req.body;
+
   try {
-    await Catalog.deleteOne({ id }).exec();
+    await Catalog.findOneAndDelete({ _id: id }, (err, res) => {
+      err ? console.log('err', err) : console.log('success', res);
+    });
+
+    return { success: true, statusCode: 200, message: 'Document removed successfully' };
+  } catch (err) {
+    return err;
+  }
+};
+
+export const deleteAssetService = async (req) => {
+  const { id } = req.body;
+
+  try {
+    await Catalog.findOneAndUpdate(id, { $pull: { assets: { _id: id } } }, (err, res) => {
+      err ? console.log('err', err) : console.log('success', res);
+    });
 
     return { success: true, statusCode: 200, message: 'Document removed successfully' };
   } catch (err) {

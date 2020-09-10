@@ -15,10 +15,17 @@ export const addNewCatalogRequest = async (newCatalogData) => {
   }
 };
 
-// eslint-disable-next-line id-length
-export const deleteDocumentRequest = async (docId) => {
+export const deleteCatalogRequest = async (catalogId) => {
   try {
-    return axios.post(`${fullApiCatalogRoute}/delete`, { id: docId });
+    return axios.post(`${fullApiCatalogRoute}/delete/catalog`, { id: catalogId });
+  } catch (err) {
+    throw new Error(`Something went wrong... ${err.message}`);
+  }
+};
+
+export const deleteAssetRequest = async (assetId) => {
+  try {
+    return axios.post(`${fullApiCatalogRoute}/delete/asset`, { id: assetId });
   } catch (err) {
     throw new Error(`Something went wrong... ${err.message}`);
   }
