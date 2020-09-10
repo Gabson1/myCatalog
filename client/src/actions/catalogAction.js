@@ -103,9 +103,9 @@ export const editAssetModeAction = (editMode, assetId) => async (dispatch) => {
 
 // This action send a post request to update the assets of a specified catalog and
 // updates the store with the new asset documents
-export const editAssetAction = (assetId, editAssetData) => async (dispatch) => {
+export const editAssetAction = (assetId, catalogId, editAssetData) => async (dispatch) => {
   try {
-    const res = await editAssetRequest(assetId, editAssetData);
+    const res = await editAssetRequest(assetId, catalogId, editAssetData);
 
     dispatch({
       type: EDIT_ASSET_SUCCESS,

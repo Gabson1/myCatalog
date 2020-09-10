@@ -36,6 +36,12 @@ See a list of asset types MyCatalog supports:
 
 ### Scripts
 
+Development: <br />
+``npm run start`` fires up the react application
+``npm run server:watch`` fires up the nodejs/expressjs server in watch mode
+
+Production: <br />
+``npm run server`` fires up the nodejs/expressjs server and serves the frontend 
 
 ### Enforcing rules
 

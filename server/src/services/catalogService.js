@@ -65,32 +65,27 @@ export const getAllCatalogsService = async (req, res) => {
   }
 };
 
-export const editAssetService = async (req, res) => {
+export const editAssetService = async (req) => {
   const {
     assetId,
     editAssetData,
   } = req.body;
 
-  const {
-    assetName, assetQuantity, singleQuantityPrice, totalQuantityPrice,
-  } = editAssetData;
-
   try {
-    const condition = { _id: assetId };
-    const updateData = {
-      assetName: assetName,
-      assetQuantity: assetQuantity,
-      singleQuantityPrice: singleQuantityPrice,
-      totalQuantityPrice: totalQuantityPrice,
-    };
-    const options = {
-      new: true, lean: true, omitUndefined: true, returnOriginal: false, remove: {}, fields: {},
-    };
+    const updatedAsset = Catalog.findOne({ 'assets._id': assetId }).then(doc => {
+      const asset = doc.assets.id(assetId);
+      asset.assetName = editAssetData.assetName;
+      asset.assetQuantity = editAssetData.assetQuantity;
+      asset.singleQuantityPrice = editAssetData.singleQuantityPrice;
+      asset.totalQuantityPrice = editAssetData.totalQuantityPrice;
+      doc.save();
 
-    const newAsset = await Catalog.findOneAndUpdate({ condition }, { $set: updateData }, { options }).exec();
-
+      console.log('ass', asset);
+    }).catch((err) => {
+      console.log('Oh! Dark', err);
+    });
     return {
-      success: true, statusCode: 200, message: 'Asset added successfully', asset: newAsset,
+      success: true, statusCode: 200, message: 'Asset updated successfully', asset: updatedAsset,
     };
   } catch (err) {
     return err;

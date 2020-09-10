@@ -40,9 +40,9 @@ export const addAssetRequest = async (catalogId, newAssetData) => {
   }
 };
 
-export const editAssetRequest = async (assetId, editAssetData) => {
+export const editAssetRequest = async (assetId, catalogId, editAssetData) => {
   try {
-    return axios.post(`${fullApiCatalogRoute}/edit/asset`, { assetId, editAssetData });
+    return axios.post(`${fullApiCatalogRoute}/edit/asset`, { assetId, catalogId, editAssetData });
   } catch (err) {
     throw new Error(`Something went wrong... ${err.message}`);
   }

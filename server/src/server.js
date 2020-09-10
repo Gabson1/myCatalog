@@ -44,8 +44,10 @@ server.listen(port, async () => {
 
 // -------------------- if node environment is production, make node serve static files -------------------- //
 const pathToIndexFile = path.join(__dirname, '..', 'client', 'build', 'index.html');
+const pathToAssetsDir = path.join(__dirname, '..', 'client', 'build', 'media');
+
 if (process.env.NODE_ENV === 'production') {
-  server.use(express.static(path.join(__dirname, '..', '..', 'client', 'src', 'assets')));
+  server.use(express.static(pathToAssetsDir));
   server.use(express.static(path.join(__dirname, '..', '..', 'client', 'public')));
 
   server.get('*', (req, res) => {

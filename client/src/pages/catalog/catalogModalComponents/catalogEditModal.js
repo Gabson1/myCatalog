@@ -4,12 +4,13 @@ import { Button, Grid, Input, Label } from 'semantic-ui-react';
 
 import useInput from '../../../hooks/useInput';
 
-import { selectAssetId } from '../../../selectors/catalogSelectors';
+import { selectAssetId, selectCatalogId } from '../../../selectors/catalogSelectors';
 
 import { editAssetAction, deleteDocumentAction } from '../../../actions';
 
 const CatalogEditModal = () => {
   const dispatch = useDispatch();
+  const catalogId = useSelector(selectCatalogId);
   const assetId = useSelector(selectAssetId);
   const assetName = useInput('');
   const assetQuantity = useInput('');
@@ -24,7 +25,7 @@ const CatalogEditModal = () => {
       totalQuantityPrice: totalQuantityPrice.value,
     };
 
-    dispatch(editAssetAction(assetId, editAssetData));
+    dispatch(editAssetAction(catalogId, assetId, editAssetData));
   };
 
   const handleDeleteAsset = (docId) => {
