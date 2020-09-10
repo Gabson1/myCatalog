@@ -57,7 +57,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        catalogs: [...payload],
       };
     default:
       return state;

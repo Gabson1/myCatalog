@@ -68,19 +68,22 @@ export const getAllCatalogsService = async (req, res) => {
 export const editAssetService = async (req) => {
   const {
     assetId,
+    catalogId,
     editAssetData,
   } = req.body;
 
+  console.log('ids', assetId, catalogId);
   try {
-    const updatedAsset = Catalog.findOne({ 'assets._id': assetId }).then(doc => {
-      const asset = doc.assets.id(assetId);
-      asset.assetName = editAssetData.assetName;
-      asset.assetQuantity = editAssetData.assetQuantity;
-      asset.singleQuantityPrice = editAssetData.singleQuantityPrice;
-      asset.totalQuantityPrice = editAssetData.totalQuantityPrice;
+    const updatedAsset = Catalog.findOne({ _id: assetId }).then(doc => {
+      const asset = doc.assets.id(catalogId);
+      asset.assetName = editAssetData.assetName === '' ? asset.assetName : editAssetData.assetName;
+      asset.assetQuantity = editAssetData.assetQuantity === '' ? asset.assetName : editAssetData.assetQuantity;
+      asset.singleQuantityPrice = editAssetData.singleQuantityPrice === '' ? asset.assetName : editAssetData.singleQuantityPrice;
+      asset.totalQuantityPrice = editAssetData.totalQuantityPrice === '' ? asset.assetName : editAssetData.totalQuantityPrice;
       doc.save();
 
       console.log('ass', asset);
+      return updatedAsset;
     }).catch((err) => {
       console.log('Oh! Dark', err);
     });

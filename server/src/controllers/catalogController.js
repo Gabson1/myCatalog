@@ -52,7 +52,7 @@ export const addAsset = async (req, res) => {
 export const editAsset = async (req, res) => {
   try {
     const result = await editAssetService(req, res);
-
+    console.log(result);
     res.json({
       success: result.success,
       statusCode: result.statusCode,

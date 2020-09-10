@@ -105,12 +105,9 @@ export const editAssetModeAction = (editMode, assetId) => async (dispatch) => {
 // updates the store with the new asset documents
 export const editAssetAction = (assetId, catalogId, editAssetData) => async (dispatch) => {
   try {
-    const res = await editAssetRequest(assetId, catalogId, editAssetData);
+    await editAssetRequest(assetId, catalogId, editAssetData);
 
-    dispatch({
-      type: EDIT_ASSET_SUCCESS,
-      payload: res.data.catalogs.assets,
-    });
+    dispatch({ type: EDIT_ASSET_SUCCESS });
   } catch (err) {
     dispatch({
       type: EDIT_ASSET_FAILURE,
