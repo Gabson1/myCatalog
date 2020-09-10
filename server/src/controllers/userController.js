@@ -75,7 +75,7 @@ export const updateUserProfile = async (req, res) => {
       statusCode: result.statusCode,
       success: result.success,
       message: result.message,
-      data: result.updatedUser,
+      data: result.user,
     });
   } catch (err) {
     // If anything goes wrong, return a json error

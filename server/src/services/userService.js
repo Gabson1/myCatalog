@@ -6,9 +6,6 @@ import { jwtSign } from '../middlewares';
 import Catalog from '../models/catalogModel';
 
 export const createUserService = async (res, { username, email, password }) => {
-  // funcName is used for debugging purposes
-  const funcName = 'createUserService';
-
   try {
     // First check whether there is another user with the same email
     let user = await User.findOne({ email });
@@ -40,14 +37,11 @@ export const createUserService = async (res, { username, email, password }) => {
     return payload;
     // If anything goes wrong, return an error
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send(`Server error: ${funcName}`);
+    return err;
   }
 };
 
 export const loginUserService = async (res, { email, password }) => {
-  // funcName is used for debugging purposes
-  const funcName = 'loginUserService';
   try {
     // First check whether there is a user with the same email
     const user = await User.findOne({ email });
@@ -71,30 +65,28 @@ export const loginUserService = async (res, { email, password }) => {
     return payload;
     // If anything goes wrong, return an error
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send(`Server error: ${funcName}`);
+    return err;
   }
 };
 
-export const updateUserProfileService = async (req, res) => {
-  const funcName = 'updateUserProfileService';
+export const updateUserProfileService = async (req) => {
+  const { userId, newUserData } = req.body;
 
-  const { newUserData, userId } = req.body;
   try {
     const condition = { _id: userId };
     const update = {
       username: newUserData.username,
       email: newUserData.email,
     };
-    const options = { new: true };
 
-    const updatedUser = await Catalog.findOneAndUpdate(condition, { $push: update }, options).exec();
+    const updatedUser = Catalog.findOneAndUpdate(condition, update, (err, doc) => {
+      err ? console.log('err', err) : console.log('doc', doc);
+    });
 
     return {
-      success: true, statusCode: 200, message: 'User updated successfully', updatedUser,
+      success: true, statusCode: 200, message: 'User updated successfully', user: updatedUser,
     };
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send(`Server error: ${funcName}`);
+    return err;
   }
 };

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Catalog from '../models/catalogModel';
 
 export const addNewCatalogService = async (req) => {
@@ -83,9 +84,8 @@ export const editAssetService = async (req) => {
       doc.save();
 
       console.log('ass', asset);
-      return updatedAsset;
     }).catch((err) => {
-      console.log('Oh! Dark', err);
+      console.log('err', err);
     });
     return {
       success: true, statusCode: 200, message: 'Asset updated successfully', asset: updatedAsset,
@@ -123,6 +123,7 @@ export const deleteAssetService = async (req) => {
   }
 };
 
+// TODO: write logic for exporting and importing
 export const importCatalogsService = async (req, res) => {
   try {
   } catch (err) {
