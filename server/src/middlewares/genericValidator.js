@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { validationResult } from 'express-validator';
 
 export const genericValidator = (req, res, next) => {

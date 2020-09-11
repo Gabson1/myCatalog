@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { useCallback, useEffect, useState } from 'react';
 import config from '../../../env.json';
 
@@ -20,12 +19,12 @@ export const NewsItems = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <div className="componentWrapper">
       { articleData.map((articles, index) => (
-        <div key={`article-${index}`} className="items">
+        <div key={`article-${index}`} className="items" style={{ paddingLeft: '5px' }}>
           <p>
             <strong>Author:&#160;</strong>
             {articles.author ? articles.author : 'No author specified'}

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form, Input } from 'semantic-ui-react';
+import { Button, Form } from 'semantic-ui-react';
 
-import { selectUser } from '../../../../selectors/userSelector';
+import { selectUser } from '../../../../selectors/userSelectors';
 
 import '../../setting.css';
 import { editUserProfileAction } from '../../../../actions';
@@ -21,7 +21,7 @@ export const SettingPrivacy = () => {
     <div className="componentWrapper" style={{ display: 'block' }}>
       <div className="componentWrapper">
         <form onSubmit={handlePrivacyResponse}>
-          <h4>From here you can adjust your user settings</h4>
+          <h4>From here you can adjust your privacy settings</h4>
           <div style={{ display: 'flex' }}>
             <div>
               <p>

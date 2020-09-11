@@ -17,4 +17,4 @@ const catalogSchema = new Schema({
   // createdAt: { type: Number, timestamps: true, name: String },
 });
 
-module.exports = mongoose.model('Catalog', catalogSchema);
+export default mongoose.model('Catalog', catalogSchema);

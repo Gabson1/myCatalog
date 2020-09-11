@@ -1,7 +1,8 @@
 import {
   addNewCatalogService,
-  deleteDocumentService,
-  getAllCatalogsService, importCatalogsService,
+  deleteCatalogService, deleteAssetService,
+  getAllCatalogsService,
+  importCatalogsService, exportCatalogsService,
   addAssetService, editAssetService,
 } from '../services';
 
@@ -51,7 +52,7 @@ export const addAsset = async (req, res) => {
 export const editAsset = async (req, res) => {
   try {
     const result = await editAssetService(req, res);
-
+    console.log(result);
     res.json({
       success: result.success,
       statusCode: result.statusCode,
@@ -63,9 +64,23 @@ export const editAsset = async (req, res) => {
   }
 };
 
-export const deleteDocument = async (req, res) => {
+export const deleteCatalog = async (req, res) => {
   try {
-    const result = await deleteDocumentService(req, res);
+    const result = await deleteCatalogService(req, res);
+
+    res.json({
+      success: result.success,
+      statusCode: result.statusCode,
+      message: result.message,
+    });
+  } catch (err) {
+    res.json({ statusCode: 500, message: err, contentType: 'application/json' });
+  }
+};
+
+export const deleteAsset = async (req, res) => {
+  try {
+    const result = await deleteAssetService(req, res);
 
     res.json({
       success: result.success,

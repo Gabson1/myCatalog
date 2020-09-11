@@ -24,8 +24,7 @@ export const signupUser = async (req, res) => {
     });
   } catch (err) {
     // If anything goes wrong, return a json error
-    // res.json({ statusCode: error, message: error.msg, contentType: 'application/json' });
-    console.log('error: ', err);
+    res.json({ statusCode: err, message: err.msg, contentType: 'application/json' });
   }
 };
 
@@ -76,7 +75,7 @@ export const updateUserProfile = async (req, res) => {
       statusCode: result.statusCode,
       success: result.success,
       message: result.message,
-      data: result.updatedUser,
+      data: result.user,
     });
   } catch (err) {
     // If anything goes wrong, return a json error

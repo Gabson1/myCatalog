@@ -1,6 +1,6 @@
 import express from 'express';
 
-import * as validation from '../middlewares';
+// import * as validation from '../middlewares';
 import * as controller from '../controllers';
 
 const router = express.Router();
@@ -15,14 +15,24 @@ router.post(
   controller.addNewCatalog,
 );
 
-// @route    POST catalog/delete
-// @desc     Delete a singleCatalog
+// @route    POST catalog/delete/catalog
+// @desc     Delete a catalog
 // @access   Private
 router.post(
-  '/delete',
+  '/delete/catalog',
   // verify whether user has gone through the full ui of deleting a singleCatalog
   // clicking on the delete button && confirming the popup modal
-  controller.deleteDocument,
+  controller.deleteCatalog,
+);
+
+// @route    POST catalog/delete/asset
+// @desc     Delete an asset
+// @access   Private
+router.post(
+  '/delete/asset',
+  // verify whether user has gone through the full ui of deleting a singleCatalog
+  // clicking on the delete button && confirming the popup modal
+  controller.deleteAsset,
 );
 
 // @route    POST catalog/add/asset

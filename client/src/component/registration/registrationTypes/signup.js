@@ -1,30 +1,29 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   Button, Form, Grid, Header, Message, Segment,
 } from 'semantic-ui-react';
 
-import { setToast } from '../../../actions/toastAction';
 import { signupAction } from '../../../actions';
 
 import useInput from '../../../hooks/useInput';
 
-const SignupForm = ({ login, signupAction }) => {
+const SignupForm = ({ login }) => {
+  const dispatch = useDispatch();
+
   const username = useInput('');
   const email = useInput('');
   const password = useInput('');
   const passwordRep = useInput('');
 
-  const handleSignup = (e) => {
-    e.preventDefault();
-
+  const handleSignup = () => {
     const formData = {
       username: username.value,
       email: email.value,
       password: password.value,
     };
 
-    signupAction(formData);
+    dispatch(signupAction(formData));
   };
 
   return (
@@ -85,11 +84,11 @@ const SignupForm = ({ login, signupAction }) => {
         <Message>
           Already have an account?
           {' '}
-          <button className="noButtonStyles" onClick={() => login()}>Login</button>
+          <button type="button" className="noButtonStyles" onClick={() => login()}>Login</button>
         </Message>
       </Grid.Column>
     </Grid>
   );
 };
 
-export default connect(null, { setToast, signupAction })(SignupForm);
+export default SignupForm;

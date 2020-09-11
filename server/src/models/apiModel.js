@@ -9,4 +9,4 @@ const apiModel = new Schema({
   assignee: { type: mongoose.Types.ObjectId, required: true, ref: 'User' },
 });
 
-module.exports = mongoose.model('Api', apiModel);
+export default mongoose.model('Api', apiModel);

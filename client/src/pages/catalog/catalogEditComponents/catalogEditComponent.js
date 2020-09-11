@@ -5,13 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Button, Table } from 'semantic-ui-react';
 
-import history from '../../../middlewares/history';
-
 import { useModal } from '../../../hooks/useModal';
 
 import { selectCatalogList, selectCatalogId } from '../../../selectors/catalogSelectors';
 
-import { deleteDocumentAction, editAssetModeAction } from '../../../actions';
+import { deleteCatalogAction, editAssetModeAction } from '../../../actions';
 
 import SideBar from '../../../component/sidebar/sidebar';
 import BackArrow from '../../../component/arrow/arrow';
@@ -40,8 +38,8 @@ const CatalogEditComponent = () => {
     showEditModal();
   };
 
-  const handleDeleteCatalog = (docId) => {
-    dispatch(deleteDocumentAction(docId));
+  const handleDeleteCatalog = () => {
+    dispatch(deleteCatalogAction(catalogId));
   };
 
   return (

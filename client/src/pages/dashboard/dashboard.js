@@ -2,13 +2,13 @@ import React from 'react';
 import { Divider, Grid } from 'semantic-ui-react';
 
 import SideBar from '../../component/sidebar/sidebar';
-import { ChangesItems } from './dashboardComponents/lastChanges';
+// import { ChangesItems } from './dashboardComponents/lastChanges';
 import { NewsItems } from './dashboardComponents/latestNews';
 
 import './dashboard.css';
 
 const Dashboard = () => {
-  const itemWidth = 5;
+  const itemWidth = 10;
 
   return (
     <main className="page">
@@ -19,16 +19,20 @@ const Dashboard = () => {
           <p>Click here if you want to adjust the way the data is displayed</p>
         </div>
         <Grid id="dashboardContent" centered>
+          {/*
           <Grid.Column className="gridItemWrapper" width={itemWidth}>
             <h4>Win/Loss</h4>
             <Divider />
             <div><p>this is some placeholder text for win/loss</p></div>
           </Grid.Column>
+          */}
+          {/*
           <Grid.Column className="gridItemWrapper" width={itemWidth}>
             <h4>Last Changes</h4>
             <Divider />
             <ChangesItems />
           </Grid.Column>
+          */}
           <Grid.Column className="gridItemWrapper" width={itemWidth}>
             <h4>Latest News</h4>
             <Divider />

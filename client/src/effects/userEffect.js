@@ -23,3 +23,19 @@ export const loginRequest = async (formData) => {
     throw new Error(`Something went wrong... ${err.message}`);
   }
 };
+
+export const editUserProfileRequest = async (userId, newUserData) => {
+  try {
+    return axios.post(`${fullApiUserRoute}/update`, { userId, newUserData });
+  } catch (err) {
+    throw new Error(`Something went wrong... ${err.message}`);
+  }
+};
+
+export const cookieConsentRequest = async (userId, consent) => {
+  try {
+    return axios.post(`${fullApiUserRoute}/cookie`, { userId, consent });
+  } catch (err) {
+    throw new Error(`Something went wrong... ${err.message}`);
+  }
+};

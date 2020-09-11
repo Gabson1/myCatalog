@@ -6,7 +6,7 @@ export const SettingPolicy = () => (
   <div className="componentWrapper" style={{ display: 'block' }}>
     <h4>This is the privacy policy you agree with by using this website</h4>
     <p>
-      Your privacy is important to us. It is MyCatalog's policy to respect your privacy regarding any
+      Your privacy is important to us. It is MyCatalog&lsquo;s policy to respect your privacy regarding any
       information we may collect from you across our website, http://www.mycatalog.com, and other sites we own and operate.
 
       We only ask for personal information when we truly need it to provide a service to you. We collect it by fair and

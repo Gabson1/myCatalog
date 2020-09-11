@@ -1,8 +1,9 @@
 import {
-  addNewCatalogRequest, deleteDocumentRequest,
-  getAllCatalogsRequest, addAssetRequest,
+  addNewCatalogRequest, addAssetRequest,
+  getAllCatalogsRequest,
   importCatalogRequest, exportCatalogRequest,
   editAssetRequest,
+  deleteAssetRequest, deleteCatalogRequest,
 } from '../effects';
 import {
   ADD_CATALOG_SUCCESS, ADD_CATALOG_FAILURE,
@@ -103,14 +104,11 @@ export const editAssetModeAction = (editMode, assetId) => async (dispatch) => {
 
 // This action send a post request to update the assets of a specified catalog and
 // updates the store with the new asset documents
-export const editAssetAction = (assetId, editAssetData) => async (dispatch) => {
+export const editAssetAction = (assetId, catalogId, editAssetData) => async (dispatch) => {
   try {
-    const res = await editAssetRequest(assetId, editAssetData);
+    await editAssetRequest(assetId, catalogId, editAssetData);
 
-    dispatch({
-      type: EDIT_ASSET_SUCCESS,
-      payload: res.data.catalogs.assets,
-    });
+    dispatch({ type: EDIT_ASSET_SUCCESS });
   } catch (err) {
     dispatch({
       type: EDIT_ASSET_FAILURE,
@@ -121,9 +119,26 @@ export const editAssetAction = (assetId, editAssetData) => async (dispatch) => {
 
 // This action send a post request to remove a catalog for a specified user and
 // updates the store with the updated catalog collection
-export const deleteDocumentAction = docId => async (dispatch) => {
+export const deleteCatalogAction = catalogId => async (dispatch) => {
   try {
-    const res = await deleteDocumentRequest(docId);
+    const res = await deleteCatalogRequest(catalogId);
+    dispatch({
+      type: DELETE_CATALOG_SUCCESS,
+      payload: res.data.catalogs,
+    });
+  } catch (err) {
+    dispatch({
+      type: DELETE_CATALOG_FAILURE,
+      payload: err.message,
+    });
+  }
+};
+
+// This action send a post request to remove a catalog for a specified user and
+// updates the store with the updated catalog collection
+export const deleteAssetAction = assetId => async (dispatch) => {
+  try {
+    const res = await deleteAssetRequest(assetId);
     dispatch({
       type: DELETE_CATALOG_SUCCESS,
       payload: res.data.catalogs,

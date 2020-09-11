@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Catalog from '../models/catalogModel';
 
 export const addNewCatalogService = async (req) => {
@@ -21,7 +22,7 @@ export const addNewCatalogService = async (req) => {
       success: true, statusCode: 200, message: 'Catalog created successfully', catalog,
     };
   } catch (err) {
-    throw new Error(err.message);
+    return err;
   }
 };
 
@@ -43,7 +44,7 @@ export const addAssetService = async (req) => {
       success: true, statusCode: 200, message: 'Asset added successfully', asset,
     };
   } catch (err) {
-    throw new Error(err.message);
+    return err;
   }
 };
 
@@ -61,63 +62,78 @@ export const getAllCatalogsService = async (req, res) => {
       success: true, statusCode: 200, message: 'Catalogs found successfully', catalogs,
     };
   } catch (err) {
-    throw new Error(err.message);
+    return err;
   }
 };
 
-export const editAssetService = async (req, res) => {
+export const editAssetService = async (req) => {
   const {
     assetId,
+    catalogId,
     editAssetData,
   } = req.body;
 
-  const {
-    assetName, assetQuantity, singleQuantityPrice, totalQuantityPrice,
-  } = editAssetData;
-
+  console.log('ids', assetId, catalogId);
   try {
-    const condition = { _id: assetId };
-    const updateData = {
-      assetName: assetName,
-      assetQuantity: assetQuantity,
-      singleQuantityPrice: singleQuantityPrice,
-      totalQuantityPrice: totalQuantityPrice,
-    };
-    const options = {
-      new: true, lean: true, omitUndefined: true, returnOriginal: false, remove: {}, fields: {},
-    };
+    const updatedAsset = Catalog.findOne({ _id: assetId }).then(doc => {
+      const asset = doc.assets.id(catalogId);
+      asset.assetName = editAssetData.assetName === '' ? asset.assetName : editAssetData.assetName;
+      asset.assetQuantity = editAssetData.assetQuantity === '' ? asset.assetName : editAssetData.assetQuantity;
+      asset.singleQuantityPrice = editAssetData.singleQuantityPrice === '' ? asset.assetName : editAssetData.singleQuantityPrice;
+      asset.totalQuantityPrice = editAssetData.totalQuantityPrice === '' ? asset.assetName : editAssetData.totalQuantityPrice;
+      doc.save();
 
-    const newAsset = await Catalog.findOneAndUpdate({ condition }, { $set: updateData }, { new: true }).exec();
-
+      console.log('ass', asset);
+    }).catch((err) => {
+      console.log('err', err);
+    });
     return {
-      success: true, statusCode: 200, message: 'Asset added successfully', asset: newAsset,
+      success: true, statusCode: 200, message: 'Asset updated successfully', asset: updatedAsset,
     };
   } catch (err) {
-    console.log(err);
+    return err;
   }
 };
 
-export const deleteDocumentService = async (req) => {
+export const deleteCatalogService = async (req) => {
   const { id } = req.body;
+
   try {
-    await Catalog.deleteOne({ id }).exec();
+    await Catalog.findOneAndDelete({ _id: id }, (err, res) => {
+      err ? console.log('err', err) : console.log('success', res);
+    });
 
     return { success: true, statusCode: 200, message: 'Document removed successfully' };
   } catch (err) {
-    console.log('err  ', err);
+    return err;
   }
 };
 
+export const deleteAssetService = async (req) => {
+  const { id } = req.body;
+
+  try {
+    await Catalog.findOneAndUpdate(id, { $pull: { assets: { _id: id } } }, (err, res) => {
+      err ? console.log('err', err) : console.log('success', res);
+    });
+
+    return { success: true, statusCode: 200, message: 'Document removed successfully' };
+  } catch (err) {
+    return err;
+  }
+};
+
+// TODO: write logic for exporting and importing
 export const importCatalogsService = async (req, res) => {
   try {
   } catch (err) {
-    throw new Error(err.message);
+    return err;
   }
 };
 
 export const exportCatalogsService = async (req, res) => {
   try {
   } catch (err) {
-    throw new Error(err.message);
+    return err;
   }
 };

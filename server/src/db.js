@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import mongoose from 'mongoose';
 
 const connectDB = async (dbUri) => {
@@ -18,4 +19,4 @@ const connectDB = async (dbUri) => {
   }
 };
 
-module.exports = connectDB;
+export default connectDB;
