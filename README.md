@@ -11,29 +11,6 @@ Users can, for example, add an integration that fetches the recent price for
 gold. Another example would be, a user can receive SMS or Email notifications 
 when the price of their gold drops by 10%.
 
-See a list of all available features:
-- api and integrations
-- Notifications 
-- Sharing options
-- Autocomplete 
-- Net worth of assets
-- Daily/weekly/monthly net changes
-- Watchlist
-- Reminder
-- ...
-
-See a list of asset types MyCatalog supports:
-- Watches
-- Gold
-- Silver
-- Wine
------ later versions -----
-- Real estate
-- Stocks
-- Cryptocurrency
-
-<hr />
-
 ### Scripts
 
 Development: <br />
@@ -42,65 +19,73 @@ Development: <br />
 
 Production: <br />
 ``npm run server`` fires up the nodejs/expressjs server and serves the frontend 
+``npm run build`` bundles the react app into es5 browser supported vanilla javascript
 
-### Enforcing rules
 
 
-### Folder Structure
-#### Client: React app
-#### Server: Node/Express app
 
-### Bundling with webpack
-Here's a really good link: [What is Webpack by Ciel](https://medium.com/the-self-taught-programmer/what-is-webpack-and-why-should-i-care-part-1-introduction-ca4da7d0d8dc)
+### Setting up and starting the project
 
-Webpack is a module builder. This is important to understand, as Webpack does not run during your page, it runs during your development.
-Webpack is a tool wherein you use a configuration to explain to the builder how to load specific things. 
-You describe to Webpack how to load *.js files, or how it should look at .scss files, etc. 
-Then, when you run it, it goes into your entry point and walks up and down your program and figures out exactly what it needs, in what order it needs it, and what each piece depends on. 
-It will then create bundles — as few as possible, as optimized as possible, that you include as the scripts in your application.
+<strong>Adding the remote repository on your local machine</strong> <br />
+If you don't have a Github account:
+1. Clone the repository <br />
+``git clone https://github.com/MisterSemaan/myCatalog.git``
+2. Remove the git file <br />
+`` cd myCatalog && rm -rf .git``
 
-See below a list of basic configuration options:
-- `entry` name of the top-level file or set of files that we want to include in our build. 
-          It can be a single file or an array of files. 
-          In our build, we only pass in our main file
-- `output` an object containing your output configuration. 
-           In our build, we only specify the filename key (bundle.js) for the name of the file we want Webpack to build
-- `rules` wrapped within `modules`, an array of rules are defined within. 
-          Within rules, you defined how webpack should handle each file type, it takes 2 required arguments. 
-          `test`: what file webpack should look for
-          `use`: what loader webpack should use
-- `plugins` are like objects ( with an apply property ) that can be instantiated. 
-            It allows you to hook into the entire webpack lifecycle of events.
-            Plugins add additional functionality to Compilation( optimized bundle modules ). 
-            Loaders are only applied on a profile basis, but you can access a whole bundle with plugins.
-- `loaders` enable us to bundle static assets. 
-            Loaders tell webpack how to interpret and translate files. 
-            The transformation happens on a per-file basis before adding to the dependency graph.
+If you do have a Github account
+1. Go to the url <br />
+https://github.com/MisterSemaan/myCatalog
+2. Click the 'Fork' button on the top-right corner
 
-See the following link for more options: [Webpack Documentation](https://webpack.js.org/concepts/) 
+<strong>Installing dependencies</strong> <br />
+1. Go into the local repository <br />
+``cd myCatalog``
+2. Client and Server directories have their own package.json files
+- Go into client directory and install dependencies
+``cd client && npm install``
+- Go into server directory and install dependencies
+``cd erver && npm install``
 
-It's important to differentiate run and dev configuration. 
-What is webpack supposed to do for the following?
-- `run`: What happens when I first run my app.
-- `dev`: What happens when my app is already running.
+<strong>Connecting to your mongoDB atlas account</strong> <br />
+1. Go to the following url and create a new account<br />
+https://www.mongodb.com/
+2. Follow the instructions of setting up your cluster
+3. Create a new database and call it ``mycatalog``
+4. Go to the connections tab and choose ``Connect your application``
+5. Copy the connection string
+6. Go into your server directory and create a ``.env`` file <br />
+``cd server && touch .env``
+7. Create a new key and name it ``MOGO_URI``
+8. Paste your connection string as the respective value to the key ``MONGO_URI``
+9. Replace the 'password' field with your mongoDB account password
 
-### Environment variables
-What is this `.env` file? [Dotenv](https://www.npmjs.com/package/dotenv) is what manages this file.
-For now all environment variables, that is stuff like database password, database hostname, external URLs, secrets, etc. will be stored under the `.env` file under the project root directory.
-It allows us to define environment variables persistently instead of giving them on each command call. These are attached to the process.env object in Node.
+<strong>Creating the react env file</strong> <br />
+1. Go into your client directory and create a ``env.json`` file <br />
+``cd client && touch env.json``
+2. Paste the following code into your ``env.json`` file
+```
+{
+  "backendUrl": "http://localhost:5000",
+  "host": "localhost",
+  "port": 3000,
+  "jwtSecret": "",
+  "apiUserRoute": "/api/user",
+  "apiAuthRoute": "/api/auth",
+  "apiCatalogRoute": "/api/catalog",
+  "newsApiKey": ""
+}
+```
+For the 'jwtSecret' field, choose any word, phrase combination and paste it into the empty value field.
+For the 'newsApiKey' do the following:
+1. Go to the url <br />
+https://newsapi.org/
+2. Click on 'Get API Key'
+3. Follow the instructions 
+4. Paste the key into the empty value field 
 
-The variables under the `.env` file are that of a key-value relationship.
-DB_PASS="MY_PASSWORD"
-
-What happens later? Where are environment variables stored later? Don't know yet, maybe in a DB... who knows.
-
-### Database managment
-Database management is achieved through knexjs - postgresql - graphql.
-
-### API & Integrations
-How does API searching work, how does the API find the exact match to the asset
-it is searching for?
-- Unique search for each asset class
-
-### Translation
-Translation between languages is managed through i18n.
+<strong>Starting the application</strong> <br />
+1. Go into the client directory and run <br />
+``cd client && npm run start``
+2. Go into the server directory and run <br />
+``cd server && npm run server``

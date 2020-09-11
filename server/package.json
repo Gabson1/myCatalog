@@ -2,6 +2,7 @@
   "scripts": {
     "server": "NODE_ENV=PRODUCTION node -r esm ./src/server.js",
     "server:watch": "nodemon --exec babel-node src/server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "lint": "eslint ./src/ --color --quiet --fix"
   },
   "dependencies": {
