@@ -1,0 +1,12 @@
+{
+  "browser": {
+    "browser": {
+      "enableGA": false
+    },
+    "auth": {
+      "domain": "test",
+      "clientId": "test",
+      "callbackUrl": "http://env-integration.brickbuy.com/callback"
+    }
+  }
+}

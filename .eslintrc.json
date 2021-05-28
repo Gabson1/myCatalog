@@ -1,0 +1,43 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jest": true,
+        "node": true
+    },
+    "extends": "airbnb",
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "react-hooks",
+        "json",
+        "import",
+        "jsx-a11y"
+    ],
+    "rules": {
+      "import/no-extraneous-dependencies": 0,
+      "import/no-unresolved": ["error", { "ignore": ["^test", "^src","^shared", "^assets", "^app", "^hooks"] }],
+      "import/extensions" : 0,
+      "jsx-a11y/anchor-is-valid" : 0,
+      "no-console": ["warn", { "allow": ["error"] }],
+      "jsx-a11y/label-has-associated-control": 0,
+      "jsx-a11y/label-has-for": 0,
+      "react/prop-types": 0,
+      "no-nested-ternary": 0,
+      "react/jsx-props-no-spreading": 0,
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "react/destructuring-assignment": 0
+    },
+    "parser": "babel-eslint"
+}

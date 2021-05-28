@@ -1,0 +1,36 @@
+{
+  "logging": {
+    "level": "LOG_LEVEL"
+  },
+  "browser": {
+    "google": {
+      "apiKey": "GOOGLE_API_KEY",
+      "captchaPublicKey": "GOOGLE_CAPTCHA_KEY",
+      "enableGA": {
+        "__name": "GOOGLE_ENABLE_ANALYTICS",
+        "__format": "json"
+      },
+      "enableGTM": {
+        "__name": "GOOGLE_ENABLE_TAG_MANAGER",
+        "__format": "json"
+      }
+    },
+    "auth" :{
+      "domain": "AUTH_DOMAIN",
+      "clientId": "AUTH_CLIENT_ID",
+      "redirectUri": "AUTH_REDIRECT_URI",
+      "audience": "AUTH_AUDIENCE"
+    },
+    "maintenanceMode": {
+      "__name": "MAINTENANCE_MODE",
+      "__format": "json"
+    },
+    "cookieConsent": {
+      "id": "COOKIE_HUB_ID",
+      "productionMode": "COOKIE_CONSENT_PRODUCTION_MODE"
+    },
+    "graphql": {
+      "httpEndpoint": "BROWSER_GRAPHQL_ENDPOINT"
+    }
+  }
+}

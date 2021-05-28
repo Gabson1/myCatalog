@@ -1,0 +1,31 @@
+{
+  "logging": {
+    "level": "info"
+  },
+  "server": {
+    "cacheHeaderAlwaysValidate": "max-age=0, must-revalidate, public",
+    "cacheHeaderValidateAfter1h": "max-age=3600, must-revalidate, public"
+  },
+  "browser": {
+    "google": {
+      "apiKey": "use from secrets",
+      "captchaPublicKey": "use from secrets",
+      "enableGA": false,
+      "enableGTM": false
+    },
+    "auth" :{
+      "domain": "auth-integration.brickbuy.com",
+      "clientId": "yTSZTG2Lh6SRY640zZ64qXzm4lcNt0ox",
+      "audience": "https://env-integration.brickbuy.com",
+      "redirectUri": "https://env-integration.brickbuy.com/callback"
+    },
+    "maintenanceMode": false,
+    "cookieConsent": {
+      "id": "1767fdb6",
+      "productionMode": false
+    },
+    "graphql": {
+      "httpEndpoint": "https://env-integration.brickbuy.com/graphql"
+    }
+  }
+}

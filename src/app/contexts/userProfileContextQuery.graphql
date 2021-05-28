@@ -1,0 +1,12 @@
+query getUserProfile($providerIdentityId: String!) {
+  userProfile: getUserProfile(providerIdentityId: $providerIdentityId) {
+    id,
+    roles,
+    providerIdentityId,
+    emailVerified,
+    user2fa {
+      type
+    }
+    status
+  },
+}
